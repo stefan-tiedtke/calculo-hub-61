@@ -7,6 +7,7 @@ import EntnahmeCalculator from "./entnahme";
 import RenteCalculator from "./rente";
 import StundenlohnCalculator from "./stundenlohn";
 import UeberstundenCalculator from "./ueberstunden";
+import KreditCalculator from "./kredit";
 
 /**
  * Central registry for all calculators on the platform.
@@ -17,6 +18,88 @@ import UeberstundenCalculator from "./ueberstunden";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "kreditrechner",
+    name: "Kreditrechner",
+    shortDescription: "Monatsrate, Laufzeit und Zinskosten eines Kredits berechnen.",
+    description:
+      "Berechne die monatliche Rate eines Annuitätendarlehens aus Kreditbetrag, Sollzins und Laufzeit – oder die Laufzeit aus einer festen Rate. Inklusive Zinskosten, Gesamtrückzahlung und jährlichem Tilgungsplan.",
+    category: "finanzen",
+    keywords: [
+      "kredit",
+      "kreditrechner",
+      "ratenkredit",
+      "annuität",
+      "tilgungsplan",
+      "monatsrate",
+      "darlehensrechner",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: KreditCalculator,
+    formula: {
+      expression: "Rate = K · i / (1 − (1 + i)^−n)",
+      explanation:
+        "Beim Annuitätendarlehen bleibt die Monatsrate konstant. i ist der monatliche Zinssatz (Jahreszins / 12), n die Anzahl der Monate. Zu Beginn sind die Zinsen hoch und die Tilgung niedrig – mit sinkender Restschuld dreht sich das Verhältnis.",
+      variables: [
+        { symbol: "K", description: "Kreditbetrag (Anfangsschuld)" },
+        { symbol: "i", description: "Monatlicher Zinssatz (Jahreszins / 12)" },
+        { symbol: "n", description: "Anzahl der Monatsraten" },
+        { symbol: "Rate", description: "Konstante monatliche Zahlung" },
+      ],
+    },
+    examples: [
+      {
+        title: "Kleiner Ratenkredit",
+        inputs: "10.000 € · 6 % · 4 Jahre",
+        result: "≈ 234,85 €/Monat · ≈ 1.273 € Zinsen",
+      },
+      {
+        title: "Autokredit",
+        inputs: "25.000 € · 5 % · 6 Jahre",
+        result: "≈ 402,62 €/Monat · ≈ 3.989 € Zinsen",
+      },
+      {
+        title: "Feste Rate",
+        inputs: "20.000 € · 5 % · 400 €/Monat",
+        result: "≈ 4,7 Jahre Laufzeit",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist ein Annuitätendarlehen?",
+        answer:
+          "Ein Kredit mit gleichbleibender Rate. In der Rate stecken Zinsen und Tilgung – ihr Verhältnis verschiebt sich über die Laufzeit: Anfangs zahlst du viel Zinsen, später überwiegt die Tilgung.",
+      },
+      {
+        question: "Ist der Sollzins dasselbe wie der Effektivzins?",
+        answer:
+          "Nein. Der Sollzins ist der reine Zins auf die Restschuld. Der Effektivzins enthält zusätzlich Gebühren und die Zinsverrechnungsweise. Für einen echten Angebotsvergleich immer den Effektivzins nutzen.",
+      },
+      {
+        question: "Wie senke ich die Zinskosten?",
+        answer:
+          "Kürzere Laufzeit, höhere Monatsrate oder Sondertilgungen reduzieren die Zinslast deutlich. Auch ein besserer Zinssatz durch Bonität, Vergleich mehrerer Anbieter oder eine zweite kreditnehmende Person hilft.",
+      },
+      {
+        question: "Sind Sondertilgungen berücksichtigt?",
+        answer:
+          "Nein. Der Rechner geht von einer klassischen Annuität ohne Sondertilgungen aus. Sondertilgungen verkürzen die Laufzeit oder senken die Restschuld zusätzlich – frag deinen Anbieter nach den Konditionen.",
+      },
+      {
+        question: "Warum ist bei fester Rate manchmal keine Berechnung möglich?",
+        answer:
+          "Wenn die Monatsrate niedriger ist als die im ersten Monat anfallenden Zinsen, wächst die Restschuld statt zu sinken – der Kredit wird nie zurückgezahlt. Erhöhe die Rate oder senke den Zinssatz.",
+      },
+    ],
+    relatedSlugs: ["zinseszins-rechner", "inflationsrechner"],
+    sources: [
+      {
+        label: "BaFin – Verbraucherkredite",
+        url: "https://www.bafin.de/",
+      },
+    ],
+  },
   {
     slug: "ueberstundenrechner",
     name: "Überstundenrechner",
