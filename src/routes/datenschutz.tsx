@@ -27,7 +27,7 @@ function DatenschutzPage() {
         Datenschutzerklärung
       </h1>
       <p className="mt-2 text-sm text-muted-foreground">
-        Diese Website wird von [Vor- und Nachname / Firma] („wir“) betrieben. Nachfolgend
+        Diese Website wird von Stefan Tiedtke („wir“) betrieben. Nachfolgend
         informieren wir dich über die Verarbeitung personenbezogener Daten bei der
         Nutzung dieser Website.
       </p>
@@ -37,22 +37,13 @@ function DatenschutzPage() {
         <p>
           Verantwortlich für die Datenverarbeitung im Sinne von Art. 4 Nr. 7 DSGVO ist:
           <br />
-          [Vor- und Nachname / Firma]
+          Stefan Tiedtke
           <br />
-          [Straße und Hausnummer]
+          Herbstweg 3
           <br />
-          [PLZ und Ort]
+          86899 Landsberg am Lech
           <br />
-          E-Mail: [E-Mail-Adresse]
-          <br />
-          Telefon: [Telefonnummer]
-        </p>
-
-        <h2>2. Datenschutzbeauftragter</h2>
-        <p>
-          [Falls bestellt: Name und Kontakt des Datenschutzbeauftragten. Andernfalls
-          diesen Abschnitt entfernen. Ein Datenschutzbeauftragter ist in der Regel nicht
-          erforderlich, wenn du allein oder mit wenigen Personen arbeitest.]
+          E-Mail: steve5000@gmx.de
         </p>
 
         <h2>3. Allgemeines zur Datenverarbeitung</h2>
@@ -88,8 +79,7 @@ function DatenschutzPage() {
 
         <h2>5. Hosting</h2>
         <p>
-          Diese Website wird bei [Name des Hosting-Anbieters, z. B. Lovable / Cloudflare]
-          gehostet. Der Anbieter verarbeitet in unserem Auftrag technische Zugriffsdaten
+          Diese Website wird bei Lovable gehostet. Der Anbieter verarbeitet in unserem Auftrag technische Zugriffsdaten
           (siehe „Server-Logfiles“). Wir haben mit dem Anbieter einen Vertrag zur
           Auftragsverarbeitung (AVV) gemäß Art. 28 DSGVO geschlossen.
         </p>
@@ -133,12 +123,6 @@ function DatenschutzPage() {
           Einhaltung des Datenschutzes verpflichtet.
         </p>
 
-        <h2>10. Übermittlung in Drittländer</h2>
-        <p>
-          [Falls Anbieter außerhalb der EU/EWR eingesetzt werden, hier auflisten und auf
-          geeignete Garantien wie EU-Standardvertragsklauseln oder das EU-US Data
-          Privacy Framework hinweisen. Andernfalls diesen Abschnitt entfernen.]
-        </p>
 
         <h2>11. Deine Rechte</h2>
         <p>
@@ -178,7 +162,7 @@ function DatenschutzPage() {
 
         <hr />
         <p className="text-sm text-muted-foreground">
-          Stand: [Monat / Jahr]. Diese Datenschutzerklärung ist eine Vorlage ohne
+          Stand: März 2024. Diese Datenschutzerklärung ist eine Vorlage ohne
           juristische Prüfung. Bitte ergänze deine individuellen Angaben und lasse den
           Text ggf. anwaltlich prüfen.
         </p>

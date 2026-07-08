@@ -31,48 +31,31 @@ function ImpressumPage() {
       <div className="prose prose-neutral dark:prose-invert mt-10 max-w-none text-[15px] leading-relaxed">
         <h2>Anbieter</h2>
         <p>
-          [Vor- und Nachname / Firma]
+          Stefan Tiedtke
           <br />
-          [Straße und Hausnummer]
+          Herbstweg 3
           <br />
-          [PLZ und Ort]
+          86899 Landsberg am Lech
           <br />
-          [Land]
+          Deutschland
         </p>
 
         <h2>Kontakt</h2>
         <p>
-          Telefon: [Telefonnummer]
-          <br />
-          E-Mail: [E-Mail-Adresse]
-          <br />
-          Web: [Website-URL]
+          E-Mail: steve5000@gmx.de
         </p>
 
-        <h2>Vertretungsberechtigte Person</h2>
-        <p>[Vor- und Nachname]</p>
-
-        <h2>Umsatzsteuer-ID</h2>
         <p>
           Umsatzsteuer-Identifikationsnummer gemäß § 27 a UStG:
           <br />
-          [USt-IdNr. – z. B. DE123456789 – oder Hinweis: „nicht vorhanden“]
-        </p>
-
-        <h2>Handelsregister</h2>
-        <p>
-          [Registergericht, Registernummer]
-          <br />
-          (Entfernen, falls nicht anwendbar.)
+          [USt-IdNr. – "nicht vorhanden“]
         </p>
 
         <h2>
           Redaktionell verantwortlich (§ 18 Abs. 2 MStV)
         </h2>
         <p>
-          [Vor- und Nachname]
-          <br />
-          [Anschrift, wenn abweichend]
+          Stefan Tiedtke
         </p>
 
         <h2>EU-Streitschlichtung</h2>
