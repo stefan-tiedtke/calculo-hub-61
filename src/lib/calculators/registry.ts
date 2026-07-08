@@ -9,6 +9,7 @@ import StundenlohnCalculator from "./stundenlohn";
 import UeberstundenCalculator from "./ueberstunden";
 import KreditCalculator from "./kredit";
 import StromkostenCalculator from "./stromkosten";
+import KaufMieteCalculator from "./kauf-miete";
 
 /**
  * Central registry for all calculators on the platform.
@@ -19,6 +20,85 @@ import StromkostenCalculator from "./stromkosten";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "kaufen-oder-mieten",
+    name: "Kauf vs. Miete",
+    shortDescription: "Vergleich: Immobilie kaufen oder weiter mieten?",
+    description:
+      "Vergleiche die langfristigen Kosten von Kauf und Miete – mit Kaufpreis, Kaufnebenkosten, Finanzierung, Instandhaltung, Wertsteigerung, Kaltmiete, Mietsteigerung und der Rendite einer alternativen Geldanlage.",
+    category: "immobilien",
+    keywords: [
+      "kaufen oder mieten",
+      "kauf vs miete",
+      "mieten vs kaufen",
+      "immobilienrechner",
+      "vergleichsrechner immobilie",
+      "opportunitätskosten",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: KaufMieteCalculator,
+    formula: {
+      expression:
+        "Vermögen_Kauf = Immobilienwert − Restschuld   ·   Vermögen_Miete = EK + Ersparnis, verzinst",
+      explanation:
+        "Der Rechner simuliert Monat für Monat: Der Käufer zahlt Annuität + Instandhaltung, die Immobilie steigt im Wert und die Restschuld sinkt. Der Mieter zahlt eine mit der Zeit steigende Miete und legt Eigenkapital sowie die monatliche Differenz zur Kaufbelastung mit der angenommenen Rendite an. Verglichen wird das Nettovermögen nach dem gewählten Zeitraum.",
+      variables: [
+        { symbol: "Kaufpreis", description: "Preis der Immobilie" },
+        { symbol: "Nebenkosten", description: "Notar, Makler, Grunderwerbsteuer (8 – 12 %)" },
+        { symbol: "Annuität", description: "Zins + Tilgung pro Jahr" },
+        { symbol: "Instandhaltung", description: "Rücklage für Reparaturen (~1 %/Jahr)" },
+        { symbol: "Wertsteigerung", description: "Erwartete Immobilienpreis-Entwicklung" },
+        { symbol: "Rendite", description: "Rendite der alternativen Geldanlage" },
+      ],
+    },
+    examples: [
+      {
+        title: "Klassisches Szenario",
+        inputs: "400.000 € · 80.000 € EK · 3,8 % Zins · 1.400 € Kaltmiete · 15 Jahre",
+        result: "Kauf oft leicht im Vorteil bei 2 % Wertsteigerung und 5 % Anlagerendite",
+      },
+      {
+        title: "Hohe Anlagerendite",
+        inputs: "gleich, aber 7 % Rendite auf Depot",
+        result: "Mieten kann finanziell besser abschneiden",
+      },
+    ],
+    faq: [
+      {
+        question: "Ist Kaufen immer die bessere Wahl?",
+        answer:
+          "Nein. Ob Kaufen oder Mieten günstiger ist, hängt von vielen Faktoren ab: Kaufpreis-Miet-Verhältnis, Zinsniveau, Wertsteigerung, Anlagerendite und Zeitraum. In teuren Lagen mit hohen Kaufpreisen ist Mieten häufig günstiger, in günstigen Lagen oft der Kauf.",
+      },
+      {
+        question: "Was sind Opportunitätskosten?",
+        answer:
+          "Das Eigenkapital, das in die Immobilie fließt, kann nicht anderweitig angelegt werden. Der Rechner berücksichtigt das, indem er für den Mieter das gleiche Eigenkapital plus die monatliche Ersparnis mit einer definierten Rendite anlegt.",
+      },
+      {
+        question: "Warum ist die Wertsteigerung so wichtig?",
+        answer:
+          "Ein Prozentpunkt mehr oder weniger Wertsteigerung pro Jahr macht über 20 – 30 Jahre einen sehr großen Unterschied. Realistische Annahmen liegen im deutschen Durchschnitt bei etwa 2 – 3 % pro Jahr, in guten Lagen deutlich mehr.",
+      },
+      {
+        question: "Sind Steuern berücksichtigt?",
+        answer:
+          "Nein. Weder Grundsteuer, Abgeltungssteuer auf Kapitalerträge noch mögliche Vorteile durch selbstgenutztes Wohneigentum werden simuliert. Für einen exakten Vergleich mit deiner Situation solltest du eine steuerliche Beratung hinzuziehen.",
+      },
+      {
+        question: "Warum sind die Nebenkosten der Miete nur zur Info?",
+        answer:
+          "Umlagefähige Nebenkosten (Heizung, Wasser, Müll) fallen auch beim Eigentümer an. Sie sind für den Vergleich Kauf vs. Miete daher nicht relevant und werden nicht mitgerechnet.",
+      },
+    ],
+    relatedSlugs: ["kreditrechner", "inflationsrechner", "zinseszins-rechner"],
+    sources: [
+      {
+        label: "Deutsche Bundesbank – Wohnimmobilienpreise",
+        url: "https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/wohnimmobilienpreisindikatoren",
+      },
+    ],
+  },
   {
     slug: "stromkostenrechner",
     name: "Stromkostenrechner",
