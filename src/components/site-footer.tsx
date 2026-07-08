@@ -16,6 +16,24 @@ export function SiteFooter() {
             Hochwertige Online-Rechner für Finanzen, Gesundheit, Alltag und mehr – klar,
             schnell und ohne Ablenkung.
           </p>
+          <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+            <li>
+              <Link
+                to="/impressum"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Impressum
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/datenschutz"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Datenschutz
+              </Link>
+            </li>
+          </ul>
         </div>
         <div>
           <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">

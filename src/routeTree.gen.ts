@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RechnerSlugRouteImport } from './routes/rechner.$slug'
 import { Route as KategorieSlugRouteImport } from './routes/kategorie.$slug'
@@ -17,6 +19,16 @@ import { Route as KategorieSlugRouteImport } from './routes/kategorie.$slug'
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -37,12 +49,16 @@ const KategorieSlugRoute = KategorieSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategorie/$slug': typeof KategorieSlugRoute
   '/rechner/$slug': typeof RechnerSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategorie/$slug': typeof KategorieSlugRoute
   '/rechner/$slug': typeof RechnerSlugRoute
@@ -50,20 +66,43 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategorie/$slug': typeof KategorieSlugRoute
   '/rechner/$slug': typeof RechnerSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml' | '/kategorie/$slug' | '/rechner/$slug'
+  fullPaths:
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/sitemap.xml'
+    | '/kategorie/$slug'
+    | '/rechner/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml' | '/kategorie/$slug' | '/rechner/$slug'
-  id: '__root__' | '/' | '/sitemap.xml' | '/kategorie/$slug' | '/rechner/$slug'
+  to:
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/sitemap.xml'
+    | '/kategorie/$slug'
+    | '/rechner/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/datenschutz'
+    | '/impressum'
+    | '/sitemap.xml'
+    | '/kategorie/$slug'
+    | '/rechner/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  ImpressumRoute: typeof ImpressumRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   KategorieSlugRoute: typeof KategorieSlugRoute
   RechnerSlugRoute: typeof RechnerSlugRoute
@@ -76,6 +115,20 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -104,6 +157,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  ImpressumRoute: ImpressumRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   KategorieSlugRoute: KategorieSlugRoute,
   RechnerSlugRoute: RechnerSlugRoute,
