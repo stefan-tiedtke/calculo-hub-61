@@ -3,8 +3,7 @@ import type {} from "@tanstack/react-start";
 import { categories } from "@/lib/calculators/categories";
 import { calculators } from "@/lib/calculators/registry";
 
-// TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://rechnerio.com";
 
 interface SitemapEntry {
   path: string;
