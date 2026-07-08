@@ -21,6 +21,7 @@ import SpritkostenCalculator from "./spritkosten";
 import PendlerpauschaleCalculator from "./pendlerpauschale";
 import WerbungskostenCalculator from "./werbungskosten";
 import KapitalertragsteuerCalculator from "./kapitalertragsteuer";
+import GehaltserhoehungNettoCalculator from "./gehaltserhoehung-netto";
 
 /**
  * Central registry for all calculators on the platform.
