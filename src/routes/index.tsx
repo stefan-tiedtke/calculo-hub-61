@@ -5,6 +5,28 @@ import { CategoryCard } from "@/components/category-card";
 import { CalculatorCard } from "@/components/calculator-card";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Rechnerio – Kostenlose Online-Rechner für Alltag & Finanzen" },
+      {
+        name: "description",
+        content:
+          "Über 30 kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen. Klar, schnell und ohne Anmeldung – für jedes Gerät.",
+      },
+      {
+        property: "og:title",
+        content: "Rechnerio – Kostenlose Online-Rechner für Alltag & Finanzen",
+      },
+      {
+        property: "og:description",
+        content:
+          "Über 30 kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen – ohne Anmeldung.",
+      },
+      { property: "og:url", content: "https://rechnerio.com/" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [{ rel: "canonical", href: "https://rechnerio.com/" }],
+  }),
   component: Index,
 });
 
