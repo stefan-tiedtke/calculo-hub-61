@@ -8,6 +8,7 @@ import RenteCalculator from "./rente";
 import StundenlohnCalculator from "./stundenlohn";
 import UeberstundenCalculator from "./ueberstunden";
 import KreditCalculator from "./kredit";
+import StromkostenCalculator from "./stromkosten";
 
 /**
  * Central registry for all calculators on the platform.
@@ -18,6 +19,91 @@ import KreditCalculator from "./kredit";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "stromkostenrechner",
+    name: "Stromkostenrechner",
+    shortDescription: "Stromkosten pro Jahr, Monat und Gerät berechnen.",
+    description:
+      "Berechne deine Stromkosten aus Jahresverbrauch, Haushaltsgröße oder Leistung eines einzelnen Geräts – inklusive Arbeitspreis, Grundpreis, monatlicher Kosten und CO₂-Ausstoß.",
+    category: "energie",
+    keywords: [
+      "stromkosten",
+      "stromkostenrechner",
+      "stromverbrauch",
+      "stromrechnung",
+      "kwh preis",
+      "stromkosten gerät",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: StromkostenCalculator,
+    formula: {
+      expression: "Kosten = Verbrauch × Arbeitspreis + Grundpreis · 12",
+      explanation:
+        "Die Jahresstromkosten setzen sich aus dem verbrauchsabhängigen Arbeitspreis (kWh × ct/kWh) und dem festen Grundpreis pro Monat zusammen. Bei Einzelgeräten wird der Verbrauch aus Leistung (Watt) × Nutzungsdauer berechnet: kWh = W × h / 1.000.",
+      variables: [
+        { symbol: "Verbrauch", description: "Jährlicher Stromverbrauch in kWh" },
+        { symbol: "Arbeitspreis", description: "Preis pro Kilowattstunde in ct/kWh" },
+        { symbol: "Grundpreis", description: "Feste monatliche Grundgebühr" },
+        { symbol: "Watt", description: "Elektrische Leistung eines Geräts" },
+      ],
+    },
+    examples: [
+      {
+        title: "2-Personen-Haushalt",
+        inputs: "2.500 kWh · 35 ct/kWh · 12 €/Monat",
+        result: "≈ 1.019 €/Jahr (≈ 84,88 €/Monat)",
+      },
+      {
+        title: "Kühlschrank",
+        inputs: "100 W · 24 Std./Tag · 365 Tage · 35 ct/kWh",
+        result: "≈ 306,60 €/Jahr",
+      },
+      {
+        title: "Gaming-PC",
+        inputs: "400 W · 4 Std./Tag · 300 Tage · 35 ct/kWh",
+        result: "≈ 168 €/Jahr",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie hoch ist der Strompreis aktuell?",
+        answer:
+          "2025 zahlen Haushalte in Deutschland im Durchschnitt etwa 35 ct/kWh. Der genaue Preis hängt vom Tarif ab – Neukundenangebote liegen oft deutlich darunter, Grundversorgungstarife oft darüber. Den exakten Wert findest du auf deiner Stromrechnung.",
+      },
+      {
+        question: "Wie viel Strom verbraucht ein Haushalt?",
+        answer:
+          "Grobe Richtwerte pro Jahr: 1 Person ~1.500 kWh, 2 Personen ~2.500 kWh, 3 Personen ~3.500 kWh, 4 Personen ~4.250 kWh. Ein Elektroherd und elektrische Warmwasseraufbereitung erhöhen den Verbrauch deutlich.",
+      },
+      {
+        question: "Was ist der Unterschied zwischen Arbeits- und Grundpreis?",
+        answer:
+          "Der Arbeitspreis ist der verbrauchsabhängige Preis pro kWh. Der Grundpreis ist eine feste monatliche Gebühr, unabhängig vom Verbrauch. Beide zusammen ergeben die Gesamtkosten.",
+      },
+      {
+        question: "Wie berechne ich den Verbrauch eines Geräts?",
+        answer:
+          "Verbrauch in kWh = Leistung (Watt) × Nutzungsdauer (Stunden) / 1.000. Beispiel: 2.000-W-Wasserkocher, 5 Minuten am Tag = 2.000 × (5/60) / 1.000 ≈ 0,17 kWh pro Tag.",
+      },
+      {
+        question: "Sind Steuern und Abgaben enthalten?",
+        answer:
+          "Ja, wenn du den Bruttopreis von deiner Stromrechnung einträgst. Die Preise in Verträgen enthalten üblicherweise Umsatzsteuer, Netzentgelte, Konzessionsabgabe und weitere Umlagen.",
+      },
+    ],
+    relatedSlugs: ["inflationsrechner"],
+    sources: [
+      {
+        label: "Bundesnetzagentur – Strompreise",
+        url: "https://www.bundesnetzagentur.de/",
+      },
+      {
+        label: "Umweltbundesamt – CO₂-Emissionen Strommix",
+        url: "https://www.umweltbundesamt.de/",
+      },
+    ],
+  },
   {
     slug: "kreditrechner",
     name: "Kreditrechner",
