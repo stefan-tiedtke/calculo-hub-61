@@ -21,9 +21,9 @@ function Index() {
               {calculators.length} Rechner online · laufend erweitert
             </div>
             <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-foreground md:text-6xl">
-              Präzise Online-Rechner.
+              Alle wichtigen Rechner an einem Ort.
               <br />
-              <span className="text-brand">Ohne Ablenkung.</span>
+              <span className="text-brand">Kostenlos, schnell und ohne Anmeldung.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
               Über 100 Rechner für Finanzen, Steuern, Gesundheit und Alltag – klar aufgebaut,
