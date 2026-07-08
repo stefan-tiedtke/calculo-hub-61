@@ -255,7 +255,7 @@ export default function KaufMieteCalculator() {
             result
               ? {
                   label: `Nach ${result.N} Jahren`,
-                  tone: kaufBesser ? "success" : "info",
+                  tone: "info",
                 }
               : undefined
           }
