@@ -6,6 +6,7 @@ import InflationCalculator from "./inflation";
 import EntnahmeCalculator from "./entnahme";
 import RenteCalculator from "./rente";
 import StundenlohnCalculator from "./stundenlohn";
+import UeberstundenCalculator from "./ueberstunden";
 
 /**
  * Central registry for all calculators on the platform.
@@ -16,6 +17,85 @@ import StundenlohnCalculator from "./stundenlohn";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "ueberstundenrechner",
+    name: "Überstundenrechner",
+    shortDescription: "Vergütung von Überstunden inkl. Zuschlag berechnen.",
+    description:
+      "Berechne die Bruttovergütung deiner Überstunden – aus Monats- oder Stundenlohn, mit individuellem Zuschlag (25 %, 50 %, 100 %) und Auswertung pro Monat oder Jahr.",
+    category: "arbeit",
+    keywords: [
+      "überstunden",
+      "überstundenrechner",
+      "überstundenzuschlag",
+      "mehrarbeit",
+      "überstunden auszahlen",
+    ],
+    popular: false,
+    updatedAt: "2026-07-08",
+    component: UeberstundenCalculator,
+    formula: {
+      expression: "Vergütung = Stundenlohn × (1 + Zuschlag) × Anzahl",
+      explanation:
+        "Der Grundstundenlohn ergibt sich aus Monatslohn × 12 / (Wochenstunden × 52). Für jede Überstunde wird der Stundenlohn um den Zuschlag erhöht und mit der Anzahl der Überstunden multipliziert.",
+      variables: [
+        { symbol: "Stundenlohn", description: "Bruttolohn pro vertraglicher Arbeitsstunde" },
+        { symbol: "Zuschlag", description: "Prozentualer Aufschlag (z. B. 25 %)" },
+        { symbol: "Anzahl", description: "Anzahl der Überstunden im Zeitraum" },
+      ],
+    },
+    examples: [
+      {
+        title: "10 Überstunden mit 25 %",
+        inputs: "3.000 €/Monat · 40 Std./Woche · 10 Überstunden · 25 %",
+        result: "≈ 216,35 € brutto",
+      },
+      {
+        title: "Sonntagsarbeit",
+        inputs: "20 €/Std. · 8 Überstunden · 50 %",
+        result: "= 240 € brutto",
+      },
+      {
+        title: "Jährliche Auswertung",
+        inputs: "3.500 €/Monat · 40 Std. · 5 Ü-Std./Monat · 25 %",
+        result: "≈ 1.514 € brutto pro Jahr",
+      },
+    ],
+    faq: [
+      {
+        question: "Muss der Arbeitgeber Überstunden bezahlen?",
+        answer:
+          "Nur wenn Arbeits- oder Tarifvertrag das vorsehen. Häufig sind Überstunden mit dem Gehalt abgegolten – hier gibt es enge gesetzliche Grenzen. Alternativ ist ein Ausgleich in Freizeit üblich.",
+      },
+      {
+        question: "Wie hoch ist ein üblicher Zuschlag?",
+        answer:
+          "Typisch sind 25 % an Werktagen, 50 % an Sonntagen und 100 % an gesetzlichen Feiertagen. Verbindlich ist immer die Regelung im Arbeits- oder Tarifvertrag.",
+      },
+      {
+        question: "Wie berechnet sich der Stundenlohn?",
+        answer:
+          "Aus dem Monatslohn × 12 geteilt durch die vertraglichen Jahresstunden (Wochenstunden × 52). Bei 40 Std./Woche entspricht ein Monatslohn von 3.000 € etwa 17,31 €/Stunde.",
+      },
+      {
+        question: "Sind Steuern berücksichtigt?",
+        answer:
+          "Nein. Der Rechner zeigt Bruttowerte. Auf ausgezahlte Überstunden fallen die üblichen Lohnsteuer- und Sozialversicherungsabzüge an – Sonntags-, Feiertags- und Nachtzuschläge sind unter bestimmten Grenzen steuerfrei.",
+      },
+      {
+        question: "Was gilt bei Teilzeit?",
+        answer:
+          "Mehrarbeit von Teilzeitkräften bis zur Vollzeit-Grenze wird meist ohne Zuschlag vergütet. Der Rechner funktioniert für Teilzeit genauso – trage die vertraglichen Wochenstunden ein.",
+      },
+    ],
+    relatedSlugs: ["stundenlohnrechner", "brutto-netto-rechner"],
+    sources: [
+      {
+        label: "Arbeitszeitgesetz (ArbZG)",
+        url: "https://www.gesetze-im-internet.de/arbzg/",
+      },
+    ],
+  },
   {
     slug: "stundenlohnrechner",
     name: "Stundenlohnrechner",
