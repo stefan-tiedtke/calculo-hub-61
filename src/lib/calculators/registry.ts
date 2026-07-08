@@ -5,6 +5,7 @@ import ZinseszinsCalculator from "./zinseszins";
 import InflationCalculator from "./inflation";
 import EntnahmeCalculator from "./entnahme";
 import RenteCalculator from "./rente";
+import StundenlohnCalculator from "./stundenlohn";
 
 /**
  * Central registry for all calculators on the platform.
@@ -15,6 +16,88 @@ import RenteCalculator from "./rente";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "stundenlohnrechner",
+    name: "Stundenlohnrechner",
+    shortDescription: "Stundenlohn aus Monats- oder Jahresgehalt berechnen.",
+    description:
+      "Berechne deinen Bruttostundenlohn aus Monats- oder Jahresgehalt – oder umgekehrt. Der Rechner berücksichtigt Wochenarbeitszeit, Urlaub, Feiertage und Krankheitstage und zeigt zusätzlich den effektiven Stundenlohn pro tatsächlich gearbeiteter Stunde.",
+    category: "arbeit",
+    keywords: [
+      "stundenlohn",
+      "stundenlohnrechner",
+      "stundensatz",
+      "gehalt umrechnen",
+      "stundenlohn berechnen",
+      "monatslohn",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: StundenlohnCalculator,
+    formula: {
+      expression:
+        "Stundenlohn = Monatslohn × 12 / (Wochenstunden × 52)",
+      explanation:
+        "Der vertragliche Stundenlohn ergibt sich aus dem Jahreslohn geteilt durch die vertraglichen Jahresstunden (Wochenstunden × 52). Der effektive Stundenlohn teilt den Jahreslohn stattdessen durch die tatsächlich gearbeiteten Stunden – also ohne Urlaub, Feiertage und Krankheitstage.",
+      variables: [
+        { symbol: "Monatslohn", description: "Bruttolohn pro Monat" },
+        { symbol: "Wochenstunden", description: "Vertragliche Arbeitszeit pro Woche" },
+        { symbol: "52", description: "Wochen pro Jahr" },
+        { symbol: "Effektivstunden", description: "Jahresstunden abzüglich Urlaub, Feiertage, Krankheit" },
+      ],
+    },
+    examples: [
+      {
+        title: "Vollzeit 40 Std.",
+        inputs: "3.000 €/Monat · 40 Std./Woche",
+        result: "≈ 17,31 €/Std. brutto",
+      },
+      {
+        title: "Effektiver Stundenlohn",
+        inputs: "42.000 €/Jahr · 40 Std./Woche · 30 Urlaub · 10 Feiertage",
+        result: "≈ 20,19 €/Std. vertraglich · ≈ 23,33 €/Std. effektiv",
+      },
+      {
+        title: "Teilzeit",
+        inputs: "20 €/Std. · 30 Std./Woche",
+        result: "≈ 2.600 €/Monat brutto",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist der Unterschied zwischen Stundenlohn und effektivem Stundenlohn?",
+        answer:
+          "Der vertragliche Stundenlohn teilt dein Gehalt durch alle bezahlten Stunden im Jahr, inklusive Urlaub und Feiertage. Der effektive Stundenlohn zeigt, was du pro tatsächlich gearbeiteter Stunde verdienst – er ist immer höher, weil bezahlte Ausfalltage auf weniger Arbeitsstunden verteilt werden.",
+      },
+      {
+        question: "Wie viele Arbeitsstunden hat ein Monat?",
+        answer:
+          "Bei 40 Wochenstunden sind es im Durchschnitt rund 173,3 Stunden pro Monat (40 × 52 / 12). In der Lohnabrechnung wird oft mit dieser Zahl gerechnet, unabhängig von der tatsächlichen Länge des Monats.",
+      },
+      {
+        question: "Ist der Wert brutto oder netto?",
+        answer:
+          "Der Rechner zeigt Bruttowerte vor Lohnsteuer, Solidaritätszuschlag, Kirchensteuer und Sozialversicherung. Für die Netto-Berechnung nutze zusätzlich den Brutto-Netto-Rechner.",
+      },
+      {
+        question: "Wie viele Feiertage sollte ich ansetzen?",
+        answer:
+          "In Deutschland fallen je nach Bundesland etwa 9 – 13 gesetzliche Feiertage auf Werktage. 10 ist ein üblicher Durchschnittswert. Wer viel am Wochenende arbeitet, kann den Wert anpassen.",
+      },
+      {
+        question: "Sind Überstunden berücksichtigt?",
+        answer:
+          "Nein. Der Rechner geht von der vertraglichen Arbeitszeit aus. Für einen realistischen Effektivstundenlohn kannst du die tatsächlichen Wochenstunden inkl. Überstunden eintragen.",
+      },
+    ],
+    relatedSlugs: ["brutto-netto-rechner"],
+    sources: [
+      {
+        label: "Bundesministerium für Arbeit und Soziales – Arbeitszeit",
+        url: "https://www.bmas.de/",
+      },
+    ],
+  },
   {
     slug: "rentenrechner",
     name: "Rentenrechner",
