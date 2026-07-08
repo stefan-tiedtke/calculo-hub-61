@@ -2,6 +2,9 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getCalculator, getCalculatorsByCategory } from "@/lib/calculators/registry";
 import { getCategory } from "@/lib/calculators/categories";
 import { CalculatorCard } from "@/components/calculator-card";
+import { CalculatorFormula } from "@/components/calculator/calculator-formula";
+import { CalculatorExamples } from "@/components/calculator/calculator-examples";
+import { CalculatorFAQ } from "@/components/calculator/calculator-faq";
 import type { CalculatorDef, CategoryDef } from "@/lib/calculators/types";
 
 export const Route = createFileRoute("/rechner/$slug")({
@@ -9,9 +12,13 @@ export const Route = createFileRoute("/rechner/$slug")({
     const calc = getCalculator(params.slug);
     if (!calc) throw notFound();
     const category = getCategory(calc.category);
-    const related = getCalculatorsByCategory(calc.category)
-      .filter((c) => c.slug !== calc.slug)
-      .slice(0, 3);
+    const related = (
+      calc.relatedSlugs
+        ? calc.relatedSlugs
+            .map(getCalculator)
+            .filter((c): c is CalculatorDef => Boolean(c))
+        : getCalculatorsByCategory(calc.category).filter((c) => c.slug !== calc.slug)
+    ).slice(0, 3);
     return { calc, category, related };
   },
   head: ({ loaderData }) => {
@@ -20,6 +27,34 @@ export const Route = createFileRoute("/rechner/$slug")({
     }
     const { calc } = loaderData;
     const title = `${calc.name} – Rechnerio`;
+    const scripts = [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: calc.name,
+          description: calc.description,
+          applicationCategory: "UtilityApplication",
+          operatingSystem: "Web",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+        }),
+      },
+    ];
+    if (calc.faq && calc.faq.length > 0) {
+      scripts.push({
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: calc.faq.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer },
+          })),
+        }),
+      });
+    }
     return {
       meta: [
         { title },
@@ -31,20 +66,7 @@ export const Route = createFileRoute("/rechner/$slug")({
         { property: "og:url", content: `/rechner/${calc.slug}` },
       ],
       links: [{ rel: "canonical", href: `/rechner/${calc.slug}` }],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            name: calc.name,
-            description: calc.description,
-            applicationCategory: "UtilityApplication",
-            operatingSystem: "Web",
-            offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
-          }),
-        },
-      ],
+      scripts,
     };
   },
   component: CalculatorPage,
@@ -98,6 +120,26 @@ function CalculatorPage() {
       <section className="mt-10">
         <CalcComponent />
       </section>
+
+      {calc.formula && <CalculatorFormula formula={calc.formula} />}
+      {calc.examples && calc.examples.length > 0 && (
+        <CalculatorExamples examples={calc.examples} />
+      )}
+      {calc.faq && calc.faq.length > 0 && <CalculatorFAQ items={calc.faq} />}
+
+      {calc.sources && calc.sources.length > 0 && (
+        <section className="mt-12 text-xs text-muted-foreground">
+          Quellen:{" "}
+            {calc.sources.map((s: { label: string; url: string }, i: number) => (
+            <span key={s.url}>
+              {i > 0 && ", "}
+              <a href={s.url} target="_blank" rel="noreferrer noopener" className="underline hover:text-foreground">
+                {s.label}
+              </a>
+            </span>
+          ))}
+        </section>
+      )}
 
       {related.length > 0 && (
         <section className="mt-16 border-t border-border pt-10">
