@@ -22,6 +22,7 @@ import PendlerpauschaleCalculator from "./pendlerpauschale";
 import WerbungskostenCalculator from "./werbungskosten";
 import KapitalertragsteuerCalculator from "./kapitalertragsteuer";
 import GehaltserhoehungNettoCalculator from "./gehaltserhoehung-netto";
+import TdeeCalculator from "./tdee";
 
 /**
  * Central registry for all calculators on the platform.
