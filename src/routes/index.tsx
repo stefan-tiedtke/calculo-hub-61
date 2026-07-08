@@ -26,7 +26,7 @@ function Index() {
               <span className="text-brand">Kostenlos, schnell und ohne Anmeldung.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              Über 100 Rechner für Finanzen, Steuern, Gesundheit und Alltag – klar aufgebaut,
+              Rechner für Finanzen, Steuern, Gesundheit und Alltag – klar aufgebaut,
               blitzschnell und für jedes Gerät optimiert.
             </p>
           </div>
