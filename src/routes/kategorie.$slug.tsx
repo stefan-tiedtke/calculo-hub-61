@@ -2,9 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getCategory, categories } from "@/lib/calculators/categories";
 import { getCalculatorsByCategory } from "@/lib/calculators/registry";
 import { CalculatorCard } from "@/components/calculator-card";
+import type { CalculatorDef, CategoryDef } from "@/lib/calculators/types";
 
 export const Route = createFileRoute("/kategorie/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { category: CategoryDef; calcs: CalculatorDef[] } => {
     const category = getCategory(params.slug);
     if (!category) throw notFound();
     const calcs = getCalculatorsByCategory(category.slug);
