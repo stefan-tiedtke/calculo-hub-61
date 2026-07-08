@@ -13,6 +13,7 @@ import KaufMieteCalculator from "./kauf-miete";
 import EvVsVerbrennerCalculator from "./ev-vs-verbrenner";
 import EtfSparplanCalculator from "./etf-sparplan";
 import BitcoinDcaCalculator from "./bitcoin-dca";
+import ReisekostenCalculator from "./reisekosten";
 
 /**
  * Central registry for all calculators on the platform.
@@ -1112,6 +1113,87 @@ export const calculators: CalculatorDef[] = [
     ],
     sources: [
       { label: "WHO – Body Mass Index", url: "https://www.who.int/health-topics/obesity" },
+    ],
+  },
+  {
+    slug: "reisekostenrechner",
+    name: "Reisekostenrechner",
+    shortDescription:
+      "Gesamtkosten, Kosten pro Person und Tagesbudget für deine Reise berechnen.",
+    description:
+      "Plane dein Reisebudget: Der Rechner summiert Unterkunft, Verpflegung, Flüge, Mietwagen, Aktivitäten und Sonstiges und zeigt dir Gesamtkosten, Kosten pro Person sowie ein realistisches Tagesbudget.",
+    category: "reisen",
+    keywords: [
+      "reisekosten",
+      "reisekostenrechner",
+      "urlaubskosten",
+      "reisebudget",
+      "urlaubsbudget",
+      "tagesbudget urlaub",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: ReisekostenCalculator,
+    formula: {
+      expression:
+        "Gesamt = Unterkunft·Tage + Verpflegung·Personen·Tage + Flüge·Personen + Mietwagen·Tage + Aktivitäten + Sonstiges",
+      explanation:
+        "Die einzelnen Posten werden je nach Bezugsgröße hochgerechnet (pro Nacht, pro Person, pro Tag) und aufsummiert. Kosten pro Person = Gesamt / Personen; Tagesbudget = Gesamt / Tage.",
+      variables: [
+        { symbol: "Personen", description: "Anzahl mitreisender Personen" },
+        { symbol: "Tage", description: "Reisedauer in Tagen bzw. Nächten" },
+        { symbol: "Unterkunft", description: "Preis pro Nacht (gesamt)" },
+        { symbol: "Verpflegung", description: "Kosten pro Person und Tag" },
+        { symbol: "Flüge", description: "Anreisekosten pro Person" },
+        { symbol: "Mietwagen", description: "Tagespreis Mietwagen" },
+        { symbol: "Aktivitäten", description: "Ausflüge, Eintritte, Touren gesamt" },
+      ],
+    },
+    examples: [
+      {
+        title: "Städtereise zu zweit",
+        inputs: "2 Personen · 4 Tage · 120 €/Nacht · 40 €/P/Tag · 150 € Flug",
+        result: "≈ 1.100 € gesamt · ~550 € pro Person",
+      },
+      {
+        title: "Familienurlaub",
+        inputs: "4 Personen · 10 Tage · 150 €/Nacht · 30 €/P/Tag · 250 € Flug",
+        result: "≈ 4.700 € gesamt · ~1.175 € pro Person",
+      },
+      {
+        title: "Roadtrip",
+        inputs: "2 Personen · 14 Tage · 80 €/Nacht · 35 €/P/Tag · 55 €/Tag Mietwagen",
+        result: "≈ 3.100 € gesamt · ~220 € pro Tag",
+      },
+    ],
+    faq: [
+      {
+        question: "Welche Kosten sollte ich einrechnen?",
+        answer:
+          "Neben den offensichtlichen Posten (Anreise, Unterkunft, Verpflegung) gerne auch Trinkgelder, Souvenirs, Parkgebühren, Reiseversicherung, Roaming, Visa und einen Puffer von 10–15 % für Unerwartetes.",
+      },
+      {
+        question: "Wie realistisch ist das Tagesbudget?",
+        answer:
+          "Das Tagesbudget ist ein Durchschnittswert. Ankunfts- und Abreisetage sind oft günstiger, Ausflugstage teurer. Für die konkrete Tagesplanung hilft es, Unterkunft und Anreise vom Tagesbudget zu trennen und nur Verpflegung + Aktivitäten pro Tag zu betrachten.",
+      },
+      {
+        question: "Wie kalkuliere ich Verpflegung realistisch?",
+        answer:
+          "Grobe Richtwerte: Selbstversorgung 15–25 €/Person/Tag, Restaurantküche in Deutschland 35–50 €, teure Reiseziele (Skandinavien, Schweiz, USA) 60–80 €, günstige Länder in Südostasien 10–20 €.",
+      },
+      {
+        question: "Sind Wechselkurse berücksichtigt?",
+        answer:
+          "Nein. Gib alle Werte in Euro ein. Für Reisen außerhalb der Eurozone rechnest du am besten mit dem tagesaktuellen Kurs und einem Aufschlag von 1–3 % für Karten- oder Wechselgebühren.",
+      },
+    ],
+    relatedSlugs: ["kreditrechner", "inflationsrechner"],
+    sources: [
+      {
+        label: "Statistisches Bundesamt – Reisen der Deutschen",
+        url: "https://www.destatis.de/",
+      },
     ],
   },
 ];
