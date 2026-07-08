@@ -22,6 +22,7 @@ import PendlerpauschaleCalculator from "./pendlerpauschale";
 import WerbungskostenCalculator from "./werbungskosten";
 import KapitalertragsteuerCalculator from "./kapitalertragsteuer";
 import GehaltserhoehungNettoCalculator from "./gehaltserhoehung-netto";
+import TdeeCalculator from "./tdee";
 
 /**
  * Central registry for all calculators on the platform.
@@ -1866,6 +1867,94 @@ export const calculators: CalculatorDef[] = [
       {
         label: "Bundesfinanzministerium – Lohn- und Einkommensteuerrechner",
         url: "https://www.bmf-steuerrechner.de/",
+      },
+    ],
+  },
+  {
+    slug: "kalorienbedarf-rechner",
+    name: "Kalorienbedarf-Rechner (TDEE)",
+    shortDescription:
+      "Täglicher Kalorienbedarf nach Mifflin-St Jeor mit Aktivitätsfaktor.",
+    description:
+      "Berechne deinen täglichen Kalorienbedarf (TDEE) aus Grundumsatz und Aktivitätslevel. Mit Empfehlungen für Diät (Defizit), Erhaltung und Muskelaufbau sowie einem einfachen Makro-Vorschlag.",
+    category: "sport",
+    keywords: [
+      "kalorienbedarf",
+      "tdee rechner",
+      "grundumsatz",
+      "bmr rechner",
+      "kalorien berechnen",
+      "mifflin st jeor",
+      "makro rechner",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: TdeeCalculator,
+    formula: {
+      expression:
+        "BMR = 10·kg + 6,25·cm − 5·Alter (+5 m / −161 w)   ·   TDEE = BMR × Aktivitätsfaktor",
+      explanation:
+        "Der Grundumsatz (BMR) nach Mifflin-St Jeor ist die Energie, die dein Körper in völliger Ruhe braucht. Multipliziert mit dem Aktivitätsfaktor (1,2 sitzend bis 1,9 extrem) ergibt sich der tägliche Gesamtbedarf (TDEE). Für Abnehmen ziehst du 10–25 % ab, für Muskelaufbau addierst du 10–20 %.",
+      variables: [
+        { symbol: "kg", description: "Körpergewicht in Kilogramm" },
+        { symbol: "cm", description: "Körpergröße in Zentimetern" },
+        { symbol: "Alter", description: "Alter in Jahren" },
+        { symbol: "Faktor", description: "1,2 · 1,375 · 1,55 · 1,725 · 1,9" },
+      ],
+    },
+    examples: [
+      {
+        title: "Mann, 30 J, 180 cm, 80 kg, aktiv",
+        inputs: "männlich · 30 J · 180 cm · 80 kg · aktiv (×1,55)",
+        result: "BMR 1.780 kcal · TDEE ≈ 2.760 kcal",
+      },
+      {
+        title: "Frau, 28 J, 165 cm, 60 kg, leicht aktiv",
+        inputs: "weiblich · 28 J · 165 cm · 60 kg · leicht (×1,375)",
+        result: "BMR 1.343 kcal · TDEE ≈ 1.846 kcal",
+      },
+      {
+        title: "Bulk-Phase Mann",
+        inputs: "männlich · 25 J · 185 cm · 85 kg · sehr aktiv (×1,725)",
+        result: "TDEE ≈ 3.230 kcal · Aufbau +10 % ≈ 3.550 kcal",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist der Unterschied zwischen BMR und TDEE?",
+        answer:
+          "Der Grundumsatz (BMR) ist der Energiebedarf im völligen Ruhezustand – nur um Organe, Zellstoffwechsel und Körpertemperatur aufrechtzuerhalten. Der TDEE (Total Daily Energy Expenditure) ist der Gesamtbedarf inklusive Alltag, Sport und Verdauung – meist 20–90 % höher als der BMR.",
+      },
+      {
+        question: "Welche Formel ist am genauesten?",
+        answer:
+          "Mifflin-St Jeor gilt heute als Standard und ist im Mittel genauer als die ältere Harris-Benedict-Formel. Bei sehr niedrigem Körperfett kann Katch-McArdle (nutzt LBM statt Gesamtgewicht) präziser sein. Rechenwert ± 10 % Individualstreuung ist normal.",
+      },
+      {
+        question: "Wie schnell sollte ich abnehmen?",
+        answer:
+          "Nachhaltig sind 0,5–1 % Körpergewicht pro Woche, also ein moderates Defizit von 300–500 kcal/Tag. Aggressivere Defizite bringen kurzfristig mehr, führen aber häufiger zu Muskelverlust, Heißhunger und Jo-Jo-Effekt.",
+      },
+      {
+        question: "Wie viel Eiweiß brauche ich?",
+        answer:
+          "Für gesunde Erwachsene mit Sport 1,4–2,2 g pro kg Körpergewicht. Im Defizit eher am oberen Ende, um Muskeln zu erhalten. Fett sollte mindestens 0,6–1,0 g/kg betragen (Hormone), Kohlenhydrate füllen die restlichen Kalorien.",
+      },
+      {
+        question: "Warum passt die Zahl nicht zu meinem Gewichtsverlauf?",
+        answer:
+          "Wasserretention, Glykogenschwankungen, Zyklus, Salz- und Kohlenhydrataufnahme können das Gewicht ±2 kg tageweise verschieben. Miss über 2–3 Wochen den Durchschnitt und passe die Kalorien um 100–200 kcal an, wenn sich langfristig nichts bewegt.",
+      },
+    ],
+    relatedSlugs: ["bmi-rechner", "pace-rechner"],
+    sources: [
+      {
+        label: "Mifflin MD et al. (1990) – New predictive equations for resting energy",
+        url: "https://pubmed.ncbi.nlm.nih.gov/2305711/",
+      },
+      {
+        label: "DGE – Referenzwerte Energiezufuhr",
+        url: "https://www.dge.de/wissenschaft/referenzwerte/energie/",
       },
     ],
   },
