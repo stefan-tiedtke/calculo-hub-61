@@ -1188,7 +1188,7 @@ export const calculators: CalculatorDef[] = [
           "Nein. Gib alle Werte in Euro ein. Für Reisen außerhalb der Eurozone rechnest du am besten mit dem tagesaktuellen Kurs und einem Aufschlag von 1–3 % für Karten- oder Wechselgebühren.",
       },
     ],
-    relatedSlugs: ["kredit-rechner", "inflationsrechner"],
+    relatedSlugs: ["kreditrechner", "inflationsrechner"],
     sources: [
       {
         label: "Statistisches Bundesamt – Reisen der Deutschen",
