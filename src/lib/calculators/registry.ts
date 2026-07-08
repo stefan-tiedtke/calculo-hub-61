@@ -61,7 +61,7 @@ export const calculators: CalculatorDef[] = [
       {
         title: "50 €/Monat seit 2017-Peak",
         inputs: "50 € · Dez 2017 – heute",
-        result: "Auch beim „schlechtesten" Einstieg langfristig positiv",
+        result: "Auch beim „schlechtesten“ Einstieg langfristig positiv",
       },
       {
         title: "200 €/Monat, 3 Jahre",
@@ -88,7 +88,7 @@ export const calculators: CalculatorDef[] = [
       {
         question: "Ist ein Bitcoin-Sparplan besser als eine Einmalanlage?",
         answer:
-          "Rein statistisch schneidet Einmalanlage bei steigenden Märkten meist besser ab. DCA punktet vor allem in volatilen und seitwärts laufenden Phasen und reduziert das Risiko, im falschen Moment „all in" zu gehen – ein psychologisch großer Vorteil.",
+          "Rein statistisch schneidet Einmalanlage bei steigenden Märkten meist besser ab. DCA punktet vor allem in volatilen und seitwärts laufenden Phasen und reduziert das Risiko, im falschen Moment „all in“ zu gehen – ein psychologisch großer Vorteil.",
       },
       {
         question: "Ist Bitcoin eine sichere Geldanlage?",
