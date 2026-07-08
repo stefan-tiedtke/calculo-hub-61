@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RechnerSlugRouteImport } from './routes/rechner.$slug'
 import { Route as KategorieSlugRouteImport } from './routes/kategorie.$slug'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,47 @@ const KategorieSlugRoute = KategorieSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategorie/$slug': typeof KategorieSlugRoute
   '/rechner/$slug': typeof RechnerSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategorie/$slug': typeof KategorieSlugRoute
   '/rechner/$slug': typeof RechnerSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/kategorie/$slug': typeof KategorieSlugRoute
   '/rechner/$slug': typeof RechnerSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kategorie/$slug' | '/rechner/$slug'
+  fullPaths: '/' | '/sitemap.xml' | '/kategorie/$slug' | '/rechner/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kategorie/$slug' | '/rechner/$slug'
-  id: '__root__' | '/' | '/kategorie/$slug' | '/rechner/$slug'
+  to: '/' | '/sitemap.xml' | '/kategorie/$slug' | '/rechner/$slug'
+  id: '__root__' | '/' | '/sitemap.xml' | '/kategorie/$slug' | '/rechner/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   KategorieSlugRoute: typeof KategorieSlugRoute
   RechnerSlugRoute: typeof RechnerSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   KategorieSlugRoute: KategorieSlugRoute,
   RechnerSlugRoute: RechnerSlugRoute,
 }
