@@ -1,49 +1,12 @@
 ## Ziel
-Ein **TDEE-Rechner (Total Daily Energy Expenditure)** in der Kategorie **Sport**, der den täglichen Kalorienbedarf auf Basis von Grundumsatz (Mifflin-St Jeor) und Aktivitätsniveau berechnet – inkl. Empfehlungen für Abnehmen, Halten und Muskelaufbau.
-
-## Eingaben
-- Geschlecht (m / w) – Segmented
-- Alter (Jahre)
-- Größe (cm)
-- Gewicht (kg)
-- Aktivitätslevel (Segmented, 5 Stufen):
-  - Sitzend (× 1,2) – kaum Bewegung
-  - Leicht aktiv (× 1,375) – 1–3× Sport / Woche
-  - Aktiv (× 1,55) – 3–5× Sport / Woche
-  - Sehr aktiv (× 1,725) – 6–7× Sport / Woche
-  - Extrem aktiv (× 1,9) – körperlich harter Job / 2× Training
-
-## Ausgabe (ResultCard)
-Hero-Zahl: **TDEE in kcal/Tag** (Erhaltungskalorien)
-
-Aufschlüsselung:
-- Grundumsatz (BMR)
-- Aktivitätsumsatz (TDEE − BMR)
-- **Erhaltung** (= TDEE)
-
-Zusätzliche Tabelle "Zielkalorien":
-| Ziel | kcal / Tag |
-|---|---|
-| Aggressives Defizit (−25 %) | z. B. 1.700 kcal |
-| Moderates Defizit (−15 %) | z. B. 1.925 kcal |
-| Leichtes Defizit (−10 %) | z. B. 2.040 kcal |
-| **Erhaltung** | 2.265 kcal |
-| Leichter Aufbau (+10 %) | 2.490 kcal |
-| Moderater Aufbau (+20 %) | 2.720 kcal |
-
-Kleiner Makro-Vorschlag bei Erhaltung: Eiweiß 1,8 g/kg · Fett 1,0 g/kg · Rest KH – als Zeile darunter.
-
-## Formel
-- BMR (Mifflin-St Jeor):
-  - Männer: 10·kg + 6,25·cm − 5·Alter + 5
-  - Frauen: 10·kg + 6,25·cm − 5·Alter − 161
-- TDEE = BMR × Aktivitätsfaktor
+Alle 9 Kategorien in der Desktop-Navigation oben anzeigen (aktuell nur die ersten 6 via `.slice(0, 6)` in `src/components/site-header.tsx`).
 
 ## Umsetzung
-- Neue Datei `src/lib/calculators/tdee.tsx`
-- Bestehende Komponenten `CalculatorShell`, `NumberField`, `SegmentedControl`, `ResultCard`
-- Registry-Eintrag `kalorienbedarf-rechner`, Kategorie `sport`, Slug/Keywords/Beispiele/5 FAQ, `relatedSlugs: [bmi-rechner, pace-rechner]`, Quellen (Mifflin-St Jeor Originalstudie, DGE)
+- `.slice(0, 6)` in `site-header.tsx` entfernen → alle 9 Kategorien werden gemappt
+- Damit die Leiste bei 9 Links nicht überläuft:
+  - Gap von `gap-6` auf `gap-4` reduzieren
+  - Sichtbarkeit erst ab `lg:flex` statt `md:flex` (auf md/Tablet würde es sonst zu eng, da der Container `max-w-6xl` ist und Logo Platz braucht)
+- Keine Änderung am Mobile-Verhalten (bleibt versteckt; Kategorien sind wie bisher über die Startseite erreichbar)
 
 ## Nicht enthalten
-- Keine Körperfett-basierten Formeln (Katch-McArdle) – hält Eingaben minimal
-- Kein Zeitplan-Rechner "in X Wochen abnehmen" – separater Rechner möglich
+- Kein neues Burger-Menü für Mobile – separater Wunsch, falls nötig

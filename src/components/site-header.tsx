@@ -13,8 +13,8 @@ export function SiteHeader() {
             Rechnerio
           </span>
         </Link>
-        <nav className="hidden items-center gap-6 md:flex">
-          {categories.slice(0, 6).map((cat) => (
+        <nav className="hidden items-center gap-4 lg:flex">
+          {categories.map((cat) => (
             <Link
               key={cat.slug}
               to="/kategorie/$slug"
