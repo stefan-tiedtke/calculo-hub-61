@@ -1519,6 +1519,93 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "pendlerpauschale-rechner",
+    name: "Pendlerpauschale-Rechner",
+    shortDescription:
+      "Entfernungspauschale, Homeoffice-Pauschale und Steuervorteil berechnen.",
+    description:
+      "Berechne die absetzbare Entfernungspauschale für deinen Arbeitsweg 2024/2025 – mit gestaffeltem Kilometersatz (0,30 € / 0,38 €), Verkehrsmittel-Deckelung, Homeoffice-Pauschale, Abzug des Arbeitnehmer-Pauschbetrags und geschätztem Steuervorteil.",
+    category: "steuern",
+    keywords: [
+      "pendlerpauschale rechner",
+      "entfernungspauschale",
+      "kilometerpauschale",
+      "fahrtkosten arbeitsweg",
+      "homeoffice pauschale",
+      "werbungskosten",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: PendlerpauschaleCalculator,
+    formula: {
+      expression:
+        "Pauschale = (min(km, 20) · 0,30 € + max(km − 20, 0) · 0,38 €) · Pendlertage + Homeoffice-Tage · 6 €",
+      explanation:
+        "Für die einfache Entfernung zur Arbeit gibt es für die ersten 20 km 0,30 €/km, ab dem 21. Kilometer 0,38 €/km. Dieser Tagessatz wird mit den tatsächlichen Pendlertagen (Arbeitstage − Homeoffice) multipliziert. Zusätzlich sind bis zu 210 Homeoffice-Tage à 6 € (max. 1.260 €) absetzbar. Bei ÖPNV, Rad und zu Fuß gilt ein Deckel von 4.500 € pro Jahr – bei ÖPNV nur, wenn die Ticketkosten nicht höher sind. Der Steuervorteil ergibt sich, indem der über den Arbeitnehmer-Pauschbetrag (1.230 €) hinausgehende Betrag mit dem persönlichen Grenzsteuersatz multipliziert wird.",
+      variables: [
+        { symbol: "km", description: "Einfache Entfernung zur Arbeit" },
+        { symbol: "Pendlertage", description: "Arbeitstage minus Homeoffice-Tage" },
+        { symbol: "Grenzsteuersatz", description: "Persönlicher Grenzsteuersatz (25–42 %)" },
+        { symbol: "1.230 €", description: "Arbeitnehmer-Pauschbetrag (automatisch)" },
+      ],
+    },
+    examples: [
+      {
+        title: "Klassischer Pendler",
+        inputs: "25 km · 220 Arbeitstage · 0 HO · Pkw · 30 %",
+        result: "≈ 1.914 € Pauschale · ~ 205 € Steuervorteil",
+      },
+      {
+        title: "Hybrid-Modell mit Homeoffice",
+        inputs: "40 km · 220 Tage · 60 HO · Pkw · 35 %",
+        result: "≈ 2.976 € Wegkosten + 360 € HO · ~ 737 € Steuervorteil",
+      },
+      {
+        title: "Kurzer Weg, unter Pauschbetrag",
+        inputs: "8 km · 220 Tage · 20 HO · Pkw · 25 %",
+        result: "Werbungskosten < 1.230 € – kein zusätzlicher Steuervorteil",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie hoch ist die Pendlerpauschale 2024/2025?",
+        answer:
+          "0,30 €/km für die ersten 20 km und 0,38 €/km ab dem 21. Kilometer der einfachen Entfernung zur Arbeit. Der erhöhte Satz gilt befristet bis einschließlich 2026. Berechnet wird nur eine Fahrt pro Arbeitstag (nicht Hin und zurück).",
+      },
+      {
+        question: "Was ist der Arbeitnehmer-Pauschbetrag?",
+        answer:
+          "1.230 € pro Jahr, die das Finanzamt jedem Arbeitnehmer automatisch als Werbungskosten anerkennt – auch ohne Nachweis. Nur was darüber hinausgeht (z. B. hohe Pendlerpauschale, Arbeitsmittel, Fortbildungen), bringt zusätzlich Steuerersparnis.",
+      },
+      {
+        question: "Wie funktioniert die Homeoffice-Pauschale?",
+        answer:
+          "Seit 2023 sind 6 € pro Homeoffice-Tag absetzbar, maximal 210 Tage = 1.260 € pro Jahr. Kein separates Arbeitszimmer nötig. An Tagen mit Fahrt zur Arbeit kann in der Regel nicht zusätzlich die HO-Pauschale angesetzt werden.",
+      },
+      {
+        question: "Gilt der 4.500-€-Deckel für alle Verkehrsmittel?",
+        answer:
+          "Nein. Mit dem eigenen Pkw (oder Firmenwagen) gibt es keine Deckelung. Bei Fahrrad, zu Fuß, Mitfahrgelegenheit sowie ÖPNV gilt der Höchstbetrag von 4.500 €. Bei ÖPNV zählen die tatsächlichen Ticketkosten, wenn sie höher sind.",
+      },
+      {
+        question: "Wie realistisch ist der geschätzte Steuervorteil?",
+        answer:
+          "Der Vorteil ist eine Näherung: absetzbarer Betrag × persönlicher Grenzsteuersatz. Der reale Effekt hängt vom Gesamteinkommen, Solidaritätszuschlag und Kirchensteuer ab und wird erst im Steuerbescheid genau ausgewiesen.",
+      },
+    ],
+    relatedSlugs: ["brutto-netto-rechner", "stundenlohn-rechner", "ueberstundenrechner"],
+    sources: [
+      {
+        label: "Bundesfinanzministerium – Entfernungspauschale",
+        url: "https://www.bundesfinanzministerium.de/",
+      },
+      {
+        label: "§ 9 Abs. 1 Nr. 4 EStG",
+        url: "https://www.gesetze-im-internet.de/estg/__9.html",
+      },
+    ],
+  },
 ];
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
