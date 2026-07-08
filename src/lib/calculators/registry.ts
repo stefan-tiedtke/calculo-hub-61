@@ -1694,6 +1694,93 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "kapitalertragsteuer-rechner",
+    name: "Kapitalertragsteuer-Rechner",
+    shortDescription:
+      "Abgeltungsteuer, Soli, Kirchensteuer und Sparerpauschbetrag berechnen.",
+    description:
+      "Berechne die Steuer auf Zinsen, Dividenden und Kursgewinne: 25 % Abgeltungsteuer plus Solidaritätszuschlag und optional Kirchensteuer, unter Berücksichtigung von Sparerpauschbetrag (1.000 € / 2.000 €) und Teilfreistellung für Fonds.",
+    category: "finanzen",
+    keywords: [
+      "kapitalertragsteuer rechner",
+      "abgeltungsteuer",
+      "kest rechner",
+      "sparerpauschbetrag",
+      "dividendensteuer",
+      "teilfreistellung",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: KapitalertragsteuerCalculator,
+    formula: {
+      expression:
+        "Steuer = max(Ertrag · (1 − TF) − Freibetrag, 0) · 25 %  + Soli 5,5 %  (+ Kirchensteuer 8/9 %)",
+      explanation:
+        "Auf Kapitalerträge zahlst du pauschal 25 % Abgeltungsteuer plus 5,5 % Solidaritätszuschlag auf diese Steuer. Kirchenmitglieder zahlen zusätzlich 8 % (Bayern, Baden-Württemberg) oder 9 % Kirchensteuer, die die KESt mindert. Vor Steuerberechnung greift der Sparerpauschbetrag (1.000 € einzeln, 2.000 € zusammenveranlagt). Bei Fonds bleibt je nach Typ ein Teil der Erträge steuerfrei (Teilfreistellung).",
+      variables: [
+        { symbol: "Ertrag", description: "Zinsen, Dividenden, realisierte Kursgewinne" },
+        { symbol: "TF", description: "Teilfreistellung (Aktien 30 %, Misch 15 %, Immobilien 60 %)" },
+        { symbol: "Freibetrag", description: "Sparerpauschbetrag 1.000 € / 2.000 €" },
+        { symbol: "KiSt", description: "Kirchensteuer 8 % oder 9 %" },
+      ],
+    },
+    examples: [
+      {
+        title: "5.000 € Gewinn, einzel, keine Kirche",
+        inputs: "5.000 € · 1.000 € Freibetrag · keine Kirchensteuer",
+        result: "≈ 1.054,88 € Steuer · Netto ≈ 3.945 €",
+      },
+      {
+        title: "Aktienfonds mit Teilfreistellung",
+        inputs: "5.000 € · Aktienfonds (30 % TF) · einzel",
+        result: "≈ 632,50 € Steuer · Netto ≈ 4.368 €",
+      },
+      {
+        title: "Verheiratet mit Kirchensteuer",
+        inputs: "8.000 € · zusammen (2.000 €) · 9 % Kirche",
+        result: "≈ 1.582 € Steuer · Netto ≈ 6.418 €",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist die Abgeltungsteuer?",
+        answer:
+          "Ein pauschaler Steuersatz von 25 % auf Kapitalerträge – unabhängig vom persönlichen Einkommensteuersatz. Hinzu kommen 5,5 % Solidaritätszuschlag auf die Steuer und ggf. Kirchensteuer. Banken führen die Steuer in Deutschland automatisch ans Finanzamt ab.",
+      },
+      {
+        question: "Wie hoch ist der Sparerpauschbetrag?",
+        answer:
+          "Seit 2023: 1.000 € pro Person und Jahr, 2.000 € bei zusammenveranlagten Ehepaaren. Bis zu dieser Höhe bleiben Kapitalerträge steuerfrei – vorausgesetzt, du hast der Bank einen Freistellungsauftrag erteilt.",
+      },
+      {
+        question: "Was ist die Teilfreistellung bei Fonds?",
+        answer:
+          "Um die Doppelbesteuerung zwischen Fondsebene und Anleger auszugleichen, bleibt ein Teil der Fondserträge steuerfrei: 30 % bei Aktienfonds (mind. 51 % Aktienquote), 15 % bei Mischfonds (mind. 25 %), 60 % bzw. 80 % bei Immobilienfonds.",
+      },
+      {
+        question: "Wann lohnt sich die Günstigerprüfung?",
+        answer:
+          "Wenn dein persönlicher Grenzsteuersatz unter 25 % liegt (typisch bei geringem Einkommen, Rentnern, Studierenden). Über die Steuererklärung wird die Abgeltungsteuer dann durch die günstigere Einkommensteuer ersetzt und du bekommst zu viel gezahlte KESt zurück.",
+      },
+      {
+        question: "Muss ich Kapitalerträge in der Steuererklärung angeben?",
+        answer:
+          "Nicht zwingend, wenn die Bank die KESt bereits einbehalten hat. Pflicht ist die Angabe bei Erträgen aus dem Ausland ohne Steuerabzug, bei Kirchensteuerpflicht ohne Datenabgleich oder wenn du die Günstigerprüfung willst.",
+      },
+    ],
+    relatedSlugs: ["etf-sparplan-rechner", "zinseszins-rechner", "bitcoin-dca-rechner"],
+    sources: [
+      {
+        label: "§ 32d EStG – Gesonderter Steuertarif für Einkünfte aus Kapitalvermögen",
+        url: "https://www.gesetze-im-internet.de/estg/__32d.html",
+      },
+      {
+        label: "Bundesfinanzministerium – Abgeltungsteuer",
+        url: "https://www.bundesfinanzministerium.de/",
+      },
+    ],
+  },
 ];
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
