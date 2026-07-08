@@ -13,6 +13,7 @@ import KaufMieteCalculator from "./kauf-miete";
 import EvVsVerbrennerCalculator from "./ev-vs-verbrenner";
 import EtfSparplanCalculator from "./etf-sparplan";
 import BitcoinDcaCalculator from "./bitcoin-dca";
+import ReisekostenCalculator from "./reisekosten";
 
 /**
  * Central registry for all calculators on the platform.
