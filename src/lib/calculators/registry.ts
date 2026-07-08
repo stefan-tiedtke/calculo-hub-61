@@ -15,6 +15,7 @@ import EtfSparplanCalculator from "./etf-sparplan";
 import BitcoinDcaCalculator from "./bitcoin-dca";
 import ReisekostenCalculator from "./reisekosten";
 import PacklisteCalculator from "./packliste";
+import MietwagenCalculator from "./mietwagen";
 
 /**
  * Central registry for all calculators on the platform.
