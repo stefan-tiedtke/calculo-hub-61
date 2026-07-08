@@ -130,7 +130,7 @@ function CalculatorPage() {
       {calc.sources && calc.sources.length > 0 && (
         <section className="mt-12 text-xs text-muted-foreground">
           Quellen:{" "}
-          {calc.sources.map((s, i) => (
+            {calc.sources.map((s: { label: string; url: string }, i: number) => (
             <span key={s.url}>
               {i > 0 && ", "}
               <a href={s.url} target="_blank" rel="noreferrer noopener" className="underline hover:text-foreground">
