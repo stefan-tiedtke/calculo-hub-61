@@ -11,6 +11,7 @@ import KreditCalculator from "./kredit";
 import StromkostenCalculator from "./stromkosten";
 import KaufMieteCalculator from "./kauf-miete";
 import EvVsVerbrennerCalculator from "./ev-vs-verbrenner";
+import EtfSparplanCalculator from "./etf-sparplan";
 
 /**
  * Central registry for all calculators on the platform.
@@ -21,6 +22,94 @@ import EvVsVerbrennerCalculator from "./ev-vs-verbrenner";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "etf-sparplan-rechner",
+    name: "ETF-Sparplan-Rechner",
+    shortDescription: "ETF-Sparplan mit Rendite, TER, Dynamik, Steuern und Inflation berechnen.",
+    description:
+      "Berechne, wie sich dein ETF-Sparplan langfristig entwickelt – mit monatlicher Sparrate, Dynamik, laufenden Kosten (TER), Abgeltungssteuer inkl. Teilfreistellung und realer Kaufkraft nach Inflation.",
+    category: "finanzen",
+    keywords: [
+      "etf sparplan",
+      "etf sparplan rechner",
+      "sparplan rechner",
+      "msci world sparplan",
+      "vermögensaufbau",
+      "teilfreistellung",
+      "abgeltungssteuer",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: EtfSparplanCalculator,
+    formula: {
+      expression:
+        "K_n = K_0 · (1+i)^n + Σ Rate_j · (1+i)^(n−j)   ·   i = Rendite − TER",
+      explanation:
+        "Das Endkapital ergibt sich aus verzinstem Startkapital plus allen aufgezinsten Sparraten. Die effektive Rendite ist die Bruttorendite abzüglich der laufenden ETF-Kosten (TER). Beim Verkauf fällt Abgeltungssteuer + Soli auf den Gewinn an, wobei Aktien-ETFs 30 % teilfreigestellt sind. Die reale Kaufkraft ergibt sich durch Abzinsung mit der Inflation.",
+      variables: [
+        { symbol: "K_0", description: "Startkapital (Einmalanlage)" },
+        { symbol: "Rate", description: "Monatliche Sparrate" },
+        { symbol: "i", description: "Rendite pro Periode (Brutto − TER)" },
+        { symbol: "TER", description: "Laufende Fondskosten in % p. a." },
+        { symbol: "Teilfreistellung", description: "Steuerfreier Anteil der Erträge" },
+      ],
+    },
+    examples: [
+      {
+        title: "Klassischer MSCI-World-Sparplan",
+        inputs: "200 €/Monat · 7 % Rendite · 0,2 % TER · 25 Jahre",
+        result: "≈ 152.000 € brutto · ~ 137.000 € netto",
+      },
+      {
+        title: "Mit Dynamik",
+        inputs: "300 €/Monat · +3 % p. a. Dynamik · 30 Jahre · 7 %",
+        result: "≈ 445.000 € brutto",
+      },
+      {
+        title: "Kurzfristig",
+        inputs: "500 €/Monat · 10 Jahre · 6 %",
+        result: "≈ 81.000 € brutto",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist die TER?",
+        answer:
+          "Total Expense Ratio – die jährlichen laufenden Kosten eines ETFs in Prozent des Fondsvermögens. Sie werden direkt aus dem Fondsvermögen entnommen und reduzieren die Rendite. Bei Aktien-ETFs auf breite Indizes liegt die TER meist zwischen 0,05 % und 0,3 %.",
+      },
+      {
+        question: "Thesaurierend oder ausschüttend?",
+        answer:
+          "Thesaurierende ETFs reinvestieren Ausschüttungen automatisch – ideal für den Vermögensaufbau. Ausschüttende ETFs zahlen Dividenden aus, was den Sparerpauschbetrag (1.000 € pro Jahr) besser ausnutzen kann, aber weniger Zinseszinseffekt bringt.",
+      },
+      {
+        question: "Was ist die Teilfreistellung?",
+        answer:
+          "Für Fonds mit hohem Aktienanteil (>50 %) sind 30 % der Erträge steuerfrei. Bei Mischfonds mit >25 % Aktien sind es 15 %, bei reinen Anleihen-ETFs 0 %. Der Rechner setzt standardmäßig 30 % für einen Aktien-ETF an.",
+      },
+      {
+        question: "Warum ist die Vorabpauschale nicht berücksichtigt?",
+        answer:
+          "Die Vorabpauschale ist eine kleine jährliche Vorauszahlung auf zukünftige Kursgewinne bei thesaurierenden Fonds. Sie hängt vom Basiszins ab und ist meist gering. Für eine überschlägige Rechnung ist der Effekt vernachlässigbar; sie wird beim späteren Verkauf angerechnet.",
+      },
+      {
+        question: "Welche Rendite ist realistisch?",
+        answer:
+          "Der MSCI World hat historisch rund 7 – 8 % pro Jahr in EUR erzielt – ohne Garantie für die Zukunft. Konservative Annahmen liegen bei 5 – 6 %, optimistische bei 8 – 9 %. Rechne mehrere Szenarien, um die Bandbreite zu sehen.",
+      },
+    ],
+    relatedSlugs: ["zinseszins-rechner", "inflationsrechner", "entnahmerechner"],
+    sources: [
+      {
+        label: "BaFin – ETFs",
+        url: "https://www.bafin.de/",
+      },
+      {
+        label: "MSCI World Index",
+        url: "https://www.msci.com/",
+      },
+    ],
+  },
   {
     slug: "elektroauto-vs-verbrenner",
     name: "Elektroauto vs. Verbrenner",
