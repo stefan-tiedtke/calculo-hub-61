@@ -15,6 +15,7 @@ import EtfSparplanCalculator from "./etf-sparplan";
 import BitcoinDcaCalculator from "./bitcoin-dca";
 import ReisekostenCalculator from "./reisekosten";
 import PacklisteCalculator from "./packliste";
+import MietwagenCalculator from "./mietwagen";
 
 /**
  * Central registry for all calculators on the platform.
@@ -1271,6 +1272,90 @@ export const calculators: CalculatorDef[] = [
       {
         label: "Auswärtiges Amt – Reise- und Sicherheitshinweise",
         url: "https://www.auswaertiges-amt.de/de/ReiseUndSicherheit",
+      },
+    ],
+  },
+  {
+    slug: "mietwagen-kostenrechner",
+    name: "Mietwagen-Kostenrechner",
+    shortDescription:
+      "Gesamtkosten eines Mietwagens inkl. Versicherung, Sprit, Maut und Parkgebühren.",
+    description:
+      "Berechne die tatsächlichen Kosten deines Mietwagens: Mietpreis, Zusatzversicherung, Kraftstoff (auf Basis von Fahrleistung, Verbrauch und Spritpreis), Maut, Parkgebühren und Zusatzoptionen wie Zweitfahrer oder Kindersitz.",
+    category: "reisen",
+    keywords: [
+      "mietwagen kosten",
+      "mietwagen rechner",
+      "mietwagenkosten",
+      "leihwagen kosten",
+      "auto mieten kosten",
+      "vollkasko mietwagen",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: MietwagenCalculator,
+    formula: {
+      expression:
+        "Gesamt = (Miete + Versicherung + Parken)·Tage + km·Verbrauch/100·Spritpreis + Maut + Zusatz",
+      explanation:
+        "Tagesposten (Miete, Zusatzversicherung, Parken) werden mit der Mietdauer multipliziert. Die Spritkosten ergeben sich aus gefahrenen Kilometern, Verbrauch pro 100 km und dem Kraftstoffpreis. Maut und Zusatzkosten (Zusatzfahrer, Kindersitz) werden als Pauschale addiert.",
+      variables: [
+        { symbol: "Tage", description: "Mietdauer in Tagen" },
+        { symbol: "Miete", description: "Grundpreis pro Tag" },
+        { symbol: "Versicherung", description: "Zusatzversicherung pro Tag (z. B. Vollkasko ohne SB)" },
+        { symbol: "km", description: "Gesamte Fahrleistung" },
+        { symbol: "Verbrauch", description: "Liter pro 100 km" },
+        { symbol: "Spritpreis", description: "Kraftstoffpreis pro Liter" },
+      ],
+    },
+    examples: [
+      {
+        title: "Städtereise 3 Tage",
+        inputs: "3 Tage · 40 €/Tag · Vollkasko 10 €/Tag · 100 km/Tag · 15 € Parken",
+        result: "≈ 240 € gesamt",
+      },
+      {
+        title: "Urlaub 2 Wochen",
+        inputs: "14 Tage · 45 €/Tag · 12 €/Tag Vers. · 150 km/Tag · 30 € Maut",
+        result: "≈ 1.100 € gesamt",
+      },
+      {
+        title: "Roadtrip mit Vignette",
+        inputs: "10 Tage · 55 €/Tag · 200 km/Tag · 6 l/100 km · 60 € Maut",
+        result: "≈ 990 € gesamt",
+      },
+    ],
+    faq: [
+      {
+        question: "Warum ist der angezeigte Buchungspreis oft günstiger?",
+        answer:
+          "Der Grundpreis der Buchung enthält meist nur eine einfache Haftpflicht und CDW mit hoher Selbstbeteiligung. Zusatzversicherung (Vollkasko ohne SB), Zweitfahrer, Kindersitz, Flughafengebühr, Einwegmiete und Sprit kommen häufig obendrauf.",
+      },
+      {
+        question: "Welche Tankregelung ist am günstigsten?",
+        answer:
+          "„Voll/Voll“ ist fast immer am günstigsten: Du übernimmst voll und gibst voll zurück. „Voll/Leer“ ist bequem, aber der Anbieter berechnet oft Tankfüllung + Servicegebühr weit über Marktpreis – meist deutlich teurer.",
+      },
+      {
+        question: "Brauche ich Vollkasko ohne Selbstbeteiligung?",
+        answer:
+          "Im Ausland ist eine SB-Reduzierung fast immer sinnvoll, da Standard-Selbstbeteiligungen 1.000–2.500 € betragen. Alternative: eine unabhängige Mietwagen-Vollkasko (10–70 €/Jahr) bei einem deutschen Versicherer – oft günstiger als die Anbieter-Zusatzversicherung.",
+      },
+      {
+        question: "Sind Maut und Vignette immer nötig?",
+        answer:
+          "Nur in Ländern mit Maut- oder Vignettenpflicht (z. B. Österreich, Schweiz, Italien, Frankreich, Portugal, Kroatien). Prüfe vorab die Regelung: Vignetten werden oft schon an der Grenze verkauft, Streckenmaut wird an Mautstellen bezahlt oder elektronisch erfasst.",
+      },
+    ],
+    relatedSlugs: ["reisekostenrechner", "elektroauto-vs-verbrenner"],
+    sources: [
+      {
+        label: "ADAC – Mietwagen im Ausland",
+        url: "https://www.adac.de/",
+      },
+      {
+        label: "Stiftung Warentest – Mietwagen",
+        url: "https://www.test.de/",
       },
     ],
   },
