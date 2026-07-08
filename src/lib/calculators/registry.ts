@@ -3,6 +3,7 @@ import BmiCalculator from "./bmi";
 import BruttoNettoCalculator from "./brutto-netto";
 import ZinseszinsCalculator from "./zinseszins";
 import InflationCalculator from "./inflation";
+import EntnahmeCalculator from "./entnahme";
 
 /**
  * Central registry for all calculators on the platform.
@@ -13,6 +14,89 @@ import InflationCalculator from "./inflation";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "entnahmerechner",
+    name: "Entnahmerechner (FIRE & 4-%-Regel)",
+    shortDescription: "FIRE-Zahl, sichere Entnahmerate und monatliche Auszahlung berechnen.",
+    description:
+      "Berechne dein FIRE-Vermögen nach der 4-%-Regel, die mögliche monatliche Entnahme aus deinem Portfolio und wie lange dein Geld unter Berücksichtigung von Rendite und Inflation reicht.",
+    category: "finanzen",
+    keywords: [
+      "entnahmerechner",
+      "fire",
+      "4 prozent regel",
+      "financial independence",
+      "safe withdrawal rate",
+      "rente entnahme",
+      "kapitalverzehr",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: EntnahmeCalculator,
+    formula: {
+      expression: "FIRE-Zahl = Jahresausgaben / Entnahmerate   ·   Monatsentnahme = Vermögen × Rate / 12",
+      explanation:
+        "Nach der 4-%-Regel (Trinity-Studie) gilt eine jährliche Entnahme von 4 % des Startkapitals über 30 Jahre historisch als sicher. Die FIRE-Zahl ist daher rund 25× der jährlichen Ausgaben. Die Reichweite hängt von Rendite und Inflation ab – der Rechner simuliert das Jahr für Jahr mit inflationsangepasster Entnahme.",
+      variables: [
+        { symbol: "Vermögen", description: "Vorhandenes Anlagekapital" },
+        { symbol: "Rate", description: "Entnahmerate pro Jahr (z. B. 4 %)" },
+        { symbol: "Jahresausgaben", description: "Benötigte Auszahlung pro Jahr" },
+        { symbol: "Rendite", description: "Erwartete jährliche Portfoliorendite" },
+        { symbol: "Inflation", description: "Jährliche Steigerung der Entnahme" },
+      ],
+    },
+    examples: [
+      {
+        title: "Klassisches FIRE",
+        inputs: "2.000 €/Monat · 4 % Entnahmerate",
+        result: "FIRE-Zahl ≈ 600.000 €",
+      },
+      {
+        title: "500.000 € Portfolio",
+        inputs: "500.000 € · 4 % · 6 % Rendite · 2 % Inflation",
+        result: "≈ 1.667 €/Monat, nachhaltig über 30+ Jahre",
+      },
+      {
+        title: "Lean FIRE",
+        inputs: "1.500 €/Monat · 3,5 % Entnahmerate",
+        result: "FIRE-Zahl ≈ 514.000 €",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist die 4-%-Regel?",
+        answer:
+          "Die Trinity-Studie (1998) hat historische US-Marktdaten analysiert und gezeigt: Wer im ersten Jahr 4 % seines Portfolios entnimmt und die Entnahme danach jährlich mit der Inflation erhöht, konnte in der überwiegenden Mehrheit der Fälle 30 Jahre lang leben, ohne das Vermögen aufzubrauchen. Für längere Zeiträume oder mehr Sicherheit werden häufig 3 – 3,5 % empfohlen.",
+      },
+      {
+        question: "Was bedeutet FIRE?",
+        answer:
+          "FIRE steht für „Financial Independence, Retire Early“. Das Ziel: genug Vermögen aufbauen, damit die Kapitalerträge (bzw. die Entnahme) die Lebenshaltungskosten dauerhaft decken. Die FIRE-Zahl ist das dafür nötige Vermögen – bei 4 % Regel etwa das 25-fache der Jahresausgaben.",
+      },
+      {
+        question: "Warum ist die Inflation so wichtig?",
+        answer:
+          "Weil deine Ausgaben mit der Zeit steigen. Wer heute 2.000 € braucht, benötigt bei 2 % Inflation in 20 Jahren rund 2.972 €. Der Rechner berücksichtigt das, indem er die Entnahme jedes Jahr an die Inflation anpasst und mit der Rendite verrechnet.",
+      },
+      {
+        question: "Sind Steuern berücksichtigt?",
+        answer:
+          "Nein. Auf Kapitalerträge fällt in Deutschland Abgeltungssteuer (25 % + Soli + ggf. Kirchensteuer) an. Rechne für eine realistische Netto-Auszahlung mit einer etwas höheren Bruttoentnahme oder ziehe die Steuer von deiner Wunschentnahme wieder hoch.",
+      },
+      {
+        question: "Warum ist die Reichweite manchmal endlich?",
+        answer:
+          "Wenn die reale Rendite (Rendite − Inflation) niedriger ist als die Entnahmerate, wird das Kapital langsam aufgezehrt. Erhöhe die Rendite-Annahme, senke die Entnahme oder erhöhe das Startkapital, um eine nachhaltige Entnahme zu erreichen.",
+      },
+    ],
+    relatedSlugs: ["zinseszins-rechner", "inflationsrechner"],
+    sources: [
+      {
+        label: "Trinity Study – Sustainable Withdrawal Rates",
+        url: "https://en.wikipedia.org/wiki/Trinity_study",
+      },
+    ],
+  },
   {
     slug: "inflationsrechner",
     name: "Inflationsrechner",
