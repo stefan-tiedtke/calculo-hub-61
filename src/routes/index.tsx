@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Über 30 kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen. Klar, schnell und ohne Anmeldung – für jedes Gerät.",
+          "Kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen. Klar, schnell und ohne Anmeldung – für jedes Gerät.",
       },
       {
         property: "og:title",
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Über 30 kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen – ohne Anmeldung.",
+          "Kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen. Klar, schnell und ohne Anmeldung – für jedes Gerät.",
       },
       { property: "og:url", content: "https://rechnerio.com/" },
       { property: "og:type", content: "website" },

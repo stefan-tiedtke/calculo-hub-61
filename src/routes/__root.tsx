@@ -81,21 +81,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Rechnerio – Hochwertige Online-Rechner" },
+      { title: "Rechnerio – Kostenlose Online-Rechner für Alltag & Finanzen" },
       {
         name: "description",
         content:
-          "Über 100 präzise Online-Rechner für Finanzen, Steuern, Gesundheit, Immobilien und mehr. Klar, schnell, ohne Ablenkung.",
+          "Kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen. Klar, schnell und ohne Anmeldung – für jedes Gerät.",
       },
       { property: "og:site_name", content: "Rechnerio" },
-      { property: "og:title", content: "Rechnerio – Hochwertige Online-Rechner" },
+      { property: "og:title", content: "Rechnerio – Kostenlose Online-Rechner für Alltag & Finanzen" },
       {
         property: "og:description",
         content:
-          "Präzise Online-Rechner für Finanzen, Steuern, Gesundheit, Immobilien und mehr.",
+          "Kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen. Klar, schnell und ohne Anmeldung – für jedes Gerät.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Rechnerio – Kostenlose Online-Rechner für Alltag & Finanzen" },
+      { name: "twitter:description", content: "Kostenlose Online-Rechner für Finanzen, Steuern, Immobilien, Gesundheit, Sport und Reisen. Klar, schnell und ohne Anmeldung – für jedes Gerät." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Btlcg0A3AM8pdw6OqgNoyAviU93/social-images/social-1783515400513-Screenshot_2026-07-08_145453.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/2Btlcg0A3AM8pdw6OqgNoyAviU93/social-images/social-1783515400513-Screenshot_2026-07-08_145453.webp" },
     ],
     links: [
       {
