@@ -17,6 +17,7 @@ import ReisekostenCalculator from "./reisekosten";
 import PacklisteCalculator from "./packliste";
 import MietwagenCalculator from "./mietwagen";
 import PaceCalculator from "./pace";
+import SpritkostenCalculator from "./spritkosten";
 
 /**
  * Central registry for all calculators on the platform.
