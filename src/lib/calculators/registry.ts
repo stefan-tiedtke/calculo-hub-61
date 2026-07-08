@@ -17,6 +17,7 @@ import ReisekostenCalculator from "./reisekosten";
 import PacklisteCalculator from "./packliste";
 import MietwagenCalculator from "./mietwagen";
 import PaceCalculator from "./pace";
+import SpritkostenCalculator from "./spritkosten";
 
 /**
  * Central registry for all calculators on the platform.
@@ -1436,6 +1437,84 @@ export const calculators: CalculatorDef[] = [
       {
         label: "World Athletics – Distances",
         url: "https://worldathletics.org/",
+      },
+    ],
+  },
+  {
+    slug: "spritkosten-rechner",
+    name: "Spritkosten-Rechner",
+    shortDescription:
+      "Spritkosten für Hin- und Rückfahrt und pro Mitfahrer berechnen.",
+    description:
+      "Berechne die Spritkosten einer Fahrt aus Strecke, Verbrauch und Benzinpreis – wahlweise für die einfache Strecke oder für Hin- und Rückfahrt. Inklusive Aufteilung auf mehrere Mitfahrer.",
+    category: "reisen",
+    keywords: [
+      "spritkosten rechner",
+      "benzinkosten",
+      "spritkosten berechnen",
+      "fahrtkosten",
+      "kosten pro km",
+      "mitfahrer kosten",
+    ],
+    popular: false,
+    updatedAt: "2026-07-08",
+    component: SpritkostenCalculator,
+    formula: {
+      expression:
+        "Kosten = (Strecke · Verbrauch / 100) · Spritpreis   ·   pro Person = Kosten / Personen",
+      explanation:
+        "Aus Strecke und Verbrauch ergibt sich die insgesamt benötigte Kraftstoffmenge in Litern. Multipliziert mit dem Preis pro Liter erhältst du die Spritkosten. Bei Hin- und Rückfahrt wird die Strecke verdoppelt; für die Kosten pro Person werden die Gesamtkosten durch die Anzahl der Insassen geteilt.",
+      variables: [
+        { symbol: "Strecke", description: "Einfache Distanz in km" },
+        { symbol: "Verbrauch", description: "Durchschnittsverbrauch in l/100km" },
+        { symbol: "Spritpreis", description: "Preis pro Liter Kraftstoff" },
+        { symbol: "Personen", description: "Anzahl Insassen inkl. Fahrer" },
+      ],
+    },
+    examples: [
+      {
+        title: "Pendelfahrt",
+        inputs: "40 km · 6,5 l/100km · 1,75 €/L · hin & zurück",
+        result: "≈ 9,10 € pro Arbeitstag",
+      },
+      {
+        title: "Urlaubsfahrt zu viert",
+        inputs: "700 km · 7,0 l/100km · 1,80 €/L · 4 Personen · hin & zurück",
+        result: "≈ 176 € gesamt · 44 € pro Person",
+      },
+      {
+        title: "Kurze Einfachstrecke",
+        inputs: "150 km · 5,5 l/100km · 1,70 €/L · nur Hinfahrt",
+        result: "≈ 14,03 €",
+      },
+    ],
+    faq: [
+      {
+        question: "Welchen Verbrauchswert sollte ich eintragen?",
+        answer:
+          "Am genauesten ist der Verbrauch laut Bordcomputer über mehrere Tankfüllungen. Alternativ WLTP-Wert aus dem Fahrzeugschein plus 10–20 % Aufschlag für die Realität – Kurzstrecken, Autobahn und Winter erhöhen den Verbrauch spürbar.",
+      },
+      {
+        question: "Ist die Aufteilung auf Mitfahrer rechtlich okay?",
+        answer:
+          "Ja – solange nur die reinen Selbstkosten (anteilige Spritkosten) geteilt werden und keine Gewinnabsicht besteht. Sonst gilt es als gewerbliche Personenbeförderung und braucht eine Lizenz.",
+      },
+      {
+        question: "Was ist mit Verschleiß, Steuer und Versicherung?",
+        answer:
+          "Dieser Rechner zeigt nur die reinen Kraftstoffkosten. Der ADAC rechnet für die vollen Betriebskosten je nach Fahrzeug mit 25–70 ct/km inkl. Wertverlust, Wartung, Steuer und Versicherung.",
+      },
+      {
+        question: "Funktioniert das auch für Diesel oder E10?",
+        answer:
+          "Ja. Trage einfach den aktuellen Preis pro Liter deines Kraftstoffs ein – die Rechnung ist für Benzin, Diesel, E10, LPG und Ethanol identisch.",
+      },
+    ],
+    relatedSlugs: ["mietwagen-kostenrechner", "reisekostenrechner", "elektroauto-vs-verbrenner"],
+    sources: [
+      {
+        label: "ADAC – Kraftstoffpreise",
+        url: "https://www.adac.de/verkehr/tanken-kraftstoff-antrieb/deutschland/kraftstoffpreise/",
       },
     ],
   },
