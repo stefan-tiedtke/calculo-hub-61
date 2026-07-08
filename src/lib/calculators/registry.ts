@@ -1197,6 +1197,83 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "packlisten-generator",
+    name: "Packlisten-Generator",
+    shortDescription:
+      "Individuelle Packliste für deine Reise – nach Ziel, Klima, Dauer und Aktivitäten.",
+    description:
+      "Generiere eine maßgeschneiderte Packliste: Gib Reiseziel, Klima, Dauer und geplante Aktivitäten an und erhalte eine strukturierte Checkliste mit Dokumenten, Kleidung, Hygiene, Elektronik und aktivitätsspezifischer Ausrüstung. Punkte lassen sich direkt abhaken.",
+    category: "reisen",
+    keywords: [
+      "packliste",
+      "packlisten generator",
+      "reise checkliste",
+      "urlaub packen",
+      "was mitnehmen",
+      "reise packliste",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: PacklisteCalculator,
+    formula: {
+      expression: "Liste = Basis + f(Klima) + f(Dauer) + Σ f(Aktivität_i)",
+      explanation:
+        "Die Packliste kombiniert eine Basisausstattung (Dokumente, Hygiene, Elektronik) mit klimaspezifischer Kleidung und dauerabhängigen Mengen (z. B. Unterwäsche = Dauer + 1, max. 10). Für jede gewählte Aktivität kommen passende Ausrüstungsgegenstände hinzu.",
+      variables: [
+        { symbol: "Reiseziel", description: "Bestimmt Reisepass, Adapter, Handgepäck-Regeln" },
+        { symbol: "Klima", description: "Warm, gemäßigt oder kalt – wählt die Kleidung" },
+        { symbol: "Dauer", description: "Skaliert Mengen von Kleidung und Hygieneartikeln" },
+        { symbol: "Aktivitäten", description: "Strand, Wandern, Business, Ski usw." },
+      ],
+    },
+    examples: [
+      {
+        title: "Strandurlaub Thailand",
+        inputs: "Thailand · warm · 14 Tage · Strand, Fotografie",
+        result: "≈ 50 Punkte inkl. Reisepass, Adapter, Sonnencreme, Schnorchel",
+      },
+      {
+        title: "Städtetrip Berlin",
+        inputs: "Berlin · gemäßigt · 3 Tage · Städtetrip, Ausgehen",
+        result: "≈ 30 Punkte, kompaktes Handgepäck",
+      },
+      {
+        title: "Skiurlaub Österreich",
+        inputs: "Österreich · kalt · 7 Tage · Ski, Fotografie",
+        result: "≈ 55 Punkte inkl. Skianzug, Thermokleidung, Skibrille",
+      },
+    ],
+    faq: [
+      {
+        question: "Woher weiß der Generator, was ich brauche?",
+        answer:
+          "Er kombiniert eine Basis-Liste (Dokumente, Hygiene, Elektronik) mit Klima-Modulen (warm/gemäßigt/kalt) und aktivitätsspezifischen Ergänzungen. Die Mengen von Kleidung und Verbrauchsgütern skalieren automatisch mit der Reisedauer.",
+      },
+      {
+        question: "Warum wird bei bestimmten Zielen ein Reisepass ergänzt?",
+        answer:
+          "Wenn du im Reiseziel Länder außerhalb der EU eingibst (z. B. USA, Thailand, Japan), erweitert der Generator die Dokumentenliste um Reisepass, Auslandskrankenversicherung und Steckdosenadapter. Prüfe zusätzlich immer aktuelle Einreisebestimmungen und Visumspflicht.",
+      },
+      {
+        question: "Kann ich die Liste als Checkliste nutzen?",
+        answer:
+          "Ja – jeder Punkt hat eine Checkbox. Beim Packen kannst du die Einträge direkt abhaken. Der Fortschritt oben zeigt, wie viele Punkte bereits erledigt sind.",
+      },
+      {
+        question: "Ist die Liste vollständig?",
+        answer:
+          "Die Liste deckt die typischen Reisebedürfnisse ab, ersetzt aber keine persönliche Prüfung. Individuelle Medikamente, spezielle Sportausrüstung, kinder- oder haustierspezifische Dinge musst du ggf. ergänzen.",
+      },
+    ],
+    relatedSlugs: ["reisekostenrechner"],
+    sources: [
+      {
+        label: "Auswärtiges Amt – Reise- und Sicherheitshinweise",
+        url: "https://www.auswaertiges-amt.de/de/ReiseUndSicherheit",
+      },
+    ],
+  },
 ];
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
