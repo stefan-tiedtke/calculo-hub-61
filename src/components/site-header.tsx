@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { categories } from "@/lib/calculators/categories";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteHeader() {
   return (
@@ -13,19 +14,22 @@ export function SiteHeader() {
             Rechnerio
           </span>
         </Link>
-        <nav className="hidden items-center gap-4 lg:flex">
-          {categories.map((cat) => (
-            <Link
-              key={cat.slug}
-              to="/kategorie/$slug"
-              params={{ slug: cat.slug }}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground font-medium" }}
-            >
-              {cat.name}
-            </Link>
-          ))}
-        </nav>
+        <div className="flex items-center gap-4">
+          <nav className="hidden items-center gap-4 lg:flex">
+            {categories.map((cat) => (
+              <Link
+                key={cat.slug}
+                to="/kategorie/$slug"
+                params={{ slug: cat.slug }}
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                activeProps={{ className: "text-foreground font-medium" }}
+              >
+                {cat.name}
+              </Link>
+            ))}
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
