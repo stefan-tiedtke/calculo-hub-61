@@ -2,6 +2,7 @@ import type { CalculatorDef } from "./types";
 import BmiCalculator from "./bmi";
 import BruttoNettoCalculator from "./brutto-netto";
 import ZinseszinsCalculator from "./zinseszins";
+import InflationCalculator from "./inflation";
 
 /**
  * Central registry for all calculators on the platform.
@@ -12,6 +13,80 @@ import ZinseszinsCalculator from "./zinseszins";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "inflationsrechner",
+    name: "Inflationsrechner",
+    shortDescription: "Was ist mein Geld in einigen Jahren noch wert?",
+    description:
+      "Berechne, wie viel Kaufkraft ein heutiger Geldbetrag durch Inflation in der Zukunft noch hat – z. B. was 100.000 € in 20 Jahren noch wert sind.",
+    category: "finanzen",
+    keywords: [
+      "inflation",
+      "inflationsrechner",
+      "kaufkraft",
+      "kaufkraftverlust",
+      "geldentwertung",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: InflationCalculator,
+    formula: {
+      expression: "Kaufkraft = Betrag / (1 + i)^n",
+      explanation:
+        "Die zukünftige Kaufkraft eines heutigen Betrags ergibt sich, indem man ihn durch den Inflationsfaktor (1 + i)^n abzinst. i ist die jährliche Inflationsrate, n die Anzahl der Jahre.",
+      variables: [
+        { symbol: "Betrag", description: "Heutiger Geldbetrag in Euro" },
+        { symbol: "i", description: "Jährliche Inflationsrate (dezimal, z. B. 0,02)" },
+        { symbol: "n", description: "Anzahl der Jahre in der Zukunft" },
+        { symbol: "Kaufkraft", description: "Wert in heutiger Kaufkraft" },
+      ],
+    },
+    examples: [
+      {
+        title: "100.000 € in 20 Jahren",
+        inputs: "100.000 € · 2,5 % Inflation · 20 Jahre",
+        result: "≈ 61.027 € Kaufkraft (~ 39 % Verlust)",
+      },
+      {
+        title: "50.000 € in 10 Jahren",
+        inputs: "50.000 € · 3 % Inflation · 10 Jahre",
+        result: "≈ 37.204 € Kaufkraft",
+      },
+    ],
+    faq: [
+      {
+        question: "Welche Inflationsrate sollte ich ansetzen?",
+        answer:
+          "Die Europäische Zentralbank zielt langfristig auf 2 % pro Jahr. Deutschland lag zwischen 2000 und 2020 im Schnitt bei etwa 1,5 %, in den Jahren 2022–2023 zeitweise über 6 %. Für langfristige Prognosen ist 2 – 3 % ein üblicher Wert.",
+      },
+      {
+        question: "Wie stark entwertet Inflation mein Geld?",
+        answer:
+          "Bei 2 % Inflation halbiert sich die Kaufkraft eines Betrags in ca. 35 Jahren, bei 3 % in ca. 23 Jahren und bei 5 % bereits in ca. 14 Jahren. Faustformel: 70 / Inflationsrate = Halbierungsdauer in Jahren.",
+      },
+      {
+        question: "Berücksichtigt der Rechner Zinsen oder Rendite?",
+        answer:
+          "Nein. Er zeigt reine Geldentwertung. Um die reale Rendite einer Anlage zu ermitteln, ziehe die Inflationsrate von deiner Nominalrendite ab – oder nutze zusätzlich den Zinseszins-Rechner.",
+      },
+      {
+        question: "Ist Inflation für alle Menschen gleich hoch?",
+        answer:
+          "Nein. Der offizielle Verbraucherpreisindex ist ein Durchschnitt. Wer viel Miete, Energie oder Lebensmittel bezahlt, spürt oft eine höhere persönliche Inflation als jemand mit anderer Ausgabenstruktur.",
+      },
+    ],
+    relatedSlugs: ["zinseszins-rechner"],
+    sources: [
+      {
+        label: "Statistisches Bundesamt – Verbraucherpreisindex",
+        url: "https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html",
+      },
+      {
+        label: "EZB – Inflationsziel",
+        url: "https://www.ecb.europa.eu/mopo/strategy/pricestab/html/index.de.html",
+      },
+    ],
+  },
   {
     slug: "zinseszins-rechner",
     name: "Zinseszins-Rechner",
