@@ -29,11 +29,6 @@ export default function WerbungskostenCalculator() {
     setValues((prev) => ({ ...prev, [key]: v }));
 
   const r = useMemo(() => {
-    const summe = POSTEN.reduce(
-      (s, p) => s + Math.max(0, parseNumber(values[p]?.length ? p.key : p.key) || 0),
-      0,
-    );
-    // recompute properly
     const gesamt = POSTEN.reduce(
       (s, p) => s + Math.max(0, parseNumber(values[p.key]) || 0),
       0,
@@ -43,7 +38,7 @@ export default function WerbungskostenCalculator() {
     const zusaetzlichAbsetzbar = Math.max(0, differenz);
     const satz = Math.max(0, Math.min(100, parseNumber(grenzsteuer) || 0)) / 100;
     const ersparnis = zusaetzlichAbsetzbar * satz;
-    return { gesamt, angesetzt, differenz, zusaetzlichAbsetzbar, ersparnis, _summe: summe };
+    return { gesamt, angesetzt, differenz, zusaetzlichAbsetzbar, ersparnis };
   }, [values, grenzsteuer]);
 
   return (
