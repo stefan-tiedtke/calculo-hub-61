@@ -1,6 +1,7 @@
 import type { CalculatorDef } from "./types";
 import BmiCalculator from "./bmi";
 import BruttoNettoCalculator from "./brutto-netto";
+import ZinseszinsCalculator from "./zinseszins";
 
 /**
  * Central registry for all calculators on the platform.
@@ -11,6 +12,78 @@ import BruttoNettoCalculator from "./brutto-netto";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "zinseszins-rechner",
+    name: "Zinseszins-Rechner",
+    shortDescription: "Vermögensaufbau mit Zinseszins und Sparrate berechnen.",
+    description:
+      "Berechne, wie dein Vermögen durch Zinseszins wächst – mit Startkapital, jährlichem Zinssatz, Anlagedauer und optionaler monatlicher oder jährlicher Sparrate.",
+    category: "finanzen",
+    keywords: [
+      "zinseszins",
+      "sparplan",
+      "vermögensaufbau",
+      "etf sparplan",
+      "rendite",
+      "zinsen",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: ZinseszinsCalculator,
+    formula: {
+      expression: "K_n = K_0 · (1 + i)^n + R · ((1 + i)^n − 1) / i",
+      explanation:
+        "Das Endkapital ergibt sich aus dem verzinsten Startkapital plus dem verzinsten Wert aller regelmäßigen Sparraten. Bei monatlicher Zinsgutschnung wird i durch 12 geteilt und n mit 12 multipliziert.",
+      variables: [
+        { symbol: "K_0", description: "Startkapital" },
+        { symbol: "i", description: "Zinssatz pro Periode (dezimal)" },
+        { symbol: "n", description: "Anzahl der Perioden" },
+        { symbol: "R", description: "Sparrate pro Periode (nachschüssig)" },
+        { symbol: "K_n", description: "Endkapital nach n Perioden" },
+      ],
+    },
+    examples: [
+      {
+        title: "ETF-Sparplan über 20 Jahre",
+        inputs: "0 € Startkapital · 200 €/Monat · 6 % p. a. · 20 Jahre",
+        result: "≈ 92.408 € Endkapital (davon ≈ 44.408 € Zinsen)",
+        note: "Vor Steuern und Kosten, jährliche Verzinsung.",
+      },
+      {
+        title: "Einmalanlage",
+        inputs: "10.000 € · 5 % p. a. · 15 Jahre · keine Sparrate",
+        result: "≈ 20.789 € Endkapital",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist der Zinseszinseffekt?",
+        answer:
+          "Beim Zinseszins werden bereits gutgeschriebene Zinsen im nächsten Zeitraum ebenfalls verzinst. Dadurch wächst das Vermögen exponentiell und nicht mehr linear – besonders spürbar bei langen Anlagezeiträumen.",
+      },
+      {
+        question: "Welchen Zinssatz sollte ich ansetzen?",
+        answer:
+          "Für Tages- oder Festgeld orientierst du dich am aktuellen Marktzins (aktuell meist 2–3 %). Für breit gestreute Aktien-ETFs wird oft mit 5–7 % pro Jahr vor Inflation gerechnet – ohne Garantie, langfristige Durchschnittswerte.",
+      },
+      {
+        question: "Sind Steuern berücksichtigt?",
+        answer:
+          "Nein. Der Rechner zeigt Bruttowerte vor Abgeltungssteuer, Solidaritätszuschlag und Kirchensteuer. In Deutschland fallen auf Kapitalerträge 25 % Abgeltungssteuer plus Zuschläge an, abzüglich Sparerpauschbetrag.",
+      },
+      {
+        question: "Wie wirkt sich die Zinsgutschnung aus?",
+        answer:
+          "Eine monatliche statt jährlichen Verzinsung führt zu einem leicht höheren Endkapital, weil Zinsen früher weiterverzinst werden. Der Unterschied ist bei üblichen Zinssätzen jedoch klein.",
+      },
+    ],
+    sources: [
+      {
+        label: "Bundesbank – Zinsstatistik",
+        url: "https://www.bundesbank.de/de/statistiken/geld-und-kapitalmaerkte/zinssaetze-und-renditen",
+      },
+    ],
+  },
   {
     slug: "brutto-netto-rechner",
     name: "Brutto-Netto-Rechner",
