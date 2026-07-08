@@ -105,7 +105,7 @@ function CalculatorPage() {
             Ähnliche Rechner
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((r) => (
+            {related.map((r: CalculatorDef) => (
               <CalculatorCard key={r.slug} calc={r} />
             ))}
           </div>
