@@ -14,6 +14,7 @@ import EvVsVerbrennerCalculator from "./ev-vs-verbrenner";
 import EtfSparplanCalculator from "./etf-sparplan";
 import BitcoinDcaCalculator from "./bitcoin-dca";
 import ReisekostenCalculator from "./reisekosten";
+import PacklisteCalculator from "./packliste";
 
 /**
  * Central registry for all calculators on the platform.
