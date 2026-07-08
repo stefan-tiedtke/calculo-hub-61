@@ -110,6 +110,10 @@
 .dark {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
+  --surface: oklch(0.208 0.042 265.755);
+  --surface-muted: oklch(0.253 0.041 262.5);
+  --brand: oklch(0.7 0.17 260);
+  --brand-foreground: oklch(0.14 0.04 264);
   --card: oklch(0.208 0.042 265.755);
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.208 0.042 265.755);
