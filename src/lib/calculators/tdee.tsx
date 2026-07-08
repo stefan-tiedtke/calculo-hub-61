@@ -7,6 +7,13 @@ import { formatInt, parseNumber } from "@/lib/format";
 
 type Sex = "m" | "w";
 type Aktivitaet = "sitzend" | "leicht" | "aktiv" | "sehr" | "extrem";
+type ProteinZiel = "allgemein" | "sport" | "aufbau";
+
+const PROTEIN: Record<ProteinZiel, { g: number; label: string; hint: string }> = {
+  allgemein: { g: 0.8, label: "Allgemein (0,8 g/kg)", hint: "DGE-Empfehlung für Erwachsene ohne intensiven Sport." },
+  sport: { g: 1.6, label: "Sport (1,6 g/kg)", hint: "Kraft- und Ausdauersport, Muskelerhalt – auch im Defizit." },
+  aufbau: { g: 2.0, label: "Muskelaufbau (2,0 g/kg)", hint: "Intensiver Kraftsport bzw. gezielter Muskelaufbau." },
+};
 
 const FAKTOR: Record<Aktivitaet, number> = {
   sitzend: 1.2,
@@ -39,6 +46,7 @@ export default function TdeeCalculator() {
   const [groesse, setGroesse] = useState("180");
   const [gewicht, setGewicht] = useState("80");
   const [aktivitaet, setAktivitaet] = useState<Aktivitaet>("aktiv");
+  const [proteinZiel, setProteinZiel] = useState<ProteinZiel>("sport");
 
   const r = useMemo(() => {
     const kg = Math.max(0, parseNumber(gewicht) || 0);
@@ -52,12 +60,12 @@ export default function TdeeCalculator() {
     const faktor = FAKTOR[aktivitaet];
     const tdee = bmr * faktor;
     const aktivPart = tdee - bmr;
-    // Makros für Erhaltung: Eiweiß 1,8 g/kg, Fett 1,0 g/kg, Rest KH
-    const eiweiss = kg * 1.8;
+    // Makros für Erhaltung: Eiweiß wählbar, Fett 1,0 g/kg, Rest KH
+    const eiweiss = kg * PROTEIN[proteinZiel].g;
     const fett = kg * 1.0;
     const kh = Math.max(0, (tdee - (eiweiss * 4 + fett * 9)) / 4);
     return { bmr, tdee, aktivPart, kg, eiweiss, fett, kh };
-  }, [sex, alter, groesse, gewicht, aktivitaet]);
+  }, [sex, alter, groesse, gewicht, aktivitaet, proteinZiel]);
 
   return (
     <CalculatorShell
@@ -118,6 +126,21 @@ export default function TdeeCalculator() {
               {AKTIVITAET_HINT[aktivitaet]} Faktor × {FAKTOR[aktivitaet]
                 .toString()
                 .replace(".", ",")}.
+            </p>
+          </div>
+          <div className="space-y-1.5">
+            <label className="text-sm font-medium text-foreground">Eiweiß-Ziel</label>
+            <SegmentedControl
+              value={proteinZiel}
+              onChange={(v) => setProteinZiel(v as ProteinZiel)}
+              options={[
+                { value: "allgemein", label: "Allgemein" },
+                { value: "sport", label: "Sport" },
+                { value: "aufbau", label: "Aufbau" },
+              ]}
+            />
+            <p className="text-xs text-muted-foreground">
+              {PROTEIN[proteinZiel].hint}
             </p>
           </div>
         </>
@@ -199,7 +222,8 @@ export default function TdeeCalculator() {
                     </div>
                   </dl>
                   <p className="mt-2 text-xs text-muted-foreground">
-                    Richtwerte: 1,8 g Eiweiß / kg, 1,0 g Fett / kg, Rest Kohlenhydrate.
+                    Gewählt: {PROTEIN[proteinZiel].g.toString().replace(".", ",")} g
+                    Eiweiß / kg · 1,0 g Fett / kg · Rest Kohlenhydrate.
                   </p>
                 </div>
               </>
