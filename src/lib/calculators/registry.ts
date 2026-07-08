@@ -16,6 +16,7 @@ import BitcoinDcaCalculator from "./bitcoin-dca";
 import ReisekostenCalculator from "./reisekosten";
 import PacklisteCalculator from "./packliste";
 import MietwagenCalculator from "./mietwagen";
+import PaceCalculator from "./pace";
 
 /**
  * Central registry for all calculators on the platform.
@@ -1356,6 +1357,85 @@ export const calculators: CalculatorDef[] = [
       {
         label: "Stiftung Warentest – Mietwagen",
         url: "https://www.test.de/",
+      },
+    ],
+  },
+  {
+    slug: "pace-rechner",
+    name: "Pace-Rechner",
+    shortDescription:
+      "Pace, Endzeit oder Distanz beim Laufen berechnen – inkl. Zwischenzeiten.",
+    description:
+      "Berechne die nötige Lauf-Pace für ein Zeitziel (z. B. Marathon unter 4 Stunden), die voraussichtliche Endzeit bei gegebener Pace oder die erreichbare Distanz. Mit Zwischenzeiten für 1 km, 5 km, 10 km, Halbmarathon und Marathon sowie Umrechnung in km/h und min/Meile.",
+    category: "sport",
+    keywords: [
+      "pace rechner",
+      "laufpace",
+      "marathon pace",
+      "halbmarathon pace",
+      "min pro km",
+      "endzeit laufen",
+      "sub 4 marathon",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: PaceCalculator,
+    formula: {
+      expression:
+        "Pace [s/km] = Zeit [s] / Distanz [km]   ·   Zeit = Pace · Distanz   ·   v [km/h] = 3600 / Pace",
+      explanation:
+        "Die Pace ist die Zeit pro Kilometer. Aus zwei bekannten Werten (Zeit, Distanz oder Pace) lässt sich der dritte direkt ausrechnen. Die Geschwindigkeit in km/h ist der Kehrwert der Pace, umgerechnet auf eine Stunde.",
+      variables: [
+        { symbol: "Pace", description: "Zeit pro Kilometer (min:ss / km)" },
+        { symbol: "Zeit", description: "Gesamte Laufzeit" },
+        { symbol: "Distanz", description: "Laufstrecke in km" },
+        { symbol: "v", description: "Geschwindigkeit in km/h" },
+      ],
+    },
+    examples: [
+      {
+        title: "Marathon unter 4:00 h",
+        inputs: "42,195 km · Zielzeit 4:00:00",
+        result: "Pace 5:41 min/km · 10,55 km/h",
+      },
+      {
+        title: "Halbmarathon unter 2:00 h",
+        inputs: "21,0975 km · Zielzeit 2:00:00",
+        result: "Pace 5:41 min/km · 10,55 km/h",
+      },
+      {
+        title: "10 km in 50 Minuten",
+        inputs: "10 km · Zielzeit 0:50:00",
+        result: "Pace 5:00 min/km · 12,0 km/h",
+      },
+    ],
+    faq: [
+      {
+        question: "Welche Pace brauche ich für einen Sub-4-Marathon?",
+        answer:
+          "Für einen Marathon (42,195 km) unter 4 Stunden musst du konstant 5:41 min/km laufen – das sind rund 10,55 km/h. Realistisch plant man einen kleinen Puffer ein, also eher 5:35–5:38 min/km, weil Verpflegungsstellen, Steigungen und leichte Tempoverluste in der zweiten Hälfte typisch sind.",
+      },
+      {
+        question: "Wie unterscheiden sich Pace und Geschwindigkeit?",
+        answer:
+          "Pace ist Zeit pro Strecke (min/km), Geschwindigkeit ist Strecke pro Zeit (km/h). Umrechnung: v [km/h] = 60 / Pace [min/km]. Eine Pace von 6:00 min/km entspricht 10 km/h.",
+      },
+      {
+        question: "Wie ist die Pace in Meilen (min/mi)?",
+        answer:
+          "Multipliziere die Pace in min/km mit 1,609. Beispiel: 5:00 min/km ≈ 8:03 min/mi. Der Rechner zeigt beides parallel an.",
+      },
+      {
+        question: "Sollte ich die Pace konstant halten?",
+        answer:
+          "Auf Wettkampfdistanzen ist eine gleichmäßige oder leicht negative Split (zweite Hälfte etwas schneller) am effizientesten. Zu schneller Start ist der häufigste Fehler – die letzten Kilometer werden dann überproportional langsamer.",
+      },
+    ],
+    relatedSlugs: ["bmi-rechner"],
+    sources: [
+      {
+        label: "World Athletics – Distances",
+        url: "https://worldathletics.org/",
       },
     ],
   },
