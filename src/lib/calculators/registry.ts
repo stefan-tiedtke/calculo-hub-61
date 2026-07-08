@@ -4,6 +4,7 @@ import BruttoNettoCalculator from "./brutto-netto";
 import ZinseszinsCalculator from "./zinseszins";
 import InflationCalculator from "./inflation";
 import EntnahmeCalculator from "./entnahme";
+import RenteCalculator from "./rente";
 
 /**
  * Central registry for all calculators on the platform.
@@ -14,6 +15,82 @@ import EntnahmeCalculator from "./entnahme";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "rentenrechner",
+    name: "Rentenrechner",
+    shortDescription: "Voraussichtliche gesetzliche Rente und Rentenlücke berechnen.",
+    description:
+      "Schätze deine voraussichtliche gesetzliche Rente auf Basis deines aktuellen Bruttogehalts, deiner Beitragsjahre und deines geplanten Renteneintritts – inklusive Abschlägen, Rentenanpassung und Kaufkraft in heutigem Geld.",
+    category: "finanzen",
+    keywords: [
+      "rentenrechner",
+      "gesetzliche rente",
+      "entgeltpunkte",
+      "rentenlücke",
+      "rente berechnen",
+      "altersvorsorge",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: RenteCalculator,
+    formula: {
+      expression:
+        "Monatsrente = Entgeltpunkte × Zugangsfaktor × Rentenwert",
+      explanation:
+        "Pro Jahr erhältst du Entgeltpunkte im Verhältnis deines Bruttolohns zum Durchschnittsentgelt aller Versicherten (2025: ~50.493 €). Der Zugangsfaktor liegt bei 1,0 bei Regelaltersgrenze (67), sinkt bei früherem Rentenbeginn um 0,3 % pro Monat und steigt bei späterem um 0,5 % pro Monat. Multipliziert mit dem aktuellen Rentenwert (2025: 39,32 €) ergibt sich die monatliche Bruttorente.",
+      variables: [
+        { symbol: "Entgeltpunkte", description: "Summe aller Beitragsjahre × EP/Jahr" },
+        { symbol: "Zugangsfaktor", description: "Ab-/Zuschlag je nach Renteneintrittsalter" },
+        { symbol: "Rentenwert", description: "Wert eines Entgeltpunkts, jährlich angepasst" },
+      ],
+    },
+    examples: [
+      {
+        title: "Durchschnittsverdiener, 40 Jahre",
+        inputs: "4.200 €/Monat brutto · 40 Beitragsjahre · Rente mit 67",
+        result: "≈ 1.630 € Bruttorente/Monat (in heutiger Kaufkraft)",
+      },
+      {
+        title: "Frührente mit 63",
+        inputs: "4.000 €/Monat · 45 Beitragsjahre · Rente mit 63",
+        result: "≈ 14,4 % Abschlag auf die Rente",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie genau ist die Berechnung?",
+        answer:
+          "Der Rechner ist eine gute Orientierung, ersetzt aber keine offizielle Renteninformation der Deutschen Rentenversicherung. Er nimmt an, dass dein aktuelles Gehalt konstant bleibt (in Relation zum Durchschnittsentgelt) und berücksichtigt keine Kindererziehungszeiten, Zurechnungszeiten bei Erwerbsminderung oder Ost/West-Sonderregeln.",
+      },
+      {
+        question: "Was sind Entgeltpunkte?",
+        answer:
+          "Ein Entgeltpunkt entspricht einem Jahr, in dem du genau das Durchschnittsentgelt aller Versicherten verdient hast (2025: 50.493 € brutto). Verdienst du mehr, bekommst du mehr Punkte pro Jahr; die Bemessungsgrenze deckelt bei rund 2,1 Punkten pro Jahr.",
+      },
+      {
+        question: "Wie hoch sind die Abschläge bei früherer Rente?",
+        answer:
+          "Pro Monat, den du vor der Regelaltersgrenze in Rente gehst, wird die Rente um 0,3 % gekürzt – dauerhaft. Zwei Jahre früher bedeuten also 7,2 % weniger, drei Jahre 10,8 %. Bei besonders langjährig Versicherten (45 Jahre) gelten Sonderregeln.",
+      },
+      {
+        question: "Warum wird die Rente in „heutiger Kaufkraft“ angezeigt?",
+        answer:
+          "Die nominale Rente in 30 Jahren klingt hoch, ist aber weniger wert, weil die Preise gestiegen sind. Der Rechner zeigt zusätzlich, was die Rente in heutigen Euro entspricht – so kannst du sie direkt mit deinen jetzigen Ausgaben vergleichen.",
+      },
+      {
+        question: "Was ist die Rentenlücke?",
+        answer:
+          "Als Faustregel werden ca. 65 – 80 % des letzten Nettoeinkommens im Ruhestand benötigt. Der Rechner vergleicht deine geschätzte Nettorente mit rund 65 % deines heutigen Bruttos und zeigt die Differenz – ein Anhaltspunkt für zusätzliche private Vorsorge.",
+      },
+    ],
+    relatedSlugs: ["entnahmerechner", "zinseszins-rechner", "inflationsrechner"],
+    sources: [
+      {
+        label: "Deutsche Rentenversicherung – Rechengrößen",
+        url: "https://www.deutsche-rentenversicherung.de/",
+      },
+    ],
+  },
   {
     slug: "entnahmerechner",
     name: "Entnahmerechner",
