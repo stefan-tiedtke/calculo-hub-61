@@ -1782,6 +1782,93 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "was-bleibt-rechner",
+    name: "Was bleibt mir wirklich?",
+    shortDescription:
+      "Wie viel Netto bringt dir eine Gehaltserhöhung wirklich?",
+    description:
+      "Interaktiver Rechner für den Netto-Effekt einer Gehaltserhöhung. Gib dein aktuelles Brutto und die geplante Erhöhung ein – siehst du live, wie viel davon nach Steuern und Sozialabgaben tatsächlich auf deinem Konto landet.",
+    category: "finanzen",
+    keywords: [
+      "gehaltserhöhung netto",
+      "was bleibt netto",
+      "was bleibt mir",
+      "netto von brutto",
+      "grenzsteuersatz gehaltserhöhung",
+      "lohnt sich gehaltserhöhung",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: GehaltserhoehungNettoCalculator,
+    formula: {
+      expression:
+        "Δ Netto = Netto(Brutto + Erhöhung) − Netto(Brutto)   ·   Grenz-Nettoquote = Δ Netto / Δ Brutto",
+      explanation:
+        "Der Rechner berechnet Netto für dein aktuelles Brutto und für Brutto + Erhöhung jeweils mit Lohnsteuer, Solidaritätszuschlag, Kirchensteuer und Sozialabgaben (RV, AV, KV, PV). Die Differenz zeigt den tatsächlichen Netto-Zuwachs. Wegen Steuerprogression und Sozialversicherungsbeiträgen bleiben von einer Erhöhung typischerweise nur 45–65 % netto übrig.",
+      variables: [
+        { symbol: "Δ Brutto", description: "Höhe der Gehaltserhöhung" },
+        { symbol: "Δ Netto", description: "Zusätzliches Netto nach allen Abgaben" },
+        { symbol: "Grenzsteuersatz", description: "Steuersatz auf den zusätzlichen Euro" },
+        { symbol: "BBG", description: "Beitragsbemessungsgrenze KV/PV 66.150 €, RV/AV 96.600 €" },
+      ],
+    },
+    examples: [
+      {
+        title: "Klassische +500 € Erhöhung",
+        inputs: "3.500 € Brutto/Monat · +500 € · Steuerklasse I · keine Kirche",
+        result: "≈ +287 € Netto (Steuern −146 €, Sozial −67 €)",
+      },
+      {
+        title: "Kleine Erhöhung, Steuerklasse III",
+        inputs: "4.500 € Brutto/Monat · +200 € · Steuerklasse III",
+        result: "≈ +130 € Netto – Splittingtarif dämpft die Progression",
+      },
+      {
+        title: "Über Beitragsbemessungsgrenze",
+        inputs: "8.000 € Brutto/Monat · +500 € · Steuerklasse I",
+        result: "≈ +290 € Netto – SV-Beiträge steigen nicht mehr mit",
+      },
+    ],
+    faq: [
+      {
+        question: "Warum bleibt so wenig von der Gehaltserhöhung übrig?",
+        answer:
+          "Weil Lohnsteuer progressiv ist: Auf zusätzliches Einkommen zahlst du deinen Grenzsteuersatz (25–42 %), nicht deinen Durchschnittssatz. Dazu kommen ca. 20 % Sozialabgaben. Realistisch bleiben bei mittleren Einkommen etwa 50–60 % netto.",
+      },
+      {
+        question: "Was ist der Grenzsteuersatz?",
+        answer:
+          "Der Steuersatz, mit dem der letzte verdiente Euro besteuert wird. Er ist immer höher als der Durchschnittssteuersatz. Für Gehaltserhöhungen, Boni oder Überstunden ist der Grenzsteuersatz entscheidend – nicht der Wert auf der Steuererklärung.",
+      },
+      {
+        question: "Ab wann steigen die Sozialabgaben nicht mehr?",
+        answer:
+          "Ab der Beitragsbemessungsgrenze. 2025: 66.150 €/Jahr (5.512 €/Monat) für KV und PV, 96.600 €/Jahr (8.050 €/Monat) für RV und AV. Wer darüber liegt, bekommt von Erhöhungen deutlich mehr netto.",
+      },
+      {
+        question: "Lohnt sich eine Gehaltserhöhung überhaupt?",
+        answer:
+          "Ja – auch wenn netto weniger ankommt als brutto, steigt dein verfügbares Einkommen dauerhaft. Zusätzlich erhöhen sich Rentenansprüche, Arbeitslosengeld, Elterngeld und Urlaubsgeld anteilig. Nur bei Übergängen (z. B. aus Minijob raus) kann es Sondereffekte geben.",
+      },
+      {
+        question: "Sind Kindergeld, Steuerklassenwechsel oder Freibeträge berücksichtigt?",
+        answer:
+          "Nein. Der Rechner nutzt die Grundtabelle (bzw. Splitting bei Klasse III) ohne individuelle Freibeträge. Für exakte Zahlen inkl. Kinderfreibetrag, Lohnsteuerermäßigung und Werbungskosten hilft nur die Steuererklärung oder ein spezialisiertes Lohnprogramm.",
+      },
+    ],
+    relatedSlugs: ["brutto-netto-rechner", "stundenlohn-rechner", "ueberstundenrechner"],
+    sources: [
+      {
+        label: "§ 32a EStG – Einkommensteuertarif",
+        url: "https://www.gesetze-im-internet.de/estg/__32a.html",
+      },
+      {
+        label: "Bundesfinanzministerium – Lohn- und Einkommensteuerrechner",
+        url: "https://www.bmf-steuerrechner.de/",
+      },
+    ],
+  },
 ];
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
