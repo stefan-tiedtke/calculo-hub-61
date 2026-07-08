@@ -16,7 +16,7 @@ import EntnahmeCalculator from "./entnahme";
 export const calculators: CalculatorDef[] = [
   {
     slug: "entnahmerechner",
-    name: "Entnahmerechner (FIRE & 4-%-Regel)",
+    name: "Entnahmerechner",
     shortDescription: "FIRE-Zahl, sichere Entnahmerate und monatliche Auszahlung berechnen.",
     description:
       "Berechne dein FIRE-Vermögen nach der 4-%-Regel, die mögliche monatliche Entnahme aus deinem Portfolio und wie lange dein Geld unter Berücksichtigung von Rendite und Inflation reicht.",
