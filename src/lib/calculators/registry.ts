@@ -18,6 +18,7 @@ import PacklisteCalculator from "./packliste";
 import MietwagenCalculator from "./mietwagen";
 import PaceCalculator from "./pace";
 import SpritkostenCalculator from "./spritkosten";
+import PendlerpauschaleCalculator from "./pendlerpauschale";
 
 /**
  * Central registry for all calculators on the platform.
