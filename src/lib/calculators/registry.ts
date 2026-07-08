@@ -1607,6 +1607,92 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "werbungskosten-rechner",
+    name: "Werbungskosten-Rechner",
+    shortDescription:
+      "Werbungskosten aufsummieren, mit Pauschbetrag vergleichen und Steuerersparnis schätzen.",
+    description:
+      "Erfasse deine beruflichen Ausgaben (Pendlerpauschale, Homeoffice, Arbeitsmittel, Fortbildung, Bewerbungen u. v. m.), vergleiche die Summe mit dem Arbeitnehmer-Pauschbetrag von 1.230 € und erhalte eine Schätzung deiner zusätzlichen Steuerersparnis.",
+    category: "steuern",
+    keywords: [
+      "werbungskosten rechner",
+      "werbungskosten",
+      "arbeitnehmer pauschbetrag",
+      "steuererklärung werbungskosten",
+      "absetzbare kosten arbeitnehmer",
+      "1230 euro pauschbetrag",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: WerbungskostenCalculator,
+    formula: {
+      expression:
+        "Angesetzt = max(Σ Werbungskosten, 1.230 €)   ·   Ersparnis = max(Σ − 1.230 €, 0) · Grenzsteuersatz",
+      explanation:
+        "Das Finanzamt setzt automatisch den Arbeitnehmer-Pauschbetrag von 1.230 € an – unabhängig davon, ob du Werbungskosten nachweist. Nur wenn deine tatsächlichen Kosten höher sind, wirkt sich die Differenz steuerlich aus. Die zusätzliche Ersparnis entspricht der Differenz multipliziert mit deinem persönlichen Grenzsteuersatz.",
+      variables: [
+        { symbol: "Σ", description: "Summe aller Werbungskosten" },
+        { symbol: "1.230 €", description: "Arbeitnehmer-Pauschbetrag (2024/2025)" },
+        { symbol: "Grenzsteuersatz", description: "Persönlicher Grenzsteuersatz (25–42 %)" },
+      ],
+    },
+    examples: [
+      {
+        title: "Klassischer Pendler",
+        inputs: "1.900 € Fahrten · 200 € Arbeitsmittel · 30 %",
+        result: "2.100 € Werbungskosten · ~ 261 € Ersparnis",
+      },
+      {
+        title: "Homeoffice + Fortbildung",
+        inputs: "1.260 € HO · 800 € Fortbildung · 300 € Arbeitsmittel · 35 %",
+        result: "2.360 € Werbungskosten · ~ 396 € Ersparnis",
+      },
+      {
+        title: "Unter Pauschbetrag",
+        inputs: "400 € Arbeitsmittel · 100 € Bewerbungen · 25 %",
+        result: "500 € Werbungskosten · Pauschbetrag greift, keine Zusatzersparnis",
+      },
+    ],
+    faq: [
+      {
+        question: "Was sind Werbungskosten?",
+        answer:
+          "Ausgaben, die im Zusammenhang mit deinem Job entstehen: Fahrten zur Arbeit, Arbeitsmittel, Fortbildungen, Bewerbungen, Berufsverbände, Homeoffice, Dienstreisen. Sie mindern das zu versteuernde Einkommen und damit die Steuerlast.",
+      },
+      {
+        question: "Wie hoch ist der Arbeitnehmer-Pauschbetrag?",
+        answer:
+          "2024 und 2025 beträgt er 1.230 € pro Jahr. Diesen Betrag zieht das Finanzamt automatisch ab – auch ohne Nachweise. Nachweisen lohnt sich also erst, wenn deine tatsächlichen Werbungskosten diese Grenze übersteigen.",
+      },
+      {
+        question: "Welche Belege muss ich aufheben?",
+        answer:
+          "Rechnungen, Kontoauszüge, Fahrtaufzeichnungen, Fortbildungsnachweise. Belege müssen nicht mehr mit der Steuererklärung eingereicht werden, aber du musst sie im Falle einer Rückfrage vorlegen können – Aufbewahrungsfrist mindestens bis Bestandskraft des Bescheids, sicherheitshalber 4 Jahre.",
+      },
+      {
+        question: "Kann ich Homeoffice und Pendlerpauschale kombinieren?",
+        answer:
+          "Nicht am selben Tag. An Homeoffice-Tagen zählt die 6-€-Pauschale (max. 1.260 €/Jahr), an Arbeitstagen im Büro die Entfernungspauschale. Beide Beträge fließen als separate Positionen in die Werbungskosten ein.",
+      },
+      {
+        question: "Wie genau ist die geschätzte Ersparnis?",
+        answer:
+          "Es ist ein Näherungswert (Differenz × Grenzsteuersatz). Der reale Effekt hängt vom Gesamteinkommen, Kirchensteuer und Solidaritätszuschlag ab. Für eine exakte Berechnung: Steuerprogramm oder Steuerberater nutzen.",
+      },
+    ],
+    relatedSlugs: ["pendlerpauschale-rechner", "brutto-netto-rechner", "stundenlohn-rechner"],
+    sources: [
+      {
+        label: "§ 9a EStG – Pauschbeträge für Werbungskosten",
+        url: "https://www.gesetze-im-internet.de/estg/__9a.html",
+      },
+      {
+        label: "Bundesfinanzministerium",
+        url: "https://www.bundesfinanzministerium.de/",
+      },
+    ],
+  },
 ];
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
