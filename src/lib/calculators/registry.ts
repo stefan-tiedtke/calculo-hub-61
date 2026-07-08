@@ -10,6 +10,7 @@ import UeberstundenCalculator from "./ueberstunden";
 import KreditCalculator from "./kredit";
 import StromkostenCalculator from "./stromkosten";
 import KaufMieteCalculator from "./kauf-miete";
+import EvVsVerbrennerCalculator from "./ev-vs-verbrenner";
 
 /**
  * Central registry for all calculators on the platform.
@@ -20,6 +21,87 @@ import KaufMieteCalculator from "./kauf-miete";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
+  {
+    slug: "elektroauto-vs-verbrenner",
+    name: "Elektroauto vs. Verbrenner",
+    shortDescription: "TCO-Vergleich: Was kostet ein E-Auto wirklich im Vergleich zum Verbrenner?",
+    description:
+      "Vergleiche die Gesamtkosten (Total Cost of Ownership) von Elektroauto und Verbrenner über die geplante Haltedauer – inklusive Kaufpreis, Wertverlust, Energiekosten, Wartung, Versicherung und Kfz-Steuer.",
+    category: "finanzen",
+    keywords: [
+      "elektroauto vs verbrenner",
+      "e-auto vergleich",
+      "tco elektroauto",
+      "gesamtkosten elektroauto",
+      "kosten e-auto benziner",
+      "vergleich stromer diesel",
+    ],
+    popular: true,
+    updatedAt: "2026-07-08",
+    component: EvVsVerbrennerCalculator,
+    formula: {
+      expression: "TCO = (Kaufpreis − Restwert) + (Energie + Wartung + Versicherung + Steuer) × N",
+      explanation:
+        "Die Total Cost of Ownership summiert den Wertverlust über die Haltedauer und alle jährlichen Betriebskosten. Bei der Energie rechnet der Rechner: E-Auto = km × kWh/100 × Strompreis / 100, Verbrenner = km × l/100 × Preis/L / 100.",
+      variables: [
+        { symbol: "N", description: "Haltedauer in Jahren" },
+        { symbol: "Restwert", description: "Verkaufserlös nach N Jahren (in % vom Kaufpreis)" },
+        { symbol: "Energie", description: "Strom- bzw. Kraftstoffkosten pro Jahr" },
+        { symbol: "Wartung", description: "Reparaturen, Inspektionen, Verschleiß" },
+      ],
+    },
+    examples: [
+      {
+        title: "Vielfahrer",
+        inputs: "30.000 km/Jahr · 8 Jahre · 42.000 € E · 32.000 € Benzin",
+        result: "Elektroauto meist deutlich günstiger (~5.000 – 10.000 €)",
+      },
+      {
+        title: "Wenigfahrer",
+        inputs: "8.000 km/Jahr · 5 Jahre",
+        result: "Verbrenner oft günstiger – hoher Aufpreis amortisiert sich nicht",
+      },
+      {
+        title: "Durchschnitt",
+        inputs: "15.000 km/Jahr · 8 Jahre · 35 ct/kWh · 1,75 €/L",
+        result: "≈ Gleichstand, sensibel auf Strom- und Spritpreis",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist TCO?",
+        answer:
+          "Total Cost of Ownership – die Gesamtkosten über die Nutzungsdauer, nicht nur der Kaufpreis. Neben Anschaffung fließen Wertverlust, Energie, Wartung, Versicherung und Steuer ein. Für einen fairen Vergleich zwischen E-Auto und Verbrenner ist TCO der entscheidende Wert.",
+      },
+      {
+        question: "Wie hoch ist der Verbrauch typischer E-Autos?",
+        answer:
+          "Kompaktklasse: 15 – 18 kWh/100 km, Mittelklasse: 18 – 22 kWh/100 km, SUV: 20 – 25 kWh/100 km. Im Winter oder bei viel Autobahn kann der Verbrauch 20 – 30 % höher liegen. Der WLTP-Wert liegt oft niedriger als der Praxisverbrauch.",
+      },
+      {
+        question: "Welchen Strompreis sollte ich ansetzen?",
+        answer:
+          "Wer überwiegend zu Hause lädt, zahlt aktuell etwa 30 – 40 ct/kWh, mit PV-Anlage teils deutlich weniger. Öffentliches AC-Laden liegt bei 40 – 60 ct/kWh, Schnellladen (HPC) oft bei 55 – 80 ct/kWh. Setze einen realistischen Mischpreis an.",
+      },
+      {
+        question: "Sind Kaufprämien berücksichtigt?",
+        answer:
+          "Nein. Prämien und Zuschüsse ändern sich häufig. Zieh eine gewährte Prämie einfach vom E-Auto-Kaufpreis ab. Auch Steuervorteile bei Dienstwagen (0,25-%-Regel) sind nicht enthalten – sie machen E-Autos für Firmenwagenfahrer oft noch günstiger.",
+      },
+      {
+        question: "Warum ist der Restwert so wichtig?",
+        answer:
+          "Der Restwert ist neben der Energie der größte Kostenblock. E-Autos gelten aktuell als volatiler im Wiederverkauf, junge Elektroautos verlieren teils schneller an Wert. Konservativ 30 – 40 % nach 8 Jahren sind ein guter Startwert.",
+      },
+    ],
+    relatedSlugs: ["stromkostenrechner", "kreditrechner"],
+    sources: [
+      {
+        label: "ADAC – Autokosten",
+        url: "https://www.adac.de/rund-ums-fahrzeug/autokatalog/marken-modelle/autokosten/",
+      },
+    ],
+  },
   {
     slug: "kaufen-oder-mieten",
     name: "Kauf vs. Miete",
