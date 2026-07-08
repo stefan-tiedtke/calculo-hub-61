@@ -104,6 +104,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Rechnerio",
+          url: "https://rechnerio.com",
+          logo: "https://rechnerio.com/favicon.ico",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Rechnerio",
+          url: "https://rechnerio.com",
+          inLanguage: "de-DE",
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

@@ -1,0 +1,34 @@
+# Rechnerio
+
+> Kostenlose, werbefreie Online-Rechner für Finanzen, Steuern, Arbeit, Immobilien, Krypto, Energie, Gesundheit, Sport und Reisen. Klar aufgebaut, ohne Anmeldung, für jedes Gerät.
+
+Rechnerio bündelt geprüfte Rechner mit Formeln, Beispielen und FAQ – von Brutto-Netto und Zinseszins bis Pace, TDEE und Reisekosten.
+
+## Kategorien
+
+- [Finanzen](/kategorie/finanzen): Kredite, Zinseszins, ETF-Sparplan, Inflation, Bitcoin-DCA, Kapitalertragsteuer.
+- [Steuern](/kategorie/steuern): Brutto/Netto, Pendlerpauschale, Werbungskosten.
+- [Arbeit](/kategorie/arbeit): Stundenlohn, Überstunden.
+- [Immobilien](/kategorie/immobilien): Kauf vs. Miete.
+- [Krypto](/kategorie/krypto): Bitcoin-Sparplan Backtest.
+- [Energie](/kategorie/energie): Stromkosten pro Gerät und Haushalt.
+- [Gesundheit](/kategorie/gesundheit): BMI.
+- [Sport](/kategorie/sport): Pace-Rechner, Kalorienbedarf (TDEE).
+- [Reisen](/kategorie/reisen): Reisekosten, Mietwagen, Spritkosten, Packlisten-Generator.
+
+## Populäre Rechner
+
+- [Brutto-Netto-Rechner](/rechner/brutto-netto-rechner): Nettogehalt aus Brutto berechnen (Lohnsteuer, Soli, Sozialabgaben, 2025).
+- [Was bleibt mir wirklich?](/rechner/was-bleibt-rechner): Netto-Effekt einer Gehaltserhöhung inkl. Steuern und Sozialabgaben.
+- [Zinseszins-Rechner](/rechner/zinseszins-rechner): Sparplan mit Zinseszins und Zeithorizont.
+- [ETF-Sparplan-Rechner](/rechner/etf-sparplan-rechner): Vermögensaufbau mit TER, Steuern und Inflation.
+- [Kreditrechner](/rechner/kreditrechner): Annuitätendarlehen, Rate, Restschuld, Tilgungsplan.
+- [Pendlerpauschale-Rechner](/rechner/pendlerpauschale-rechner): Entfernungspauschale, Homeoffice, Steuervorteil.
+- [BMI-Rechner](/rechner/bmi-rechner): Body-Mass-Index inkl. Interpretation.
+- [Kalorienbedarf (TDEE)](/rechner/kalorienbedarf-rechner): Grundumsatz und Ziel-Kalorien nach Mifflin-St Jeor.
+- [Pace-Rechner](/rechner/pace-rechner): Lauf-Pace, Endzeit und Zwischenzeiten.
+
+## Rechtliches
+
+- [Impressum](/impressum)
+- [Datenschutz](/datenschutz)
