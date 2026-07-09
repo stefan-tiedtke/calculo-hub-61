@@ -3,6 +3,7 @@ import { categories } from "@/lib/calculators/categories";
 import { calculators, getPopularCalculators } from "@/lib/calculators/registry";
 import { CategoryCard } from "@/components/category-card";
 import { CalculatorCard } from "@/components/calculator-card";
+import { CalculatorSearch } from "@/components/calculator-search";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,6 +52,9 @@ function Index() {
               Rechner für Finanzen, Steuern, Gesundheit und Alltag – klar aufgebaut,
               blitzschnell und für jedes Gerät optimiert.
             </p>
+            <div className="mt-8 max-w-2xl">
+              <CalculatorSearch variant="hero" placeholder="Rechner suchen – z. B. Brutto-Netto, BMI, Kredit …" />
+            </div>
           </div>
         </div>
       </section>

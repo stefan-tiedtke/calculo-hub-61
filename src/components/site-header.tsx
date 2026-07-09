@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { categories } from "@/lib/calculators/categories";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { CalculatorSearch } from "@/components/calculator-search";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
         <Link to="/" className="flex items-center gap-2">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand text-brand-foreground font-display text-sm font-bold">
             R
@@ -14,6 +15,9 @@ export function SiteHeader() {
             Rechnerio
           </span>
         </Link>
+        <div className="hidden max-w-sm flex-1 md:block">
+          <CalculatorSearch variant="compact" />
+        </div>
         <div className="flex items-center gap-4">
           <nav className="hidden items-center gap-4 lg:flex">
             {categories.map((cat) => (
