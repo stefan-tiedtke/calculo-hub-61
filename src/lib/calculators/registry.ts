@@ -23,6 +23,7 @@ import WerbungskostenCalculator from "./werbungskosten";
 import KapitalertragsteuerCalculator from "./kapitalertragsteuer";
 import GehaltserhoehungNettoCalculator from "./gehaltserhoehung-netto";
 import TdeeCalculator from "./tdee";
+import SitzzeitCalculator from "./sitzzeit";
 
 /**
  * Central registry for all calculators on the platform.
