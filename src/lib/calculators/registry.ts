@@ -1959,6 +1959,126 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "sitzzeit-rechner",
+    name: "Sitzzeit-Rechner",
+    shortDescription:
+      "Berechne deine tägliche Sitzzeit und erhalte einen Aktivitäts-Score inkl. Verbesserungsplan.",
+    description:
+      "Berechne deine tägliche Sitzzeit und erfahre, wie du mit kleinen Veränderungen mehr Bewegung in deinen Alltag bringst. Der Rechner ermittelt Sitzdauer, Bewegungszeit, Sitzrisiko und einen Aktivitäts-Score (0–100) aus Beruf, Freizeit, Arbeitsweg, Sport, Krafttraining und Pausenverhalten.",
+    category: "gesundheit",
+    keywords: [
+      "sitzzeit rechner",
+      "wie lange sitze ich",
+      "sitzen gesundheit",
+      "aktivitäts score",
+      "bewegungsrechner",
+      "bewegung im alltag",
+      "sitzrisiko",
+      "höhenverstellbarer schreibtisch",
+    ],
+    popular: true,
+    updatedAt: "2026-07-10",
+    component: SitzzeitCalculator,
+    formula: {
+      expression:
+        "Score = Sitz (35) + Bewegung (25) + Kraft (15) + Pausen (15) + Arbeitsweg (10)",
+      explanation:
+        "Der Aktivitäts-Score fasst fünf Bausteine additiv zusammen. Sitzzeit ist der größte Hebel: 35 Punkte bei ≤4 Std/Tag, 0 Punkte ab 12 Std. Bewegung erreicht die volle Punktzahl bei ≥5 Std/Woche (WHO-Empfehlung: 2,5–5 Std moderat). Kraft-, Pausen- und Arbeitsweg-Punkte skalieren nach Häufigkeit bzw. Dauer. Ein aktiver Arbeitsweg (Fuß, Rad) fließt zusätzlich als Bewegung in die Wochenbilanz ein.",
+      variables: [
+        { symbol: "Sitz", description: "Arbeit + Freizeit + passiver Arbeitsweg" },
+        { symbol: "Bewegung", description: "Sport pro Woche inkl. aktivem Arbeitsweg" },
+        { symbol: "Kraft", description: "Anzahl Krafttrainingseinheiten pro Woche" },
+        { symbol: "Pausen", description: "Häufigkeit des Aufstehens am Arbeitsplatz" },
+        { symbol: "Arbeitsweg", description: "Länge und Aktivität des täglichen Wegs" },
+      ],
+    },
+    examples: [
+      {
+        title: "Klassischer Büroalltag",
+        inputs: "Büro · 8 Std sitzen · 3 Std Freizeit-Sitzen · Auto 30 Min · 2 Std Sport/Woche",
+        result: "Sitzzeit 11 Std 30 Min · Score ≈ 45 · 🟠 Erhöht",
+      },
+      {
+        title: "Aktiver Alltag",
+        inputs: "Homeoffice · 7 Std sitzen · Rad 30 Min · 5 Std Sport · 2× Kraft · alle 60 Min aufstehen",
+        result: "Sitzzeit 10 Std · Score ≈ 82 · 🟢 Sehr gut",
+      },
+      {
+        title: "Handwerk",
+        inputs: "Handwerk · 2 Std sitzen · 2 Std TV · Auto 20 Min · 1 Std Sport",
+        result: "Sitzzeit 4 Std 20 Min · Score ≈ 70 · 🟡 Verbesserungsfähig",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie lange Sitzen ist zu viel?",
+        answer:
+          "Studien zeigen ab etwa 8 Stunden Sitzen pro Tag steigt das Risiko für Herz-Kreislauf-Erkrankungen, Diabetes Typ 2 und Rückenbeschwerden messbar an. Ab 10 Stunden gilt Sitzen als kritisch – vor allem, wenn es ohne Unterbrechungen erfolgt. Wichtig ist nicht nur die Gesamtdauer, sondern auch, dass das Sitzen regelmäßig unterbrochen wird.",
+      },
+      {
+        question: "Reicht Sport am Abend aus, um viel Sitzen auszugleichen?",
+        answer:
+          "Regelmäßiger Sport reduziert das Risiko deutlich, kann langes Sitzen aber nur teilweise ausgleichen. Wer täglich 8+ Stunden sitzt, sollte laut aktueller Forschung zusätzlich 60–75 Minuten moderate Bewegung pro Tag einplanen. Kurze Bewegungspausen zwischendurch wirken zusätzlich zum Sport.",
+      },
+      {
+        question: "Warum sind Bewegungspausen so wichtig?",
+        answer:
+          "Beim Sitzen schaltet der Stoffwechsel in einen Sparmodus: Muskelaktivität sinkt, Blutzucker- und Fettverwertung verlangsamen sich, die Durchblutung nimmt ab. Schon 2–3 Minuten Aufstehen und Gehen pro Stunde reaktivieren die Muskulatur und verbessern nachweislich Blutzuckerregulation und Konzentration.",
+      },
+      {
+        question: "Ist Stehen besser als Sitzen?",
+        answer:
+          "Stehen verbraucht mehr Energie und aktiviert Rumpf- und Beinmuskulatur, ist aber kein Wundermittel. Dauerhaftes Stehen belastet Venen und Gelenke. Optimal ist ein Wechsel aus Sitzen, Stehen und Bewegung – Faustregel: 60 % sitzen, 30 % stehen, 10 % bewegen.",
+      },
+      {
+        question: "Wie oft sollte ich am Arbeitsplatz aufstehen?",
+        answer:
+          "Ideal ist ein Wechsel alle 30 Minuten. Wenn das nicht möglich ist, sollten spätestens alle 60 Minuten 2–3 Minuten Bewegung stattfinden: aufstehen, ein Glas Wasser holen, kurz dehnen, telefonieren im Gehen. Erinnerungen auf Smartphone oder Smartwatch helfen beim Etablieren der Routine.",
+      },
+      {
+        question: "Wie viel Bewegung wird empfohlen?",
+        answer:
+          "Die WHO empfiehlt Erwachsenen 150–300 Minuten moderate oder 75–150 Minuten intensive Bewegung pro Woche, plus 2 Einheiten Krafttraining. Bei viel Sitzen sollte man am oberen Ende der Empfehlung liegen. Alltagsbewegung wie Radfahren zur Arbeit oder Treppensteigen zählt mit.",
+      },
+      {
+        question: "Hilft ein höhenverstellbarer Schreibtisch?",
+        answer:
+          "Ja, wenn er tatsächlich genutzt wird. Wer 2–4 Stunden pro Tag im Stehen arbeitet, reduziert die Sitzzeit deutlich und verbessert Haltung, Konzentration und Energielevel. Der Effekt entfaltet sich vor allem in Kombination mit Bewegungspausen – der Tisch allein reicht nicht.",
+      },
+      {
+        question: "Wie wirkt sich langes Sitzen auf den Rücken aus?",
+        answer:
+          "Dauerhaftes Sitzen verkürzt Hüftbeuger und Brustmuskulatur, schwächt Gesäß- und Rumpfmuskeln und erhöht den Druck auf die Bandscheiben – besonders in der Lendenwirbelsäule. Häufige Folgen sind Rückenschmerzen, Nackenverspannungen und Kopfschmerzen. Regelmäßiges Aufstehen, Mobility-Übungen und gezieltes Training gleichen das aus.",
+      },
+      {
+        question: "Kann ich langes Sitzen komplett ausgleichen?",
+        answer:
+          "Vollständig ausgleichen lässt sich Dauersitzen nicht – aber die negativen Effekte lassen sich stark reduzieren. Studien zeigen: Wer täglich 60–75 Minuten moderat aktiv ist, hebt das erhöhte Sterberisiko durch langes Sitzen weitgehend auf. Kurze Pausen mehrfach am Tag sind dabei genauso wichtig wie eine lange Sporteinheit.",
+      },
+      {
+        question: "Welche Übungen eignen sich im Büro?",
+        answer:
+          "Effektiv und diskret: 10 Kniebeugen am Platz, Schulterkreisen, Nackendehnen, Wadenheben, kurze Rumpfbeugen. Auch 2 Minuten „Desk-Push-ups“ an der Kante des Tisches oder eine Runde ums Bürogebäude wirken. Alles, was Puls und Muskulatur kurz aktiviert, zählt.",
+      },
+      {
+        question: "Wie ist der Aktivitäts-Score aufgebaut?",
+        answer:
+          "Der Score summiert fünf Bausteine zu maximal 100 Punkten: Sitzzeit (35), Bewegung pro Woche (25), Krafttraining (15), regelmäßige Pausen (15) und aktiver Arbeitsweg (10). Ein Wert ab 80 gilt als sehr gut, 60–79 als verbesserungsfähig, 40–59 als erhöhtes Risiko, unter 40 als kritisch.",
+      },
+    ],
+    relatedSlugs: ["bmi-rechner", "kalorienbedarf-rechner", "pace-rechner"],
+    sources: [
+      {
+        label: "WHO – Physical activity guidelines",
+        url: "https://www.who.int/news-room/fact-sheets/detail/physical-activity",
+      },
+      {
+        label: "DGUV – Sitzen im Büro",
+        url: "https://www.dguv.de/",
+      },
+    ],
+  },
 ];
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
