@@ -24,6 +24,7 @@ import KapitalertragsteuerCalculator from "./kapitalertragsteuer";
 import GehaltserhoehungNettoCalculator from "./gehaltserhoehung-netto";
 import TdeeCalculator from "./tdee";
 import SitzzeitCalculator from "./sitzzeit";
+import BalkonkraftwerkCalculator from "./balkonkraftwerk";
 
 /**
  * Central registry for all calculators on the platform.
