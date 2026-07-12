@@ -24,6 +24,7 @@ import KapitalertragsteuerCalculator from "./kapitalertragsteuer";
 import GehaltserhoehungNettoCalculator from "./gehaltserhoehung-netto";
 import TdeeCalculator from "./tdee";
 import SitzzeitCalculator from "./sitzzeit";
+import BalkonkraftwerkCalculator from "./balkonkraftwerk";
 
 /**
  * Central registry for all calculators on the platform.
@@ -2076,6 +2077,130 @@ export const calculators: CalculatorDef[] = [
       {
         label: "DGUV – Sitzen im Büro",
         url: "https://www.dguv.de/",
+      },
+    ],
+  },
+  {
+    slug: "balkonkraftwerk-rechner",
+    name: "Balkonkraftwerk-Rechner",
+    shortDescription:
+      "Amortisation, Ersparnis und CO₂-Bilanz deines Balkonkraftwerks über bis zu 30 Jahre.",
+    description:
+      "Berechne, wann sich dein Balkonkraftwerk amortisiert und wie viel Geld sowie CO₂ du langfristig einsparen kannst. Der Rechner berücksichtigt Leistung, Ausrichtung, Neigung, Eigenverbrauch und die erwartete Strompreissteigerung und zeigt drei Szenarien (konservativ / realistisch / optimistisch).",
+    category: "energie",
+    keywords: [
+      "balkonkraftwerk rechner",
+      "balkonkraftwerk amortisation",
+      "balkonkraftwerk wirtschaftlichkeit",
+      "mini pv rechner",
+      "steckersolar",
+      "600 watt balkonkraftwerk",
+      "800 watt balkonkraftwerk",
+      "eigenverbrauch pv",
+    ],
+    popular: true,
+    updatedAt: "2026-07-12",
+    component: BalkonkraftwerkCalculator,
+    formula: {
+      expression:
+        "Ertrag = kWp · 950 · f_Ausrichtung · f_Neigung   ·   Ersparnis_j = EV · Ertrag · Preis · (1+p)^(j−1)",
+      explanation:
+        "Der Jahresertrag ergibt sich aus der installierten Leistung (kWp) multipliziert mit einem bundesweiten Basisertrag von rund 950 kWh/kWp/Jahr, korrigiert um Ausrichtung und Neigung. Vom Ertrag ist nur der selbst verbrauchte Anteil (EV) wirtschaftlich relevant, da Balkonkraftwerke ins Netz eingespeisten Strom meist nicht vergütet bekommen. Steigende Strompreise werden jährlich fortgeschrieben.",
+      variables: [
+        { symbol: "kWp", description: "Modulleistung / 1000" },
+        { symbol: "f_Ausrichtung", description: "0,60 (N) – 1,00 (S)" },
+        { symbol: "f_Neigung", description: "0,72 (90°) – 1,00 (30°)" },
+        { symbol: "EV", description: "Eigenverbrauchsquote (0–1)" },
+        { symbol: "p", description: "Jährliche Strompreissteigerung" },
+      ],
+    },
+    examples: [
+      {
+        title: "800 W · Süd · 30°",
+        inputs: "800 € · 800 W · Süd · 30° · 0,32 €/kWh · 70 % EV · 2 % p. a. · 20 J",
+        result: "Amortisation ≈ 6 Jahre · Gewinn ≈ 1.700 € · 4,1 t CO₂",
+      },
+      {
+        title: "600 W · Ost · 45°",
+        inputs: "550 € · 600 W · Ost · 45° · 0,32 €/kWh · 65 % EV · 20 J",
+        result: "Amortisation ≈ 7 Jahre · Gewinn ≈ 950 €",
+      },
+      {
+        title: "1000 W · Süd · flach",
+        inputs: "1.000 € · 1000 W · Süd · flach · 0,35 €/kWh · 80 % EV · 3 % p. a. · 25 J",
+        result: "Amortisation ≈ 5 Jahre · Gewinn ≈ 3.400 €",
+      },
+    ],
+    faq: [
+      {
+        question: "Lohnt sich ein Balkonkraftwerk?",
+        answer:
+          "In den meisten Fällen ja. Bei einem 600–800-W-Set für 500–900 € liegt die Amortisation typischerweise zwischen 5 und 8 Jahren – die Anlagen halten aber 20–25 Jahre. Danach spart jede erzeugte Kilowattstunde direkt Geld. Wer viel tagsüber zu Hause ist und Verbraucher gezielt einschaltet, verkürzt die Amortisation deutlich.",
+      },
+      {
+        question: "Wie lange hält ein Balkonkraftwerk?",
+        answer:
+          "Die Solarmodule sind extrem langlebig: Hersteller geben in der Regel 25 Jahre Leistungsgarantie mit mindestens 80 % Restleistung. Der Wechselrichter ist das kürzere Glied – seine Lebensdauer liegt bei 10–15 Jahren, mit Garantie von meist 10 Jahren. Ein Austausch kostet zwischen 100 und 250 €.",
+      },
+      {
+        question: "Was bedeutet Eigenverbrauch?",
+        answer:
+          "Der Anteil des erzeugten Solarstroms, den du im Haushalt direkt selbst verbrauchst. Nur dieser Teil spart dir bares Geld, da Balkonkraftwerke ins Netz eingespeisten Strom meist nicht vergütet bekommen. Ein realistischer Wert liegt bei 60–80 %. Wer viele Verbraucher tagsüber laufen lässt, erreicht auch 80–90 %.",
+      },
+      {
+        question: "Kann ich als Mieter ein Balkonkraftwerk nutzen?",
+        answer:
+          "Ja. Seit dem Solarpaket I (Mai 2024) haben Mieter und Wohnungseigentümer einen gesetzlichen Anspruch auf die Installation, sofern keine schwerwiegenden Gründe dagegen sprechen. Der Vermieter bzw. die Eigentümergemeinschaft kann Vorgaben zur Optik oder Befestigung machen, die Installation aber grundsätzlich nicht mehr verbieten.",
+      },
+      {
+        question: "Muss ich mein Balkonkraftwerk anmelden?",
+        answer:
+          "Ja. Seit April 2024 reicht eine einmalige, vereinfachte Anmeldung im Marktstammdatenregister der Bundesnetzagentur. Die separate Anmeldung beim Netzbetreiber entfällt seitdem. Bei bestehendem Ferraris-Zähler (Drehscheibe) tauscht der Netzbetreiber diesen kostenlos gegen einen digitalen Zähler.",
+      },
+      {
+        question: "Wie wirkt sich Verschattung aus?",
+        answer:
+          "Verschattung ist bei Balkonkraftwerken kritisch, weil die Module in Reihe geschaltet sind. Schon ein teilweise verschattetes Modul kann den Gesamtertrag um 30–70 % senken. Wichtig sind daher ein möglichst freier Blick nach Süden, Osten oder Westen und keine dauerhaften Schatten durch Wäscheständer, Balkonpflanzen oder Nachbargebäude.",
+      },
+      {
+        question: "Wie hoch ist die typische Stromproduktion?",
+        answer:
+          "Ein 800-W-Balkonkraftwerk mit Süd-Ausrichtung und 30° Neigung erzeugt in Deutschland etwa 700–800 kWh pro Jahr. Süd-Ost/Süd-West kommt auf ~90 %, Ost/West auf ~85 %, Nord nur auf ~60 % dieses Werts. Flach oder senkrecht (Balkonbrüstung) reduziert den Ertrag zusätzlich um 5–25 %.",
+      },
+      {
+        question: "Wie verändert ein steigender Strompreis die Wirtschaftlichkeit?",
+        answer:
+          "Erheblich. Der Rechner berücksichtigt eine jährliche Preissteigerung, die die Ersparnis Jahr für Jahr wachsen lässt. Bereits 3 % pro Jahr können die Gesamtersparnis über 20 Jahre um 30–40 % erhöhen. Ein Balkonkraftwerk wirkt damit wie eine kleine Absicherung gegen zukünftige Strompreisschocks.",
+      },
+      {
+        question: "Was passiert im Winter?",
+        answer:
+          "Im Dezember und Januar liefern Balkonkraftwerke nur etwa 3–5 % des Jahresertrags. Die Produktion konzentriert sich auf März bis Oktober, mit dem Maximum zwischen Mai und Juli. Wichtig ist die Jahresbilanz – nicht einzelne Wintertage. Schnee auf den Modulen sollte man vorsichtig entfernen, wenn er länger liegen bleibt.",
+      },
+      {
+        question: "Kann ich einen Batteriespeicher nachrüsten?",
+        answer:
+          "Ja, es gibt speziell für Balkonkraftwerke konzipierte Speicher (0,8 – 2 kWh). Sie erhöhen den Eigenverbrauch auf 80–95 %, kosten aber 500–1.500 €. Die Wirtschaftlichkeit ist derzeit grenzwertig – der Speicher amortisiert sich meist knapp innerhalb seiner Lebensdauer. Wer maximalen Eigenverbrauch oder Notstromfunktion will, profitiert trotzdem.",
+      },
+      {
+        question: "Wie hoch darf die Leistung sein?",
+        answer:
+          "Seit dem Solarpaket I (Mai 2024) sind Balkonkraftwerke mit bis zu 800 W Wechselrichterleistung ohne Elektriker erlaubt. Die Modulleistung darf bis zu 2.000 Wp betragen – die Module dürfen also überdimensioniert werden, um schlechtere Lichtverhältnisse auszugleichen und den Jahresertrag zu erhöhen.",
+      },
+    ],
+    relatedSlugs: ["stromkostenrechner", "ev-vs-verbrenner"],
+    sources: [
+      {
+        label: "Bundesnetzagentur – Marktstammdatenregister",
+        url: "https://www.marktstammdatenregister.de/",
+      },
+      {
+        label: "HTW Berlin – Stecker-Solar-Simulator",
+        url: "https://solar.htw-berlin.de/rechner/stecker-solar-simulator/",
+      },
+      {
+        label: "Verbraucherzentrale – Steckersolargeräte",
+        url: "https://www.verbraucherzentrale.de/wissen/energie/erneuerbare-energien/steckerfertige-solaranlagen-fuer-die-steckdose-44032",
       },
     ],
   },
