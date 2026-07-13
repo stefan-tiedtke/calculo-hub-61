@@ -519,8 +519,6 @@ export default function BalkonkraftwerkCalculator() {
   );
 
   const realistisch = useMemo(() => berechne(input, { ertragsFaktor: 1.0 }), [input]);
-  const optimistisch = useMemo(() => berechne(input, { ertragsFaktor: 1.15 }), [input]);
-  const konservativ = useMemo(() => berechne(input, { ertragsFaktor: 0.85 }), [input]);
 
   const amortisationsBadge = realistisch.amortisation
     ? realistisch.amortisation <= jahre / 2
