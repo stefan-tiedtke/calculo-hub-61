@@ -2205,6 +2205,119 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "kaufnebenkosten-rechner",
+    name: "Kaufnebenkosten-Rechner",
+    shortDescription:
+      "Alle Nebenkosten beim Immobilienkauf in Deutschland auf einen Blick.",
+    description:
+      "Berechne die gesamten Kaufnebenkosten einer Immobilie in Deutschland – inklusive Grunderwerbsteuer (nach Bundesland), Notarkosten, Grundbuchkosten und Maklerprovision. Mit übersichtlicher Aufteilung als Kreisdiagramm und Gesamtkosten inklusive Kaufpreis.",
+    category: "immobilien",
+    keywords: [
+      "kaufnebenkosten",
+      "kaufnebenkosten rechner",
+      "immobilie nebenkosten",
+      "grunderwerbsteuer rechner",
+      "notarkosten immobilie",
+      "maklerprovision rechner",
+      "hauskauf nebenkosten",
+      "wohnung kaufen nebenkosten",
+    ],
+    popular: true,
+    updatedAt: "2026-07-13",
+    component: KaufnebenkostenCalculator,
+    formula: {
+      expression:
+        "Nebenkosten = Kaufpreis × (GrESt% + Notar% + Grundbuch% + Makler%)",
+      explanation:
+        "Alle vier Positionen werden als prozentualer Anteil des Kaufpreises berechnet. Die Grunderwerbsteuer variiert je Bundesland (3,5 – 6,5 %), Notar (~1,5 %) und Grundbuch (~0,5 %) sind bundesweit ähnlich. Die Maklerprovision wird seit Dezember 2020 bei selbstgenutzten Immobilien üblicherweise hälftig geteilt (Käuferanteil ca. 3,57 % inkl. USt.).",
+      variables: [
+        { symbol: "GrESt%", description: "Grunderwerbsteuersatz des Bundeslandes" },
+        { symbol: "Notar%", description: "Notarkosten (im Schnitt 1,5 %)" },
+        { symbol: "Grundbuch%", description: "Grundbuchgebühren (im Schnitt 0,5 %)" },
+        { symbol: "Makler%", description: "Käuferanteil der Maklerprovision inkl. USt." },
+      ],
+    },
+    examples: [
+      {
+        title: "Einfamilienhaus NRW mit Makler",
+        inputs: "400.000 € · NRW (6,5 %) · Makler 3,57 %",
+        result: "≈ 48.280 € Nebenkosten (12,07 %) · Gesamt 448.280 €",
+      },
+      {
+        title: "Wohnung München ohne Makler",
+        inputs: "600.000 € · Bayern (3,5 %) · kein Makler",
+        result: "≈ 33.000 € Nebenkosten (5,5 %) · Gesamt 633.000 €",
+      },
+      {
+        title: "Haus Berlin mit Makler",
+        inputs: "500.000 € · Berlin (6,0 %) · Makler 3,57 %",
+        result: "≈ 57.850 € Nebenkosten (11,57 %) · Gesamt 557.850 €",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie hoch sind die Kaufnebenkosten in Deutschland üblicherweise?",
+        answer:
+          "Je nach Bundesland und ob ein Makler beauftragt wird, liegen die Nebenkosten zwischen etwa 5,5 % (Bayern, ohne Makler) und rund 12 % (z. B. NRW oder Brandenburg, mit Makler) des Kaufpreises. Bei einer 400.000-€-Immobilie sind das schnell 20.000 – 48.000 € zusätzlich.",
+      },
+      {
+        question: "Wie hoch ist die Grunderwerbsteuer in meinem Bundesland?",
+        answer:
+          "Bayern erhebt 3,5 %, Hamburg 5,5 %, Berlin, Hessen und Mecklenburg-Vorpommern 6,0 %, Brandenburg, NRW, Saarland und Schleswig-Holstein 6,5 %. Baden-Württemberg, Bremen, Niedersachsen, Rheinland-Pfalz, Sachsen-Anhalt und Thüringen liegen bei 5,0 %, Sachsen bei 5,5 %. Der Rechner setzt den Satz automatisch nach Auswahl des Bundeslandes.",
+      },
+      {
+        question: "Was kostet der Notar beim Immobilienkauf?",
+        answer:
+          "Die Notargebühren richten sich nach dem Gerichts- und Notarkostengesetz (GNotKG) und sind bundesweit gleich. Typisch sind rund 1,0 – 1,5 % des Kaufpreises. Zusätzlich fallen Gebühren für die Grundbucheinträge an (~0,5 %). Zusammen werden meist rund 2 % kalkuliert.",
+      },
+      {
+        question: "Sind Notar- und Grundbuchkosten fix?",
+        answer:
+          "Nein. Die im Rechner verwendeten 1,5 % (Notar) und 0,5 % (Grundbuch) sind Durchschnittswerte. Die tatsächliche Höhe hängt von der Grundschuldhöhe, Vertragskonstellation, Auflassungsvormerkung und weiteren notariellen Leistungen ab. Rechne mit +/– 0,3 Prozentpunkten Abweichung.",
+      },
+      {
+        question: "Wie hoch ist die Maklerprovision?",
+        answer:
+          "Üblich sind 7,14 % inkl. USt. Gesamtprovision. Seit dem 23.12.2020 muss beim Verkauf einer selbstgenutzten Immobilie (Einfamilienhaus, Eigentumswohnung) an einen Verbraucher die Provision mindestens hälftig geteilt werden – der Käuferanteil beträgt also meist 3,57 %. Bei Kapitalanlagen oder Grundstücken gilt diese Regel nicht.",
+      },
+      {
+        question: "Kann ich die Kaufnebenkosten mitfinanzieren?",
+        answer:
+          "Grundsätzlich ja, aber viele Banken sehen das kritisch. Als Faustregel gilt: Die Nebenkosten sollten aus Eigenkapital gezahlt werden, damit der Kredit nur den Immobilienwert finanziert (max. 100 % Beleihung). Wer die Nebenkosten mitfinanziert (110-%-Finanzierung), zahlt spürbar höhere Zinsen.",
+      },
+      {
+        question: "Sind die Kaufnebenkosten steuerlich absetzbar?",
+        answer:
+          "Bei selbstgenutzten Immobilien nein. Bei vermieteten Immobilien werden Grunderwerbsteuer, Notar- und Grundbuchkosten den Anschaffungsnebenkosten zugerechnet und über die Abschreibung (AfA) auf 33 bis 50 Jahre verteilt. Die Maklerprovision zählt ebenfalls dazu.",
+      },
+      {
+        question: "Sind Renovierungs- oder Modernisierungskosten enthalten?",
+        answer:
+          "Nein. Der Rechner deckt nur die klassischen Erwerbsnebenkosten ab. Für Renovierung, Umzug, Küche, Gutachter oder eine mögliche Vorfälligkeitsentschädigung des Verkäufers solltest du zusätzlich einen Puffer einplanen.",
+      },
+      {
+        question: "Fallen bei einer Erbschaft oder Schenkung Kaufnebenkosten an?",
+        answer:
+          "Grunderwerbsteuer fällt nicht an, wohl aber Notar- und Grundbuchkosten sowie ggf. Erbschaft- oder Schenkungsteuer. Diese sind mit dem Rechner nicht abgebildet – er ist auf den klassischen entgeltlichen Immobilienkauf ausgelegt.",
+      },
+    ],
+    relatedSlugs: ["kaufen-oder-mieten", "kreditrechner"],
+    sources: [
+      {
+        label: "Bundesministerium der Finanzen – Grunderwerbsteuer",
+        url: "https://www.bundesfinanzministerium.de/",
+      },
+      {
+        label: "GNotKG – Gerichts- und Notarkostengesetz",
+        url: "https://www.gesetze-im-internet.de/gnotkg/",
+      },
+      {
+        label: "Verbraucherzentrale – Maklerprovision",
+        url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/maklerprovision-neue-regeln-fuer-kaeufer-und-verkaeufer-51110",
+      },
+    ],
+  },
 ];
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
