@@ -3,6 +3,7 @@ import { categories } from "@/lib/calculators/categories";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CalculatorSearch } from "@/components/calculator-search";
 import logoAsset from "@/assets/rechnerio-logo.png.asset.json";
+import wordmarkAsset from "@/assets/rechnerio-wordmark.png.asset.json";
 
 export function SiteHeader() {
   return (
@@ -16,9 +17,11 @@ export function SiteHeader() {
               className="h-8 w-8 object-contain"
             />
           </span>
-          <span className="font-display text-lg font-semibold tracking-tight">
-            Rechnerio
-          </span>
+          <img
+            src={wordmarkAsset.url}
+            alt="Rechnerio"
+            className="h-6 w-auto dark:[filter:invert(1)_hue-rotate(180deg)]"
+          />
         </Link>
         <div className="hidden max-w-sm flex-1 md:block">
           <CalculatorSearch variant="compact" />
