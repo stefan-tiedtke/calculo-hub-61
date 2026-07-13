@@ -2,26 +2,18 @@ import { Link } from "@tanstack/react-router";
 import { categories } from "@/lib/calculators/categories";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { CalculatorSearch } from "@/components/calculator-search";
-import logoAsset from "@/assets/rechnerio-logo.png.asset.json";
-import wordmarkAsset from "@/assets/rechnerio-wordmark.png.asset.json";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
         <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-white ring-1 ring-border overflow-hidden">
-            <img
-              src={logoAsset.url}
-              alt="Rechnerio Logo"
-              className="h-8 w-8 object-contain"
-            />
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand text-brand-foreground font-display text-sm font-bold">
+            R
           </span>
-          <img
-            src={wordmarkAsset.url}
-            alt="Rechnerio"
-            className="h-6 w-auto dark:[filter:invert(1)_hue-rotate(180deg)]"
-          />
+          <span className="font-display text-lg font-semibold tracking-tight">
+            Rechnerio
+          </span>
         </Link>
         <div className="hidden max-w-sm flex-1 md:block">
           <CalculatorSearch variant="compact" />
