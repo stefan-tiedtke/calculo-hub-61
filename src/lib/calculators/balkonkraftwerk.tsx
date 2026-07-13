@@ -519,8 +519,6 @@ export default function BalkonkraftwerkCalculator() {
   );
 
   const realistisch = useMemo(() => berechne(input, { ertragsFaktor: 1.0 }), [input]);
-  const optimistisch = useMemo(() => berechne(input, { ertragsFaktor: 1.15 }), [input]);
-  const konservativ = useMemo(() => berechne(input, { ertragsFaktor: 0.85 }), [input]);
 
   const amortisationsBadge = realistisch.amortisation
     ? realistisch.amortisation <= jahre / 2
@@ -724,36 +722,6 @@ export default function BalkonkraftwerkCalculator() {
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-5">
-            <div className="flex items-baseline justify-between">
-              <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                Szenarien
-              </div>
-              <div className="text-[11px] text-muted-foreground">±15 % Ertrag</div>
-            </div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <SzenarioCard
-                title="Konservativ"
-                tone="warning"
-                result={konservativ}
-                jahre={jahre}
-              />
-              <SzenarioCard
-                title="Realistisch"
-                tone="info"
-                result={realistisch}
-                jahre={jahre}
-                highlight
-              />
-              <SzenarioCard
-                title="Optimistisch"
-                tone="positive"
-                result={optimistisch}
-                jahre={jahre}
-              />
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-border bg-card p-5">
             <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
               Spartipps für höheren Eigenverbrauch
             </div>
@@ -769,60 +737,6 @@ export default function BalkonkraftwerkCalculator() {
         </div>
       }
     />
-  );
-}
-
-function SzenarioCard({
-  title,
-  tone,
-  result,
-  jahre,
-  highlight,
-}: {
-  title: string;
-  tone: "positive" | "warning" | "info";
-  result: CalcResult;
-  jahre: number;
-  highlight?: boolean;
-}) {
-  const toneDot: Record<typeof tone, string> = {
-    positive: "bg-emerald-500",
-    warning: "bg-amber-500",
-    info: "bg-brand",
-  };
-  return (
-    <div
-      className={`rounded-xl border p-4 ${
-        highlight ? "border-brand/40 bg-brand/5" : "border-border bg-surface"
-      }`}
-    >
-      <div className="flex items-center gap-2">
-        <span aria-hidden className={`h-2 w-2 rounded-full ${toneDot[tone]}`} />
-        <div className="text-sm font-medium text-foreground">{title}</div>
-      </div>
-      <dl className="mt-3 space-y-1 text-xs">
-        <div className="flex justify-between">
-          <dt className="text-muted-foreground">Amortisation</dt>
-          <dd className="tabular-nums text-foreground">
-            {result.amortisation !== null
-              ? `${formatNumber(result.amortisation, 1)} J`
-              : `> ${jahre} J`}
-          </dd>
-        </div>
-        <div className="flex justify-between">
-          <dt className="text-muted-foreground">Gewinn</dt>
-          <dd className="tabular-nums text-foreground">
-            {formatCurrency(result.gewinn)}
-          </dd>
-        </div>
-        <div className="flex justify-between">
-          <dt className="text-muted-foreground">Gesamt</dt>
-          <dd className="tabular-nums text-foreground">
-            {formatCurrency(result.gesamtErsparnis)}
-          </dd>
-        </div>
-      </dl>
-    </div>
   );
 }
 
