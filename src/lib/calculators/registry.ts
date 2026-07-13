@@ -25,6 +25,7 @@ import GehaltserhoehungNettoCalculator from "./gehaltserhoehung-netto";
 import TdeeCalculator from "./tdee";
 import SitzzeitCalculator from "./sitzzeit";
 import BalkonkraftwerkCalculator from "./balkonkraftwerk";
+import KaufnebenkostenCalculator from "./kaufnebenkosten";
 
 /**
  * Central registry for all calculators on the platform.
