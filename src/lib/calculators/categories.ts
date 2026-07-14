@@ -10,6 +10,7 @@ export const categories: CategoryDef[] = [
   { slug: "gesundheit", name: "Gesundheit", description: "BMI, Kalorien, Werte.", icon: "❤️" },
   { slug: "sport", name: "Sport", description: "Training, Pace, Leistung.", icon: "🏃" },
   { slug: "reisen", name: "Reisen", description: "Distanzen, Kosten, Währungen.", icon: "✈️" },
+  { slug: "haustiere", name: "Haustiere", description: "Futter, Kosten, Pflege rund ums Tier.", icon: "🐾" },
 ];
 
 export function getCategory(slug: string): CategoryDef | undefined {
