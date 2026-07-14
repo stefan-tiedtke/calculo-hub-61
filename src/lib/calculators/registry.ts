@@ -26,6 +26,8 @@ import TdeeCalculator from "./tdee";
 import SitzzeitCalculator from "./sitzzeit";
 import BalkonkraftwerkCalculator from "./balkonkraftwerk";
 import KaufnebenkostenCalculator from "./kaufnebenkosten";
+import KatzenalterCalculator from "./katzenalter";
+
 
 /**
  * Central registry for all calculators on the platform.
