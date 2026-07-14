@@ -12,7 +12,7 @@ import StromkostenCalculator from "./stromkosten";
 import KaufMieteCalculator from "./kauf-miete";
 import EvVsVerbrennerCalculator from "./ev-vs-verbrenner";
 import EtfSparplanCalculator from "./etf-sparplan";
-import BitcoinDcaCalculator from "./bitcoin-dca";
+
 import ReisekostenCalculator from "./reisekosten";
 import PacklisteCalculator from "./packliste";
 import MietwagenCalculator from "./mietwagen";
@@ -36,91 +36,6 @@ import KaufnebenkostenCalculator from "./kaufnebenkosten";
  * 3. That's it — it appears in category pages, search, and sitemap.
  */
 export const calculators: CalculatorDef[] = [
-  {
-    slug: "bitcoin-dca-rechner",
-    name: "Bitcoin-DCA-Rechner",
-    shortDescription: "Backtest: Wie hätte sich ein Bitcoin-Sparplan entwickelt?",
-    description:
-      "Simuliere einen monatlichen Bitcoin-Sparplan (Dollar-Cost-Averaging) gegen historische BTC/EUR-Kurse. Zeigt investiertes Kapital, angesparte Bitcoin, durchschnittlichen Einstiegskurs, aktuellen Depotwert und Rendite über den gewählten Zeitraum.",
-    category: "krypto",
-    keywords: [
-      "bitcoin dca",
-      "bitcoin sparplan",
-      "btc dca rechner",
-      "dollar cost averaging",
-      "bitcoin backtest",
-      "durchschnittskosteneffekt",
-    ],
-    popular: true,
-    updatedAt: "2026-07-08",
-    component: BitcoinDcaCalculator,
-    formula: {
-      expression: "BTC = Σ (Rate / Kurs_i)   ·   Wert = BTC × Kurs_aktuell",
-      explanation:
-        "Beim Dollar-Cost-Averaging (DCA) wird zu jedem Zeitpunkt derselbe Eurobetrag investiert. Bei niedrigen Kursen bekommst du mehr Bitcoin, bei hohen weniger – der durchschnittliche Einstiegskurs glättet sich. Der Backtest rechnet Monat für Monat mit dem historischen Schlusskurs und bewertet den Bestand zum Endkurs des gewählten Zeitraums.",
-      variables: [
-        { symbol: "Rate", description: "Monatlich investierter Eurobetrag" },
-        { symbol: "Kurs_i", description: "BTC/EUR-Kurs im Monat i" },
-        { symbol: "BTC", description: "Insgesamt angesparte Bitcoin" },
-        { symbol: "Kurs_aktuell", description: "Kurs am Ende des Zeitraums" },
-      ],
-    },
-    examples: [
-      {
-        title: "100 €/Monat seit 2020",
-        inputs: "100 € · Jan 2020 – heute",
-        result: "Deutliche Gewinne trotz zwischenzeitlicher Bärenmärkte",
-      },
-      {
-        title: "50 €/Monat seit 2017-Peak",
-        inputs: "50 € · Dez 2017 – heute",
-        result: "Auch beim „schlechtesten“ Einstieg langfristig positiv",
-      },
-      {
-        title: "200 €/Monat, 3 Jahre",
-        inputs: "200 € · letzte 36 Monate",
-        result: "Rendite abhängig vom aktuellen Marktzyklus",
-      },
-    ],
-    faq: [
-      {
-        question: "Was ist Dollar-Cost-Averaging (DCA)?",
-        answer:
-          "Eine Anlagestrategie, bei der du regelmäßig denselben Betrag investierst, unabhängig vom Kurs. Vorteile: du musst nicht den perfekten Einstiegszeitpunkt treffen, glättest Schwankungen und baust automatisch antizyklisch auf – bei niedrigen Kursen kaufst du mehr Coins.",
-      },
-      {
-        question: "Woher stammen die Kurse?",
-        answer:
-          "Der Rechner nutzt aggregierte monatliche BTC/EUR-Schlusskurse großer Marktplätze (z. B. CoinGecko, Kraken). Werte sind gerundet und dienen als realitätsnahe Näherung, ersetzen aber keine offiziellen Handelsdaten deiner Börse.",
-      },
-      {
-        question: "Sind Gebühren und Steuern berücksichtigt?",
-        answer:
-          "Nein. Kauf- und Netzwerkgebühren, Spreads sowie mögliche Steuern (in Deutschland aktuell steuerfrei nach 1 Jahr Haltefrist) fallen weg. Der Rechner zeigt die Bruttoperformance des Sparplans.",
-      },
-      {
-        question: "Ist ein Bitcoin-Sparplan besser als eine Einmalanlage?",
-        answer:
-          "Rein statistisch schneidet Einmalanlage bei steigenden Märkten meist besser ab. DCA punktet vor allem in volatilen und seitwärts laufenden Phasen und reduziert das Risiko, im falschen Moment „all in“ zu gehen – ein psychologisch großer Vorteil.",
-      },
-      {
-        question: "Ist Bitcoin eine sichere Geldanlage?",
-        answer:
-          "Nein. Bitcoin ist hochvolatil und kann kurz- bis mittelfristig deutlich an Wert verlieren. Ein Sparplan reduziert das Timing-Risiko, aber nicht das Preisrisiko. Investiere nur Beträge, deren Verlust dich nicht in finanzielle Schwierigkeiten bringt.",
-      },
-    ],
-    relatedSlugs: ["zinseszins-rechner", "etf-sparplan-rechner", "inflationsrechner"],
-    sources: [
-      {
-        label: "CoinGecko – Bitcoin (EUR)",
-        url: "https://www.coingecko.com/de/munzen/bitcoin",
-      },
-      {
-        label: "Kraken – BTC/EUR",
-        url: "https://www.kraken.com/prices/bitcoin",
-      },
-    ],
-  },
   {
     slug: "etf-sparplan-rechner",
     name: "ETF-Sparplan-Rechner",
@@ -1774,7 +1689,7 @@ export const calculators: CalculatorDef[] = [
           "Nicht zwingend, wenn die Bank die KESt bereits einbehalten hat. Pflicht ist die Angabe bei Erträgen aus dem Ausland ohne Steuerabzug, bei Kirchensteuerpflicht ohne Datenabgleich oder wenn du die Günstigerprüfung willst.",
       },
     ],
-    relatedSlugs: ["etf-sparplan-rechner", "zinseszins-rechner", "bitcoin-dca-rechner"],
+    relatedSlugs: ["etf-sparplan-rechner", "zinseszins-rechner"],
     sources: [
       {
         label: "§ 32d EStG – Gesonderter Steuertarif für Einkünfte aus Kapitalvermögen",
