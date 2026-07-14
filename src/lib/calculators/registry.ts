@@ -2235,7 +2235,83 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "katzenalter-rechner",
+    name: "Katzenalter-Rechner",
+    shortDescription: "Wie alt ist deine Katze in Menschenjahren?",
+    description:
+      "Rechne das Alter deiner Katze schnell und verständlich in ein vergleichbares Menschenalter um – mit Lebensphase und kurzer Einordnung.",
+    category: "haustiere",
+    keywords: [
+      "katzenalter rechner",
+      "katze menschenjahre",
+      "katzenalter umrechnen",
+      "wie alt ist meine katze",
+      "katze jahre menschen",
+      "katzen lebensphase",
+    ],
+    popular: false,
+    updatedAt: "2026-07-14",
+    component: KatzenalterCalculator,
+    formula: {
+      expression:
+        "Menschenjahre = 15 × 1. Jahr + 9 × 2. Jahr + 4 × jedes weitere Jahr",
+      explanation:
+        "Katzen altern in den ersten beiden Jahren deutlich schneller als Menschen. Das erste Jahr entspricht etwa 15 Menschenjahren, das zweite zusätzlich 9. Ab dem dritten Jahr rechnet man jedes Katzenjahr mit etwa 4 Menschenjahren.",
+      variables: [
+        { symbol: "1. Jahr", description: "≈ 15 Menschenjahre" },
+        { symbol: "2. Jahr", description: "+ 9 Menschenjahre (also 24 insgesamt)" },
+        { symbol: "weitere Jahre", description: "+ 4 Menschenjahre pro Jahr" },
+      ],
+    },
+    examples: [
+      {
+        title: "6 Monate altes Kitten",
+        inputs: "0,5 Jahre",
+        result: "≈ 7,5 Menschenjahre",
+      },
+      {
+        title: "2 Jahre alte Katze",
+        inputs: "2 Jahre",
+        result: "≈ 24 Menschenjahre",
+      },
+      {
+        title: "10 Jahre alte Katze",
+        inputs: "10 Jahre",
+        result: "≈ 56 Menschenjahre",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie alt wird eine Katze im Durchschnitt?",
+        answer:
+          "Freigänger werden oft 10 – 12 Jahre, reine Wohnungskatzen mit guter Versorgung und tierärztlicher Betreuung können 15 – 20 Jahre alt werden. Einzelne Katzen erreichen auch 25 Jahre und mehr.",
+      },
+      {
+        question: "Warum altern Katzen in den ersten Jahren so schnell?",
+        answer:
+          "Bereits mit einem Jahr gilt eine Katze körperlich als ausgewachsen. Das erste Lebensjahr umfasst daher den größten Reifungsprozess und wird mit etwa 15 Menschenjahren verglichen.",
+      },
+      {
+        question: "Ist die Umrechnung exakt?",
+        answer:
+          "Nein, sie ist eine verbreitete Faustregel. Rasse, Lebensweise, Ernährung und Gesundheit beeinflussen das biologische Alter. Für medizinische Einschätzungen ist der Tierarzt zuständig.",
+      },
+      {
+        question: "Ab wann gilt eine Katze als Senior?",
+        answer:
+          "Oft wird ab etwa 7 – 10 Jahren von einer reifen Katze gesprochen und ab etwa 11 – 15 Jahren von einem Senior. Jede Katze altert individuell – regelmäßige Vorsorgeuntersuchungen helfen, den Zustand besser einzuschätzen.",
+      },
+      {
+        question: "Kann ich auch Monate eingeben?",
+        answer:
+          "Ja. Gib das Alter als Dezimalzahl ein: 6 Monate entsprechen 0,5 Jahren, 18 Monate 1,5 Jahren.",
+      },
+    ],
+    relatedSlugs: [],
+  },
 ];
+
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
   return calculators.find((c) => c.slug === slug);
