@@ -108,15 +108,15 @@ export default function KatzenalterCalculator() {
                 : "Gib ein gültiges Katzenalter ein, um die Umrechnung zu sehen."
             }
             footer={
-              result && (
+              result ? (
                 <span>
                   {result.years < 1
                     ? "In den ersten Monaten altern Katzen besonders schnell."
                     : result.years < 3
-                      ? "Die ersten beiden Lebensjahre entsprecichen großen Entwicklungssprüngen."
+                      ? "Die ersten beiden Lebensjahre entsprechen großen Entwicklungssprüngen."
                       : "Ab dem dritten Jahr entspricht jedes Katzenjahr etwa vier Menschenjahren."}
                 </span>
-              )
+              ) : undefined
             }
           />
 
