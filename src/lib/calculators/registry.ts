@@ -28,6 +28,7 @@ import BalkonkraftwerkCalculator from "./balkonkraftwerk";
 import KaufnebenkostenCalculator from "./kaufnebenkosten";
 import KatzenalterCalculator from "./katzenalter";
 import HundealterCalculator from "./hundealter";
+import FuttermengeCalculator from "./futtermenge";
 
 
 /**
@@ -2310,6 +2311,83 @@ export const calculators: CalculatorDef[] = [
       },
     ],
     relatedSlugs: ["hundealter-rechner"],
+  },
+  {
+    slug: "futtermengen-rechner",
+    name: "Futtermengen-Rechner",
+    shortDescription: "Tägliche Futtermenge für Hund, Katze und Kleintiere berechnen.",
+    description:
+      "Berechne die ungefähre tägliche Futtermenge für dein Haustier – für Hunde und Katzen auf Basis des Energiebedarfs (RER) und für Kleintiere nach arttypischen Richtwerten.",
+    category: "haustiere",
+    keywords: [
+      "futtermenge rechner",
+      "hund futtermenge",
+      "katze futtermenge",
+      "tägliche futtermenge",
+      "futterration hund",
+      "futterration katze",
+      "meerschweinchen futter",
+      "kaninchen futter",
+    ],
+    popular: false,
+    updatedAt: "2026-07-15",
+    component: FuttermengeCalculator,
+    formula: {
+      expression: "RER = 70 × kg^0,75   ·   Futtermenge = (RER × Faktor) / kcal/100g × 100",
+      explanation:
+        "Für Hunde und Katzen wird zunächst der Ruhe-Energiebedarf (RER) aus dem Körpergewicht berechnet. Mit einem Aktivitätsfaktor ergibt sich der tägliche Energiebedarf, der durch die Energiedichte des gewählten Futters in eine Grammangabe umgerechnet wird. Für Kleintiere werden arttypische Richtwerte pro Kilogramm Körpergewicht bzw. fixe Tagesmengen verwendet.",
+      variables: [
+        { symbol: "RER", description: "Ruhe-Energiebedarf in kcal/Tag" },
+        { symbol: "kg", description: "Körpergewicht des Tieres" },
+        { symbol: "Faktor", description: "Aktivitätsmultiplikator (z. B. 1,4 – 2,2)" },
+        { symbol: "kcal/100g", description: "Energiedichte des Futters" },
+      ],
+    },
+    examples: [
+      {
+        title: "Normal aktiver Hund",
+        inputs: "15 kg · normal aktiv · Trockenfutter",
+        result: "≈ 330 g Trockenfutter / Tag",
+      },
+      {
+        title: "Wohnungskatze",
+        inputs: "4 kg · wenig aktiv · Nassfutter",
+        result: "≈ 170 g Nassfutter / Tag",
+      },
+      {
+        title: "Kaninchen",
+        inputs: "2,5 kg",
+        result: "≈ 63 g Pellets / Tag (plus unbegrenzt Heu)",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie genau ist die berechnete Futtermenge?",
+        answer:
+          "Die Werte sind Orientierungswerte für gesunde, ausgewachsene Tiere. Rasse, Alter, Stoffwechsel, Kastrierungsstatus und spezifisches Futter können den Bedarf deutlich verändern. Beobachte Gewicht und Körperkondition deines Tieres.",
+      },
+      {
+        question: "Warum unterscheidet sich die Menge je nach Futtertyp?",
+        answer:
+          "Trockenfutter hat eine hohe Energiedichte (ca. 360 kcal/100g), Nassfutter enthält viel Wasser und ist deutlich kalorienärmer (ca. 100 kcal/100g). Deshalb benötigt ein Tier bei Nassfutter eine größere Menge als bei Trockenfutter.",
+      },
+      {
+        question: "Was ist mit Welpen und Kitten?",
+        answer:
+          "Junge Tiere haben einen erhöhten Energiebedarf. Für Welpen und Kitten solltest du entweder ein spezielles Jungtierfutter füttern oder den Aktivitätsfaktor erhöhen und mehrmals täglich füttern. Bei Unsicherheit den Tierarzt fragen.",
+      },
+      {
+        question: "Wie oft sollte ich meinen Hund oder meine Katze füttern?",
+        answer:
+          "Erwachsene Hunde und Katzen fühlen sich bei zwei Mahlzeiten am Tag meist wohl. Welpen und Kitten benötigen drei bis vier Mahlzeiten. Kleintiere sollten Heu und Wasser stets zur Verfügung haben.",
+      },
+      {
+        question: "Mein Tier nimmt zu oder ab – was tun?",
+        answer:
+          "Passe die Tagesmenge schrittlich um etwa 10 % an und wiege dein Tier regelmäßig. Bei anhaltender Gewichtsveränderung oder gesundheitlichen Auffälligkeiten ist ein Tierarztbesuch ratsam.",
+      },
+    ],
+    relatedSlugs: ["hundealter-rechner", "katzenalter-rechner"],
   },
   {
     slug: "hundealter-rechner",
