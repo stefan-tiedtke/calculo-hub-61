@@ -2309,7 +2309,82 @@ export const calculators: CalculatorDef[] = [
           "Ja. Gib das Alter als Dezimalzahl ein: 6 Monate entsprechen 0,5 Jahren, 18 Monate 1,5 Jahren.",
       },
     ],
-    relatedSlugs: [],
+    relatedSlugs: ["hundealter-rechner"],
+  },
+  {
+    slug: "hundealter-rechner",
+    name: "Hundealter-Rechner",
+    shortDescription: "Wie alt ist dein Hund in Menschenjahren?",
+    description:
+      "Rechne das Alter deines Hundes schnell und verständlich in ein vergleichbares Menschenalter um – mit Lebensphase und kurzer Einordnung.",
+    category: "haustiere",
+    keywords: [
+      "hundealter rechner",
+      "hund menschenjahre",
+      "hundealter umrechnen",
+      "wie alt ist mein hund",
+      "hund jahre menschen",
+      "hund lebensphase",
+    ],
+    popular: false,
+    updatedAt: "2026-07-15",
+    component: HundealterCalculator,
+    formula: {
+      expression:
+        "Menschenjahre = 15 × 1. Jahr + 9 × 2. Jahr + 5 × jedes weitere Jahr",
+      explanation:
+        "Hunde altern in den ersten beiden Jahren deutlich schneller als Menschen. Das erste Jahr entspricht etwa 15 Menschenjahren, das zweite zusätzlich 9. Ab dem dritten Jahr rechnet man jedes Hundejahr mit etwa 5 Menschenjahren.",
+      variables: [
+        { symbol: "1. Jahr", description: "≈ 15 Menschenjahre" },
+        { symbol: "2. Jahr", description: "+ 9 Menschenjahre (also 24 insgesamt)" },
+        { symbol: "weitere Jahre", description: "+ 5 Menschenjahre pro Jahr" },
+      ],
+    },
+    examples: [
+      {
+        title: "6 Monate alter Welpe",
+        inputs: "0,5 Jahre",
+        result: "≈ 7,5 Menschenjahre",
+      },
+      {
+        title: "2 Jahre alter Hund",
+        inputs: "2 Jahre",
+        result: "≈ 24 Menschenjahre",
+      },
+      {
+        title: "10 Jahre alter Hund",
+        inputs: "10 Jahre",
+        result: "≈ 64 Menschenjahre",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie alt wird ein Hund im Durchschnitt?",
+        answer:
+          "Kleine Hunderassen werden oft 12 – 16 Jahre, mittelgroße 10 – 13 Jahre und große Rassen oft nur 8 – 10 Jahre. Die Lebenserwartung hängt stark von Rasse, Größe, Ernährung und Bewegung ab.",
+      },
+      {
+        question: "Warum altern Hunde in den ersten Jahren so schnell?",
+        answer:
+          "Bereits mit einem bis zwei Jahren gilt ein Hund körperlich als ausgewachsen. Das erste Lebensjahr umfasst daher den größten Reifungsprozess und wird mit etwa 15 Menschenjahren verglichen.",
+      },
+      {
+        question: "Ist die Umrechnung exakt?",
+        answer:
+          "Nein, sie ist eine verbreitete Faustregel. Rasse, Größe, Lebensweise, Ernährung und Gesundheit beeinflussen das biologische Alter. Für medizinische Einschätzungen ist der Tierarzt zuständig.",
+      },
+      {
+        question: "Ab wann gilt ein Hund als Senior?",
+        answer:
+          "Oft wird ab etwa 7 – 10 Jahren von einem reifen Hund gesprochen und ab etwa 10 – 13 Jahren von einem Senior. Große Rassen altern tendenziell schneller als kleine.",
+      },
+      {
+        question: "Kann ich auch Monate eingeben?",
+        answer:
+          "Ja. Gib das Alter als Dezimalzahl ein: 6 Monate entsprechen 0,5 Jahren, 18 Monate 1,5 Jahren.",
+      },
+    ],
+    relatedSlugs: ["katzenalter-rechner"],
   },
 ];
 
