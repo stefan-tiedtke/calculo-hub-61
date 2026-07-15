@@ -28,6 +28,7 @@ import BalkonkraftwerkCalculator from "./balkonkraftwerk";
 import KaufnebenkostenCalculator from "./kaufnebenkosten";
 import KatzenalterCalculator from "./katzenalter";
 import HundealterCalculator from "./hundealter";
+import FuttermengeCalculator from "./futtermenge";
 
 
 /**
