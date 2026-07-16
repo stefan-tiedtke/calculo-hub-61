@@ -29,6 +29,7 @@ import KaufnebenkostenCalculator from "./kaufnebenkosten";
 import KatzenalterCalculator from "./katzenalter";
 import HundealterCalculator from "./hundealter";
 import FuttermengeCalculator from "./futtermenge";
+import ArbeitsmittelAfaCalculator from "./arbeitsmittel-afa";
 
 
 /**
