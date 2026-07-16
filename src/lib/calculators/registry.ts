@@ -29,6 +29,7 @@ import KaufnebenkostenCalculator from "./kaufnebenkosten";
 import KatzenalterCalculator from "./katzenalter";
 import HundealterCalculator from "./hundealter";
 import FuttermengeCalculator from "./futtermenge";
+import ArbeitsmittelAfaCalculator from "./arbeitsmittel-afa";
 
 
 /**
@@ -2463,6 +2464,104 @@ export const calculators: CalculatorDef[] = [
       },
     ],
     relatedSlugs: ["katzenalter-rechner"],
+  },
+  {
+    slug: "arbeitsmittel-absetzungsrechner",
+    name: "Arbeitsmittel-Absetzungsrechner",
+    shortDescription:
+      "Arbeitsmittel steuerlich absetzen: Sofortabzug (GWG) oder AfA über mehrere Jahre.",
+    description:
+      "Berechne, wie du Laptop, Bürostuhl, Werkzeug & Co. als Arbeitnehmer oder Selbstständiger von der Steuer absetzt – mit beruflichem Nutzungsanteil, Prüfung der GWG-Grenze (800 € netto), Sofortabzug für Computerhardware sowie linearer AfA inklusive monatsgenauer Verteilung im Kaufjahr.",
+    category: "steuern",
+    keywords: [
+      "arbeitsmittel absetzen",
+      "arbeitsmittel afa",
+      "afa rechner",
+      "gwg rechner",
+      "geringwertige wirtschaftsgüter",
+      "laptop absetzen",
+      "beruflicher anteil",
+      "abschreibung arbeitsmittel",
+    ],
+    popular: false,
+    updatedAt: "2026-07-16",
+    component: ArbeitsmittelAfaCalculator,
+    formula: {
+      expression:
+        "Basis = Kaufpreis · beruflicher Anteil   ·   AfA/Jahr = Basis / Nutzungsdauer (pro rata temporis)",
+      explanation:
+        "Arbeitsmittel mit einem Nettopreis bis 800 € (952 € brutto) sind geringwertige Wirtschaftsgüter (GWG) und können im Kaufjahr sofort komplett abgesetzt werden. Computerhardware und Software werden seit 2021 (BMF-Schreiben) ebenfalls mit einer Nutzungsdauer von 1 Jahr sofort abgeschrieben. Alle anderen Arbeitsmittel werden über die betriebsgewöhnliche Nutzungsdauer linear abgeschrieben (§ 7 EStG). Im Kaufjahr erfolgt die AfA monatsgenau ab dem Kaufmonat; die restlichen Monate fallen ins letzte Abschreibungsjahr. Wird das Arbeitsmittel nicht ausschließlich beruflich genutzt, ist nur der berufliche Anteil absetzbar.",
+      variables: [
+        { symbol: "Kaufpreis", description: "Brutto-Anschaffungskosten inkl. USt" },
+        { symbol: "beruflicher Anteil", description: "Berufliche Nutzung in % (≥ 90 % gilt meist als voll beruflich)" },
+        { symbol: "GWG-Grenze", description: "800 € netto / 952 € brutto (2024/2025)" },
+        { symbol: "Nutzungsdauer", description: "Betriebsgewöhnliche Nutzungsdauer laut amtlicher AfA-Tabelle" },
+        { symbol: "Grenzsteuersatz", description: "Persönlicher Grenzsteuersatz (typisch 25 – 42 %)" },
+      ],
+    },
+    examples: [
+      {
+        title: "Laptop – Sofortabzug",
+        inputs: "1.200 € brutto · 100 % beruflich · 1 Jahr Nutzungsdauer",
+        result: "1.200 € sofort absetzbar · ≈ 360 € Ersparnis (30 %)",
+      },
+      {
+        title: "Bürostuhl – GWG",
+        inputs: "800 € brutto · 100 % beruflich",
+        result: "≙ 672 € netto → GWG, sofort komplett absetzbar",
+      },
+      {
+        title: "Schreibtisch – AfA 13 Jahre",
+        inputs: "1.800 € brutto · 90 % beruflich · Kauf Juli",
+        result: "≈ 62 € AfA in Jahr 1 · ≈ 124 €/Jahr in Folgejahren",
+      },
+    ],
+    faq: [
+      {
+        question: "Was sind geringwertige Wirtschaftsgüter (GWG)?",
+        answer:
+          "Arbeitsmittel mit Anschaffungskosten bis 800 € netto (952 € brutto). Sie dürfen im Kaufjahr in voller Höhe abgesetzt werden – ohne Verteilung über die Nutzungsdauer. Für Arbeitnehmer zählt in der Regel der Bruttopreis, weil sie keinen Vorsteuerabzug haben.",
+      },
+      {
+        question: "Warum werden Computer und Software auf 1 Jahr abgeschrieben?",
+        answer:
+          "Mit dem BMF-Schreiben vom 22.02.2022 wurde die Nutzungsdauer für Computerhardware (Laptop, PC, Bildschirm, Peripherie) und Software steuerlich auf 1 Jahr festgesetzt. In der Praxis wirkt das wie ein Sofortabzug – unabhängig vom Kaufpreis.",
+      },
+      {
+        question: "Was bedeutet der berufliche Anteil?",
+        answer:
+          "Nutzt du das Arbeitsmittel auch privat, ist nur der berufliche Anteil absetzbar. Bei einem beruflichen Anteil ≥ 90 % erkennt das Finanzamt in der Regel die vollen Kosten an, darunter wird anteilig gekürzt. Der Anteil sollte plausibel geschätzt und dokumentiert werden.",
+      },
+      {
+        question: "Wie funktioniert die AfA bei unterjährigem Kauf?",
+        answer:
+          "Im Kaufjahr wird monatsgenau abgeschrieben (pro rata temporis). Beispiel: Ein Möbelstück mit 13 Jahren Nutzungsdauer, gekauft im Juli, wird im ersten Jahr nur für 6 Monate abgeschrieben, im letzten Jahr entsprechend für die fehlenden 6 Monate.",
+      },
+      {
+        question: "Welche Nutzungsdauern gelten typisch?",
+        answer:
+          "Computer & Software: 1 Jahr · Smartphone: 5 Jahre · Drucker/Peripherie: 3 Jahre · Werkzeug: 5 Jahre · Bürostuhl und Schreibtisch: 13 Jahre. Verbindliche Werte stehen in den amtlichen AfA-Tabellen des BMF.",
+      },
+    ],
+    relatedSlugs: [
+      "werbungskosten-rechner",
+      "pendlerpauschale-rechner",
+      "brutto-netto-rechner",
+    ],
+    sources: [
+      {
+        label: "§ 6 Abs. 2 EStG – GWG-Regelung",
+        url: "https://www.gesetze-im-internet.de/estg/__6.html",
+      },
+      {
+        label: "§ 7 EStG – Absetzung für Abnutzung",
+        url: "https://www.gesetze-im-internet.de/estg/__7.html",
+      },
+      {
+        label: "BMF-Schreiben zur Nutzungsdauer Computerhardware",
+        url: "https://www.bundesfinanzministerium.de/",
+      },
+    ],
   },
 ];
 
