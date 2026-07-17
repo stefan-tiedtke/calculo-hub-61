@@ -30,6 +30,7 @@ import KatzenalterCalculator from "./katzenalter";
 import HundealterCalculator from "./hundealter";
 import FuttermengeCalculator from "./futtermenge";
 import ArbeitsmittelAfaCalculator from "./arbeitsmittel-afa";
+import StandbyKostenCalculator from "./standby-kosten";
 
 
 /**
@@ -2560,6 +2561,93 @@ export const calculators: CalculatorDef[] = [
       {
         label: "BMF-Schreiben zur Nutzungsdauer Computerhardware",
         url: "https://www.bundesfinanzministerium.de/",
+      },
+    ],
+  },
+  {
+    slug: "standby-kosten-rechner",
+    name: "Standby-Kosten-Rechner",
+    shortDescription:
+      "Wie viel Strom kosten deine Geräte im Standby pro Jahr wirklich?",
+    description:
+      "Berechne die Standby-Kosten deiner Haushaltsgeräte: TV, Konsole, Router, Ladegeräte & Co. Trage Leistung (Watt), Standby-Stunden pro Tag und Anzahl ein – der Rechner ermittelt jährlichen Stromverbrauch, Kosten und CO₂-Ausstoß pro Gerät.",
+    category: "energie",
+    keywords: [
+      "standby kosten",
+      "standby stromverbrauch",
+      "standby rechner",
+      "leerlaufverluste",
+      "stromfresser",
+      "steckerleiste sparen",
+      "phantomstrom",
+    ],
+    popular: false,
+    updatedAt: "2026-07-17",
+    component: StandbyKostenCalculator,
+    formula: {
+      expression: "kWh/Jahr = Watt · Std/Tag · 365 · Anzahl / 1.000   ·   Kosten = kWh · Preis",
+      explanation:
+        "Für jedes Gerät wird der jährliche Stromverbrauch aus Standby-Leistung, täglicher Standby-Zeit und Stückzahl berechnet. Multipliziert mit dem Arbeitspreis pro kWh ergeben sich die jährlichen Kosten. Der CO₂-Ausstoß basiert auf dem deutschen Strommix (~380 g/kWh).",
+      variables: [
+        { symbol: "Watt", description: "Leistungsaufnahme im Standby-Modus" },
+        { symbol: "Std/Tag", description: "Stunden pro Tag, in denen das Gerät im Standby ist" },
+        { symbol: "Anzahl", description: "Anzahl gleichartiger Geräte im Haushalt" },
+        { symbol: "Preis", description: "Arbeitspreis in ct/kWh" },
+      ],
+    },
+    examples: [
+      {
+        title: "TV + Sat-Receiver",
+        inputs: "TV 1,5 W · Receiver 8 W · je 22 Std./Tag · 35 ct/kWh",
+        result: "≈ 27 €/Jahr nur für Standby",
+      },
+      {
+        title: "WLAN-Router 24/7",
+        inputs: "8 W · 24 Std./Tag · 35 ct/kWh",
+        result: "≈ 25 €/Jahr",
+      },
+      {
+        title: "Typischer Haushalt",
+        inputs: "TV, Receiver, Konsole, Router, 3× Ladegeräte",
+        result: "≈ 80 – 150 €/Jahr an vermeidbaren Kosten",
+      },
+    ],
+    faq: [
+      {
+        question: "Was zählt zu Standby-Verbrauch?",
+        answer:
+          "Alles, was Strom zieht, ohne aktiv genutzt zu werden: TVs und Receiver im Bereitschaftsmodus, Konsolen im Ruhezustand, WLAN-Router im Dauerbetrieb, Ladegeräte ohne Endgerät, Kaffeemaschinen und Mikrowellen mit Uhr sowie PCs im Ruhemodus.",
+      },
+      {
+        question: "Wie hoch ist die Standby-Leistung typischer Geräte?",
+        answer:
+          "Grobe Richtwerte: Fernseher 0,5 – 3 W, Sat-/TV-Receiver 5 – 15 W, Spielkonsole im Ruhemodus 5 – 15 W, WLAN-Router 5 – 12 W, PC-Monitor 0,3 – 1 W, Ladegerät ohne Last 0,1 – 0,5 W. Der genaue Wert steht meist im Datenblatt.",
+      },
+      {
+        question: "Wie viel kann man realistisch sparen?",
+        answer:
+          "In einem durchschnittlichen deutschen Haushalt verursachen Standby-Verbraucher rund 100 € pro Jahr, laut Umweltbundesamt sogar bis zu 115 €. Der Großteil lässt sich durch abschaltbare Steckerleisten und Zeitschaltuhren vermeiden.",
+      },
+      {
+        question: "Sollte ich alle Geräte komplett vom Netz nehmen?",
+        answer:
+          "Bei den meisten Geräten (TV, HiFi, Ladegeräte, Kaffeemaschine) ist das unproblematisch. Ausnahmen: Router, Festplattenrekorder und Kühlgeräte sollten nicht ständig getrennt werden. Set-Top-Boxen können nach dem Neustart mehrere Minuten für Software-Updates brauchen.",
+      },
+      {
+        question: "Woher kommt der CO₂-Wert?",
+        answer:
+          "Der deutsche Strommix verursacht laut Umweltbundesamt rund 380 g CO₂ pro kWh (Wert für 2023). Bei reinem Ökostrom liegt der Wert deutlich niedriger; der Rechner nutzt den Durchschnittswert als konservative Näherung.",
+      },
+    ],
+    relatedSlugs: ["stromkostenrechner", "balkonkraftwerk-rechner"],
+    sources: [
+      {
+        label: "Umweltbundesamt – Standby-Verluste",
+        url: "https://www.umweltbundesamt.de/",
+      },
+      {
+        label: "Bundesnetzagentur – Strompreise",
+        url: "https://www.bundesnetzagentur.de/",
       },
     ],
   },
