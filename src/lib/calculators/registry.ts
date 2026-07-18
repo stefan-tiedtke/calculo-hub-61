@@ -31,6 +31,7 @@ import HundealterCalculator from "./hundealter";
 import FuttermengeCalculator from "./futtermenge";
 import ArbeitsmittelAfaCalculator from "./arbeitsmittel-afa";
 import StandbyKostenCalculator from "./standby-kosten";
+import ArbeitstageCalculator from "./arbeitstage";
 
 
 /**
