@@ -31,6 +31,7 @@ import HundealterCalculator from "./hundealter";
 import FuttermengeCalculator from "./futtermenge";
 import ArbeitsmittelAfaCalculator from "./arbeitsmittel-afa";
 import StandbyKostenCalculator from "./standby-kosten";
+import ArbeitstageCalculator from "./arbeitstage";
 
 
 /**
@@ -2648,6 +2649,88 @@ export const calculators: CalculatorDef[] = [
       {
         label: "Bundesnetzagentur – Strompreise",
         url: "https://www.bundesnetzagentur.de/",
+      },
+    ],
+  },
+  {
+    slug: "arbeitstage-rechner",
+    name: "Arbeitstage-Rechner",
+    shortDescription:
+      "Arbeitstage zwischen zwei Daten berechnen – inkl. Bundesland-Feiertage.",
+    description:
+      "Berechne die Anzahl der Arbeitstage zwischen zwei beliebigen Daten. Wochenenden und die gesetzlichen Feiertage deines Bundeslandes werden automatisch abgezogen. Urlaubstage lassen sich optional berücksichtigen.",
+    category: "arbeit",
+    keywords: [
+      "arbeitstage",
+      "arbeitstage rechner",
+      "werktage berechnen",
+      "arbeitstage zwischen zwei daten",
+      "feiertage bundesland",
+      "arbeitstage 2026",
+    ],
+    popular: false,
+    updatedAt: "2026-07-17",
+    component: ArbeitstageCalculator,
+    formula: {
+      expression:
+        "Arbeitstage = Kalendertage − Wochenendtage − Feiertage (Mo–Fr) − Urlaubstage",
+      explanation:
+        "Der Rechner zählt jeden Tag im gewählten Zeitraum, entfernt Samstage und Sonntage sowie alle im gewählten Bundesland gesetzlichen Feiertage, die auf einen Werktag fallen. Bewegliche Feiertage (Karfreitag, Ostermontag, Christi Himmelfahrt, Pfingstmontag, Fronleichnam, Buß- und Bettag) werden über den Ostersonntag nach der Gauß-Formel berechnet.",
+      variables: [
+        { symbol: "Kalendertage", description: "Alle Tage inklusive Start- und Enddatum" },
+        { symbol: "Wochenendtage", description: "Alle Samstage und Sonntage im Zeitraum" },
+        { symbol: "Feiertage", description: "Gesetzliche Feiertage des Bundeslandes, die auf einen Mo–Fr fallen" },
+      ],
+    },
+    examples: [
+      {
+        title: "Ganzes Jahr Bayern 2026",
+        inputs: "01.01.2026 – 31.12.2026 · Bayern",
+        result: "≈ 250 Arbeitstage (13 gesetzliche Feiertage in BY)",
+      },
+      {
+        title: "Projektzeitraum",
+        inputs: "01.03.2026 – 31.05.2026 · NRW",
+        result: "≈ 62 Arbeitstage",
+      },
+      {
+        title: "Mit Urlaub",
+        inputs: "Jahr 2026 · Berlin · 30 Urlaubstage",
+        result: "≈ 220 tatsächliche Arbeitstage",
+      },
+    ],
+    faq: [
+      {
+        question: "Welche Feiertage werden berücksichtigt?",
+        answer:
+          "Alle bundeseinheitlichen Feiertage (Neujahr, Karfreitag, Ostermontag, 1. Mai, Christi Himmelfahrt, Pfingstmontag, Tag der Deutschen Einheit, 1. und 2. Weihnachtstag) sowie die im jeweiligen Bundesland zusätzlich gesetzlich freien Tage – z. B. Fronleichnam (BW, BY, HE, NW, RP, SL), Allerheiligen, Reformationstag, Heilige Drei Könige, Frauentag (BE, MV), Weltkindertag (TH), Mariä Himmelfahrt (SL) und Buß- und Bettag (SN).",
+      },
+      {
+        question: "Sind Sonderfälle wie Bayern (Mariä Himmelfahrt) berücksichtigt?",
+        answer:
+          "Mariä Himmelfahrt (15.08.) ist in Bayern nur in überwiegend katholischen Gemeinden gesetzlicher Feiertag. Da das nicht landesweit gilt, wird er hier nur für das Saarland gezählt. Bewohner katholischer Gemeinden in Bayern sollten den Tag ggf. manuell berücksichtigen.",
+      },
+      {
+        question: "Wie wird der Buß- und Bettag berechnet?",
+        answer:
+          "Der Buß- und Bettag ist gesetzlicher Feiertag nur in Sachsen. Er fällt auf den Mittwoch vor dem 23. November. Der Rechner ermittelt das Datum automatisch für jedes Jahr.",
+      },
+      {
+        question: "Zählen Start- und Endtag mit?",
+        answer:
+          "Ja, sowohl das Von- als auch das Bis-Datum werden mitgezählt (inklusiver Zeitraum). Beispiel: Mo bis Fr derselben Woche = 5 Arbeitstage.",
+      },
+      {
+        question: "Kann ich Urlaubstage abziehen?",
+        answer:
+          "Ja, im Feld „Urlaubs-/Abwesenheitstage“ kannst du beliebig viele Tage eintragen. Sie werden pauschal von den ermittelten Arbeitstagen abgezogen, ohne konkretes Datum.",
+      },
+    ],
+    relatedSlugs: ["stundenlohnrechner", "ueberstundenrechner", "pendlerpauschale-rechner"],
+    sources: [
+      {
+        label: "Bundesministerium des Innern – Gesetzliche Feiertage",
+        url: "https://www.bmi.bund.de/",
       },
     ],
   },
