@@ -17,6 +17,7 @@ import ReisekostenCalculator from "./reisekosten";
 import PacklisteCalculator from "./packliste";
 import MietwagenCalculator from "./mietwagen";
 import PaceCalculator from "./pace";
+import TrainingszeitCalculator from "./trainingszeit";
 import SpritkostenCalculator from "./spritkosten";
 import PendlerpauschaleCalculator from "./pendlerpauschale";
 import WerbungskostenCalculator from "./werbungskosten";
@@ -1369,6 +1370,72 @@ export const calculators: CalculatorDef[] = [
         url: "https://worldathletics.org/",
       },
     ],
+  },
+  {
+    slug: "trainingszeit-rechner",
+    name: "Trainingszeit-Rechner",
+    shortDescription:
+      "Gesamte Trainingszeit pro Woche, Monat oder Jahr berechnen.",
+    description:
+      "Berechne aus Anzahl der Trainingseinheiten pro Woche und der durchschnittlichen Dauer die gesamte Trainingszeit pro Woche, im gewählten Zeitraum sowie die durchschnittliche tägliche Trainingszeit. Ideal für Trainingsplanung und Zielsetzung.",
+    category: "sport",
+    keywords: [
+      "trainingszeit rechner",
+      "training zeit berechnen",
+      "wochentraining zeit",
+      "trainingsumfang",
+      "sport zeitaufwand",
+      "trainingsplanung",
+    ],
+    popular: false,
+    updatedAt: "2026-07-19",
+    component: TrainingszeitCalculator,
+    formula: {
+      expression:
+        "Zeit pro Woche = Einheiten/Woche × Dauer/Einheit   ·   Gesamtzeit = Zeit pro Woche × Wochen",
+      explanation:
+        "Die wöchentliche Trainingszeit ergibt sich aus der Anzahl der Einheiten multipliziert mit deren Dauer. Die Gesamtzeit über den Betrachtungszeitraum ist die wöchentliche Zeit multipliziert mit der Anzahl der Wochen. Die durchschnittliche tägliche Zeit teilt die Gesamtzeit durch die Anzahl der Tage im Zeitraum.",
+      variables: [
+        { symbol: "Einheiten/Woche", description: "Anzahl Trainingseinheiten pro Woche" },
+        { symbol: "Dauer/Einheit", description: "Durchschnittliche Dauer einer Einheit in Minuten" },
+        { symbol: "Wochen", description: "Betrachtungszeitraum in Wochen" },
+      ],
+    },
+    examples: [
+      {
+        title: "3 × 60 Min. über 4 Wochen",
+        inputs: "3 Einheiten/Woche · 60 Min. · 4 Wochen",
+        result: "12 Stunden Gesamttraining · ~51 Min. pro Tag",
+      },
+      {
+        title: "5 × 90 Min. über 12 Wochen",
+        inputs: "5 Einheiten/Woche · 90 Min. · 12 Wochen",
+        result: "90 Stunden Gesamttraining · ~64 Min. pro Tag",
+      },
+      {
+        title: "2 × 45 Min. über 1 Jahr",
+        inputs: "2 Einheiten/Woche · 45 Min. · 52 Wochen",
+        result: "78 Stunden Gesamttraining · ~13 Min. pro Tag",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie viel Sport ist gesund?",
+        answer:
+          "Die WHO empfiehlt Erwachsenen mindestens 150–300 Minuten moderate oder 75–150 Minuten intensive körperliche Aktivität pro Woche. Das entspricht etwa 20–45 Minuten pro Tag.",
+      },
+      {
+        question: "Sollte ich Pausentage einplanen?",
+        answer:
+          "Ja. Regeneration ist ein wichtiger Teil des Trainings. Intensive Einheiten sollten nicht an aufeinanderfolgenden Tagen liegen, damit Muskeln und Nervensystem sich erholen können.",
+      },
+      {
+        question: "Was ist ein realistischer Trainingsumfang?",
+        answer:
+          "Das hängt von Ziel, Fitnessstand und Alltag ab. Einsteiger starten oft mit 2–3 × 30–45 Min. pro Woche. Fortgeschrittene können 4–6 Einheiten mit jeweils 60–90 Min. absolvieren.",
+      },
+    ],
+    relatedSlugs: ["pace-rechner", "bmi-rechner"],
   },
   {
     slug: "spritkosten-rechner",
