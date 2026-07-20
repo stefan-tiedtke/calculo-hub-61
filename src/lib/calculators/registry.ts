@@ -2868,7 +2868,7 @@ export const calculators: CalculatorDef[] = [
       {
         question: "Kann ich einen konkreten Monat eingrenzen?",
         answer:
-          "Ja. Über die Auswahl „Reisezeitraum / Monat" filterst du die Vorschläge auf Zeiträume, die den gewünschten Monat berühren – ideal für konkrete Reiseplanung.",
+          "Ja. Über die Auswahl „Reisezeitraum / Monat“ filterst du die Vorschläge auf Zeiträume, die den gewünschten Monat berühren – ideal für konkrete Reiseplanung.",
       },
     ],
     relatedSlugs: ["arbeitstage-rechner", "reisekosten-rechner", "packlisten-generator"],
