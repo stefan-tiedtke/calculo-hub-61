@@ -33,6 +33,7 @@ import FuttermengeCalculator from "./futtermenge";
 import ArbeitsmittelAfaCalculator from "./arbeitsmittel-afa";
 import StandbyKostenCalculator from "./standby-kosten";
 import ArbeitstageCalculator from "./arbeitstage";
+import UrlaubsoptimiererCalculator from "./urlaubsoptimierer";
 
 
 /**
@@ -2801,8 +2802,84 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "urlaubstage-optimierer",
+    name: "Urlaubstage-Optimierer",
+    shortDescription:
+      "Brückentage clever nutzen – aus wenigen Urlaubstagen maximale Freizeit machen.",
+    description:
+      "Finde die effizientesten Brückentag-Kombinationen für dein Bundesland. Der Rechner kombiniert Wochenenden und gesetzliche Feiertage und schlägt Zeiträume vor, in denen du mit wenigen Urlaubstagen möglichst viele freie Tage am Stück erreichst.",
+    category: "reisen",
+    keywords: [
+      "urlaubsplaner",
+      "brückentage",
+      "brueckentage rechner",
+      "urlaubstage optimieren",
+      "feiertage 2026",
+      "urlaub planen",
+    ],
+    popular: true,
+    updatedAt: "2026-07-20",
+    component: UrlaubsoptimiererCalculator,
+    formula: {
+      expression:
+        "freie Tage am Stück = zusammenhängende Kette aus (Urlaubstagen + Wochenenden + Feiertagen)",
+      explanation:
+        "Für jedes Wochenende und jeden gesetzlichen Feiertag im gewählten Bundesland prüft der Rechner, wie viele Arbeitstage links und rechts als Urlaub eingesetzt werden müssten, um bis zum nächsten freien Block zu überbrücken. Anschließend werden alle so entstehenden Zeiträume nach dem besten Verhältnis von eingesetzten Urlaubstagen zu freien Tagen sortiert.",
+      variables: [
+        { symbol: "Urlaubstage", description: "Als Urlaub eingesetzte Werktage" },
+        { symbol: "Freie Tage", description: "Gesamte zusammenhängende Freizeit inkl. WE und Feiertagen" },
+        { symbol: "Verhältnis", description: "Freie Tage geteilt durch eingesetzte Urlaubstage" },
+      ],
+    },
+    examples: [
+      {
+        title: "Weihnachten 2026 (Bayern)",
+        inputs: "24.–31. Dezember 2026 · 3 Urlaubstage",
+        result: "3 Urlaubstage → bis zu 10 Tage am Stück frei",
+      },
+      {
+        title: "Christi Himmelfahrt (NRW)",
+        inputs: "Freitag nach Christi Himmelfahrt als Brückentag",
+        result: "1 Urlaubstag → 4 Tage am Stück frei",
+      },
+      {
+        title: "Pfingsten (Baden-Württemberg)",
+        inputs: "4 Urlaubstage rund um Pfingstmontag + Fronleichnam",
+        result: "4 Urlaubstage → 9 Tage am Stück frei",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie werden die Vorschläge berechnet?",
+        answer:
+          "Der Rechner betrachtet jeden freien Block aus Wochenenden und Feiertagen und prüft, wie viele Arbeitstage zusätzlich als Urlaub genommen werden müssten, um weitere angrenzende freie Blöcke einzuschließen. Vorschläge werden nach dem Verhältnis freier Tage zu eingesetzten Urlaubstagen sortiert – der effizienteste zuerst.",
+      },
+      {
+        question: "Werden Feiertage anderer Bundesländer berücksichtigt?",
+        answer:
+          "Nein. Es werden ausschließlich die gesetzlichen Feiertage des ausgewählten Bundeslandes verwendet – so wie sie für Arbeitnehmer:innen in diesem Land relevant sind.",
+      },
+      {
+        question: "Warum tauchen manche Vorschläge doppelt auf?",
+        answer:
+          "Rund um lange Feiertagsketten (z. B. Ostern, Weihnachten) gibt es oft mehrere sinnvolle Kombinationen mit unterschiedlicher Länge und unterschiedlichem Urlaubs-Einsatz. Der Rechner zeigt die effizientesten Varianten getrennt, damit du je nach Budget wählen kannst.",
+      },
+      {
+        question: "Kann ich einen konkreten Monat eingrenzen?",
+        answer:
+          "Ja. Über die Auswahl „Reisezeitraum / Monat“ filterst du die Vorschläge auf Zeiträume, die den gewünschten Monat berühren – ideal für konkrete Reiseplanung.",
+      },
+    ],
+    relatedSlugs: ["arbeitstage-rechner", "reisekosten-rechner", "packlisten-generator"],
+    sources: [
+      {
+        label: "Bundesministerium des Innern – Gesetzliche Feiertage",
+        url: "https://www.bmi.bund.de/",
+      },
+    ],
+  },
 ];
-
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
   return calculators.find((c) => c.slug === slug);
