@@ -2803,7 +2803,7 @@ export const calculators: CalculatorDef[] = [
     ],
   },
 ];
-
+;
 
 export function getCalculator(slug: string): CalculatorDef | undefined {
   return calculators.find((c) => c.slug === slug);
