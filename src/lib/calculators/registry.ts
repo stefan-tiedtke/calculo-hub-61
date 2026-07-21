@@ -33,6 +33,7 @@ import FuttermengeCalculator from "./futtermenge";
 import ArbeitsmittelAfaCalculator from "./arbeitsmittel-afa";
 import StandbyKostenCalculator from "./standby-kosten";
 import ArbeitstageCalculator from "./arbeitstage";
+import RenteneintrittCalculator from "./renteneintritt";
 
 
 /**
@@ -695,6 +696,49 @@ export const calculators: CalculatorDef[] = [
         url: "https://www.deutsche-rentenversicherung.de/",
       },
     ],
+  },
+  {
+    slug: "renteneintritt-countdown",
+    name: "Renteneintritt-Countdown",
+    shortDescription: "Countdown bis zum gewünschten Renteneintrittsalter.",
+    description:
+      "Berechne, wie viele Jahre, Monate und Tage es noch bis zu deinem gewünschten Renteneintrittsalter sind. Gib einfach dein Geburtsdatum und das geplante Renteneintrittsalter an.",
+    category: "finanzen",
+    keywords: [
+      "renteneintritt countdown",
+      "rente countdown",
+      "renteneintrittsalter",
+      "rente berechnen",
+      "jahre bis rente",
+      "ruhestand countdown",
+    ],
+    updatedAt: "2026-07-21",
+    component: RenteneintrittCalculator,
+    examples: [
+      {
+        title: "Regelaltersgrenze",
+        inputs: "Geburtsdatum 15.03.1985 · Rente mit 67 Jahren",
+        result: "Countdown bis 15.03.2052",
+      },
+      {
+        title: "Frührente",
+        inputs: "Geburtsdatum 01.01.1970 · Rente mit 63 Jahren",
+        result: "Renteneintritt bereits erreicht",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie genau ist der Countdown?",
+        answer:
+          "Der Rechner ermittelt das exakte Renteneintrittsdatum aus Geburtsdatum plus gewünschtem Alter und zeigt die verbleibende Zeit in Jahren, Monaten und Tagen an. Schaltjahre werden dabei berücksichtigt.",
+      },
+      {
+        question: "Was ist die Regelaltersgrenze?",
+        answer:
+          "In Deutschland liegt die Regelaltersgrenze für die gesetzliche Altersrente derzeit bei 67 Jahren für nach 1964 Geborene. Wer früher in Rente gehen möchte, muss Abschläge in Kauf nehmen; wer länger arbeitet, erhält Zuschläge.",
+      },
+    ],
+    relatedSlugs: ["rentenrechner", "entnahmerechner", "inflationsrechner"],
   },
   {
     slug: "entnahmerechner",
