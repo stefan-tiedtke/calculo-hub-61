@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "sdk_version": "0.24.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "rechnerio-mcp",
+      "version": "0.1.0",
+      "title": "Rechnerio"
+    },
+    "tools": [
+      {
+        "name": "list_categories",
+        "title": "Kategorien auflisten",
+        "description": "Listet alle Rechner-Kategorien auf Rechnerio (z. B. Finanzen, Steuern, Gesundheit) inklusive Slug, Name und Beschreibung.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_calculators",
+        "title": "Rechner auflisten",
+        "description": "Listet alle Rechner auf Rechnerio auf, optional gefiltert nach Kategorie-Slug (z. B. 'finanzen', 'gesundheit', 'reisen').",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "Optionaler Kategorie-Slug, z. B. 'finanzen'. Leer lassen für alle Rechner.",
+              "type": "string"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_calculators",
+        "title": "Rechner suchen",
+        "description": "Sucht Rechner auf Rechnerio anhand eines Stichworts (Name, Beschreibung oder Keywords). Gibt die besten Treffer mit Slug und URL zurück.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Suchbegriff, z. B. 'Kredit', 'BMI', 'Steuer'."
+            },
+            "limit": {
+              "description": "Maximale Trefferzahl (Default 10).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            }
+          },
+          "required": [
+            "query"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_calculator",
+        "title": "Rechner-Details",
+        "description": "Liefert Details zu einem Rechner auf Rechnerio (Beschreibung, Formel, Beispiele, FAQ, Quellen) anhand seines Slugs.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Rechner-Slug, z. B. 'bmi-rechner' oder 'kredit-rechner'."
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
