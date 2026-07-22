@@ -703,7 +703,7 @@ export const calculators: CalculatorDef[] = [
     shortDescription: "Countdown bis zum gewünschten Renteneintrittsalter.",
     description:
       "Berechne, wie viele Jahre, Monate und Tage es noch bis zu deinem gewünschten Renteneintrittsalter sind. Gib einfach dein Geburtsdatum und das geplante Renteneintrittsalter an.",
-    category: "finanzen",
+    category: "arbeit",
     keywords: [
       "renteneintritt countdown",
       "rente countdown",
