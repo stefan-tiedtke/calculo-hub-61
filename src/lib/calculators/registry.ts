@@ -34,6 +34,7 @@ import ArbeitsmittelAfaCalculator from "./arbeitsmittel-afa";
 import StandbyKostenCalculator from "./standby-kosten";
 import ArbeitstageCalculator from "./arbeitstage";
 import RenteneintrittCalculator from "./renteneintritt";
+import WasserbedarfCalculator from "./wasserbedarf";
 
 
 /**
