@@ -2846,6 +2846,104 @@ export const calculators: CalculatorDef[] = [
       },
     ],
   },
+  {
+    slug: "wasserbedarf",
+    name: "Wasserbedarf-Rechner",
+    shortDescription:
+      "Empfohlene tägliche Trinkmenge nach Gewicht, Alter, Aktivität, Sport und Temperatur.",
+    description:
+      "Berechne deinen persönlichen Wasserbedarf pro Tag: aus Körpergewicht, Alter, Geschlecht, Aktivitätslevel, Sportdauer und Außentemperatur ergibt sich eine realistische Trinkempfehlung in Liter und Gläsern.",
+    category: "gesundheit",
+    keywords: [
+      "wasserbedarf",
+      "wasserbedarf rechner",
+      "trinkmenge",
+      "wie viel wasser trinken",
+      "flüssigkeitsbedarf",
+      "wasser pro tag",
+      "hydration",
+    ],
+    popular: false,
+    updatedAt: "2026-07-23",
+    component: WasserbedarfCalculator,
+    formula: {
+      expression:
+        "Bedarf = Gewicht × Basis(Alter) + Aktivität + (Sportmin / 30) × 500 ml + Temperatur",
+      explanation:
+        "Der Basisbedarf orientiert sich an DGE-Richtwerten: rund 40 ml/kg für Jugendliche, 35 ml/kg für Erwachsene, 30 ml/kg ab 51 und 28 ml/kg ab 65 Jahren. Aktivitätslevel und Außentemperatur addieren pauschale Zuschläge, Sport rund 500 ml pro 30 Minuten moderate Belastung.",
+      variables: [
+        { symbol: "Basis", description: "ml pro kg Körpergewicht je nach Alter" },
+        { symbol: "Aktivität", description: "0 / 300 / 600 ml (gering / normal / hoch)" },
+        { symbol: "Sport", description: "≈ 500 ml pro 30 Minuten Training" },
+        { symbol: "Temperatur", description: "0 / 300 / 800 ml (<20 / 20–30 / >30 °C)" },
+      ],
+    },
+    examples: [
+      {
+        title: "Büroalltag",
+        inputs: "70 kg · 30 J · normal · 0 Min Sport · 20–30 °C",
+        result: "≈ 2,7 L / Tag",
+      },
+      {
+        title: "Sportler im Sommer",
+        inputs: "80 kg · 28 J · hoch · 60 Min Sport · > 30 °C",
+        result: "≈ 4,6 L / Tag",
+      },
+      {
+        title: "Seniorin, ruhiger Alltag",
+        inputs: "65 kg · 70 J · gering · 0 Min Sport · < 20 °C",
+        result: "≈ 1,7 L / Tag",
+      },
+    ],
+    faq: [
+      {
+        question: "Wie viel Wasser sollte ich täglich trinken?",
+        answer:
+          "Als Faustregel gelten 30–40 ml pro Kilogramm Körpergewicht. Für einen Erwachsenen mit 70 kg entspricht das etwa 2,1–2,8 L Flüssigkeit pro Tag. Rund 20 % davon nimmst du über feste Nahrung auf, den Rest über Getränke.",
+      },
+      {
+        question: "Zählt Kaffee oder Tee zur Trinkmenge?",
+        answer:
+          "Ja. Ungesüßter Tee, Kaffee in moderaten Mengen und stark verdünnte Saftschorlen zählen mit zur Flüssigkeitsbilanz. Wasser und Kräutertees bleiben aber die beste Wahl – Softdrinks und Alkohol sollten nicht zur Bedarfsdeckung eingerechnet werden.",
+      },
+      {
+        question: "Wie viel zusätzlich beim Sport?",
+        answer:
+          "Pro 30 Minuten moderater Belastung solltest du etwa 500 ml zusätzlich einplanen, bei intensivem Training oder Hitze mehr. Trinke am besten schluckweise vor, während und nach dem Sport, nicht erst wenn du Durst bekommst.",
+      },
+      {
+        question: "Kann ich zu viel trinken?",
+        answer:
+          "Ja. Wer über längere Zeit deutlich mehr als 4–5 L pro Tag trinkt, ohne entsprechend zu schwitzen, riskiert eine Hyponatriämie (Natriummangel). Gesunde Erwachsene liegen mit 1,5–3 L täglich in einem sicheren Bereich.",
+      },
+      {
+        question: "Was sind Anzeichen für zu wenig Flüssigkeit?",
+        answer:
+          "Typische Zeichen sind dunkler Urin, Kopfschmerzen, Konzentrationsprobleme, trockene Lippen, Schwindel und Müdigkeit. Ein guter Indikator ist die Urinfarbe: hellgelb ist ideal, dunkelgelb ein Warnsignal.",
+      },
+      {
+        question: "Brauchen ältere Menschen mehr oder weniger Wasser?",
+        answer:
+          "Der absolute Bedarf sinkt leicht, weil Muskelmasse abnimmt. Gleichzeitig lässt das Durstgefühl im Alter nach – gerade Senior:innen sollten deshalb bewusst und regelmäßig trinken, auch ohne akuten Durst.",
+      },
+      {
+        question: "Muss ich bei Hitze wirklich viel mehr trinken?",
+        answer:
+          "Ja. Bei Temperaturen über 30 °C verlierst du deutlich mehr Flüssigkeit und Elektrolyte über Schweiß. 0,5–1 L zusätzlich pro Tag sind realistisch, bei körperlicher Aktivität in der Sonne noch mehr.",
+      },
+    ],
+    relatedSlugs: ["bmi-rechner", "sitzzeit-rechner", "kalorienbedarf-rechner"],
+    sources: [
+      {
+        label: "DGE – Referenzwerte Wasser",
+        url: "https://www.dge.de/wissenschaft/referenzwerte/wasser/",
+      },
+      {
+        label: "EFSA – Dietary reference values for water",
+        url: "https://www.efsa.europa.eu/en/efsajournal/pub/1459",
+      },
+    ],
+  },
 ];
 
 
