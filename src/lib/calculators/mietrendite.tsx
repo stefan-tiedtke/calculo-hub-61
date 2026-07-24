@@ -3,7 +3,7 @@ import { CalculatorShell } from "@/components/calculator/calculator-shell";
 import { NumberField } from "@/components/calculator/number-field";
 import { ResultCard } from "@/components/calculator/result-card";
 import { SegmentedControl } from "@/components/calculator/segmented-control";
-import { formatCurrency, formatNumber, formatPercent, parseNumber } from "@/lib/format";
+import { formatCurrency, formatNumber, parseNumber } from "@/lib/format";
 
 // ---------------------------------------------------------------------------
 // Mietrendite-Rechner (Immobilien Deutschland)
