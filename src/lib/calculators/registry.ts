@@ -27,6 +27,7 @@ import TdeeCalculator from "./tdee";
 import SitzzeitCalculator from "./sitzzeit";
 import BalkonkraftwerkCalculator from "./balkonkraftwerk";
 import KaufnebenkostenCalculator from "./kaufnebenkosten";
+import MietrenditeCalculator from "./mietrendite";
 import KatzenalterCalculator from "./katzenalter";
 import HundealterCalculator from "./hundealter";
 import FuttermengeCalculator from "./futtermenge";
@@ -2349,6 +2350,100 @@ export const calculators: CalculatorDef[] = [
       {
         label: "Verbraucherzentrale – Maklerprovision",
         url: "https://www.verbraucherzentrale.de/wissen/geld-versicherungen/kredit-schulden-insolvenz/maklerprovision-neue-regeln-fuer-kaeufer-und-verkaeufer-51110",
+      },
+    ],
+  },
+  {
+    slug: "mietrendite-rechner",
+    name: "Mietrendite-Rechner",
+    shortDescription:
+      "Brutto- und Nettomietrendite einer Immobilie inkl. Kosten und Cashflow berechnen.",
+    description:
+      "Berechne die Mietrendite einer Immobilie – von der einfachen Bruttomietrendite bis zur aussagekräftigen Nettomietrendite. Berücksichtige Kaufnebenkosten, Verwaltung, Instandhaltung, Mietausfallrisiko und optional Zins + Tilgung, um den tatsächlichen Cashflow zu ermitteln.",
+    category: "immobilien",
+    keywords: [
+      "mietrendite",
+      "mietrendite rechner",
+      "bruttomietrendite",
+      "nettomietrendite",
+      "immobilien rendite",
+      "kapitalanlage immobilie",
+      "cashflow immobilie",
+      "rendite wohnung",
+    ],
+    popular: true,
+    updatedAt: "2026-07-24",
+    component: MietrenditeCalculator,
+    formula: {
+      expression:
+        "Bruttomietrendite = (Kaltmiete/Jahr) / Kaufpreis · 100   ·   Nettomietrendite = (Kaltmiete/Jahr − Kosten) / (Kaufpreis + Nebenkosten) · 100",
+      explanation:
+        "Die Bruttomietrendite vergleicht die Jahreskaltmiete mit dem Kaufpreis. Die Nettomietrendite zieht laufende Kosten (Verwaltung, Instandhaltung, Mietausfall) ab und bezieht den Wert auf den Gesamtkaufpreis inklusive Nebenkosten. Der Cashflow ergibt sich aus der Nettomiete abzüglich der monatlichen Finanzierungskosten.",
+      variables: [
+        { symbol: "Kaltmiete/Jahr", description: "Monatliche Kaltmiete × 12" },
+        { symbol: "Kosten", description: "Verwaltung + Instandhaltung + Mietausfallrisiko pro Jahr" },
+        { symbol: "Nebenkosten", description: "Notar, Makler, Grunderwerbsteuer (ca. 8 – 12 %)" },
+        { symbol: "Cashflow", description: "Nettomiete minus Zins + Tilgung pro Jahr" },
+      ],
+    },
+    examples: [
+      {
+        title: "Solide Kapitalanlage",
+        inputs: "400.000 € Kaufpreis · 1.600 €/Monat Kaltmiete · 10 % Nebenkosten",
+        result: "Brutto 4,80 % · Netto ca. 3,78 % · Amortisation ~29 Jahre",
+      },
+      {
+        title: "Stark vermietete Wohnung",
+        inputs: "300.000 € · 1.400 €/Monat · 8 % Nebenkosten · geringe Kosten",
+        result: "Brutto 5,60 % · Netto ca. 4,6 %",
+      },
+      {
+        title: "Teure Lage, wenig Miete",
+        inputs: "600.000 € · 1.800 €/Monat · 12 % Nebenkosten",
+        result: "Brutto 3,60 % · Netto ca. 2,4 %",
+      },
+    ],
+    faq: [
+      {
+        question: "Was ist ein gute Nettomietrendite?",
+        answer:
+          "Als Faustregie gelten ab ca. 4 % Nettomietrendite als attraktiv, 2,5 – 4 % als solide und unter 2,5 % als eher schwach. Die Bewertung hängt aber stark von Standort, Zinsniveau, Objektzustand und persönlichem Risikoappetit ab.",
+      },
+      {
+        question: "Was ist der Unterschied zwischen Brutto- und Nettomietrendite?",
+        answer:
+          "Die Bruttomietrendite setzt die Jahreskaltmiete ins Verhältnis zum Kaufpreis. Die Nettomietrendite zieht laufende Kosten und den vollen Anschaftungspreis inklusive Nebenkosten ab und ist daher aussagekräftiger für den tatsächlichen Ertrag.",
+      },
+      {
+        question: "Welche Kosten sollte ich bei der Nettomietrendite einplanen?",
+        answer:
+          "Typische nicht umlagefähige Kosten sind Verwaltung (2 – 4 % der Jahresmiete), Instandhaltungsrücklage (0,5 – 1,5 % des Kaufpreises pro Jahr), Mietausfälle (2 – 5 % der Jahresmiete) und ggf. Reparaturen, Versicherungen sowie anteilige Grundsteuer.",
+      },
+      {
+        question: "Ist der Cashflow nach Finanzierung wichtig?",
+        answer:
+          "Ja. Ein positiver Cashflow bedeutet, dass die Miete alle laufenden Kosten und die Annuität deckt. Bei negativem Cashflow musst du monatlich zuschießen – das ist nicht automatisch schlecht, sollte aber bewusst eingeplant werden.",
+      },
+      {
+        question: "Sind Steuern in der Nettomietrendite enthalten?",
+        answer:
+          "Nein. Der Rechner zeigt die vorsteuerliche Rendite. Steuern auf Mieteinnahmen und mögliche Abschreibungen (AfA) sowie der Veräußerungsgewinn sind individuell und sollten mit einem Steuerberater geprüft werden.",
+      },
+      {
+        question: "Was bedeutet Amortisation?",
+        answer:
+          "Die Amortisationsdauer gibt an, nach wie vielen Jahren sich die Investition aus dem jährlichen Überschuss vor Finanzierung zurückbezahlt hat. Kürzere Zeiträume bedeuten mehr Sicherheitspuffer; typisch sind 20 – 35 Jahre bei Immobilien.",
+      },
+    ],
+    relatedSlugs: ["kaufnebenkosten-rechner", "kaufen-oder-mieten", "kreditrechner"],
+    sources: [
+      {
+        label: "Verbraucherzentrale – Mietrendite",
+        url: "https://www.verbraucherzentrale.de/",
+      },
+      {
+        label: "Bundesministerium der Finanzen – Grunderwerbsteuer",
+        url: "https://www.bundesfinanzministerium.de/",
       },
     ],
   },
