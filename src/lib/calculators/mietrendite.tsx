@@ -255,7 +255,7 @@ export default function MietrenditeCalculator() {
     <div className="space-y-5">
       <ResultCard
         label="Nettomietrendite"
-        value={formatPercent(result.nettomietrendite, 2)}
+        value={`${formatNumber(result.nettomietrendite, 2)} %`}
         badge={{
           label: `${badgeLabel}`,
           tone: badgeTone,
@@ -264,7 +264,7 @@ export default function MietrenditeCalculator() {
           <>
             Bruttomietrendite:{" "}
             <span className="font-semibold text-foreground">
-              {formatPercent(result.bruttomietrendite, 2)}
+              {formatNumber(result.bruttomietrendite, 2)} %
             </span>
           </>
         }
