@@ -46,7 +46,7 @@ function DatenschutzPage() {
           E-Mail: steve5000@gmx.de
         </p>
 
-        <h2>3. Allgemeines zur Datenverarbeitung</h2>
+        <h2>2. Allgemeines zur Datenverarbeitung</h2>
         <p>
           Wir verarbeiten personenbezogene Daten unserer Nutzerinnen und Nutzer
           grundsätzlich nur, soweit dies zur Bereitstellung einer funktionsfähigen
@@ -56,7 +56,7 @@ function DatenschutzPage() {
           DSGVO).
         </p>
 
-        <h2>4. Bereitstellung der Website und Server-Logfiles</h2>
+        <h2>3. Bereitstellung der Website und Server-Logfiles</h2>
         <p>
           Bei jedem Aufruf dieser Website erfasst unser Hosting-Anbieter automatisch
           Daten und Informationen, die dein Browser übermittelt. Dies sind
@@ -77,14 +77,18 @@ function DatenschutzPage() {
           und danach gelöscht oder anonymisiert.
         </p>
 
-        <h2>5. Hosting</h2>
+        <h2>4. Hosting</h2>
         <p>
-          Diese Website wird bei Lovable gehostet. Der Anbieter verarbeitet in unserem Auftrag technische Zugriffsdaten
-          (siehe „Server-Logfiles“). Wir haben mit dem Anbieter einen Vertrag zur
-          Auftragsverarbeitung (AVV) gemäß Art. 28 DSGVO geschlossen.
+          Diese Website wird über ChatGPT Sites von OpenAI gehostet. OpenAI und
+          gegebenenfalls von OpenAI eingesetzte Hosting-Dienstleister verarbeiten in
+          unserem Auftrag die für Hosting, Wartung, Sicherheit und Support
+          erforderlichen Daten, einschließlich technischer Zugriffsdaten (siehe
+          „Server-Logfiles“). Für diese Verarbeitung gelten die ChatGPT-Sites-Bedingungen
+          und die für unser Konto anwendbaren Datenschutz- und
+          Auftragsverarbeitungsvereinbarungen mit OpenAI.
         </p>
 
-        <h2>6. Nutzung der Rechner</h2>
+        <h2>5. Nutzung der Rechner</h2>
         <p>
           Die auf dieser Website angebotenen Rechner arbeiten vollständig im Browser.
           Die von dir eingegebenen Werte (z. B. Gehalt, Alter, Sparbetrag) werden nicht
@@ -92,22 +96,16 @@ function DatenschutzPage() {
           dein Gerät nicht.
         </p>
 
-        <h2>7. Cookies und lokale Speicherung</h2>
+        <h2>6. Cookies und lokale Speicherung</h2>
         <p>
           Diese Website setzt nur technisch notwendige Cookies bzw. Einträge im lokalen
           Speicher deines Browsers ein, soweit dies für den Betrieb erforderlich ist
           (z. B. zur Speicherung deiner Theme-Auswahl). Rechtsgrundlage ist § 25 Abs. 2
           Nr. 2 TDDDG sowie Art. 6 Abs. 1 lit. f DSGVO.
         </p>
+        <h2>7. Kontaktaufnahme</h2>
         <p>
-          [Falls du zusätzliche Cookies oder Tracking einsetzt (z. B. Google Analytics,
-          Meta Pixel), ergänze hier die entsprechenden Informationen und binde ein
-          Consent-Banner ein.]
-        </p>
-
-        <h2>8. Kontaktaufnahme</h2>
-        <p>
-          Wenn du uns per E-Mail oder über ein Kontaktformular kontaktierst, verarbeiten
+          Wenn du uns per E-Mail kontaktierst, verarbeiten
           wir die von dir mitgeteilten Daten (z. B. Name, E-Mail-Adresse, Nachricht) zur
           Bearbeitung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO
           (vorvertragliche Maßnahmen) oder lit. f (berechtigtes Interesse an der
@@ -115,16 +113,14 @@ function DatenschutzPage() {
           Zweckes ihrer Erhebung nicht mehr erforderlich sind.
         </p>
 
-        <h2>9. Empfänger und Auftragsverarbeiter</h2>
+        <h2>8. Empfänger und Auftragsverarbeiter</h2>
         <p>
           Personenbezogene Daten geben wir nur weiter, wenn dies gesetzlich erlaubt ist
           oder du eingewilligt hast. Auftragsverarbeiter (z. B. Hosting-Anbieter)
           erhalten Daten nur im Rahmen des jeweiligen Auftrags und sind vertraglich zur
           Einhaltung des Datenschutzes verpflichtet.
         </p>
-
-
-        <h2>11. Deine Rechte</h2>
+        <h2>9. Deine Rechte</h2>
         <p>
           Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16),
           Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18),
@@ -138,21 +134,21 @@ function DatenschutzPage() {
           Bundeslandes.
         </p>
 
-        <h2>12. Speicherdauer</h2>
+        <h2>10. Speicherdauer</h2>
         <p>
           Wir speichern personenbezogene Daten nur so lange, wie dies für die genannten
           Zwecke erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen.
           Danach werden die Daten gelöscht.
         </p>
 
-        <h2>13. Datensicherheit</h2>
+        <h2>11. Datensicherheit</h2>
         <p>
           Wir setzen technische und organisatorische Maßnahmen ein, um deine Daten vor
           zufälliger oder vorsätzlicher Manipulation, Verlust und unberechtigtem
           Zugriff zu schützen. Die Datenübertragung erfolgt verschlüsselt über HTTPS.
         </p>
 
-        <h2>14. Änderungen dieser Datenschutzerklärung</h2>
+        <h2>12. Änderungen dieser Datenschutzerklärung</h2>
         <p>
           Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets
           den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen an
@@ -162,9 +158,9 @@ function DatenschutzPage() {
 
         <hr />
         <p className="text-sm text-muted-foreground">
-          Stand: März 2024. Diese Datenschutzerklärung ist eine Vorlage ohne
-          juristische Prüfung. Bitte ergänze deine individuellen Angaben und lasse den
-          Text ggf. anwaltlich prüfen.
+          Stand: August 2026. Diese Datenschutzerklärung wurde an den aktuellen
+          technischen Betrieb der Website angepasst. Eine individuelle rechtliche
+          Prüfung bleibt empfohlen.
         </p>
       </div>
     </div>
