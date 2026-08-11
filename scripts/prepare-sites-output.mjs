@@ -14,6 +14,9 @@ await cp(resolve(nitroOutput, "server"), resolve(sitesOutput, "server"), {
 await cp(resolve(nitroOutput, "public"), resolve(sitesOutput, "public"), {
   recursive: true,
 });
+await cp(resolve(nitroOutput, "public"), resolve(sitesOutput, "client"), {
+  recursive: true,
+});
 await cp(resolve(nitroOutput, "nitro.json"), resolve(sitesOutput, "nitro.json"));
 
 await cp(
