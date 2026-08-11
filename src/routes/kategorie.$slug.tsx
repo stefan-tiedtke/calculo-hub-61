@@ -2,14 +2,14 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getCategory, categories } from "@/lib/calculators/categories";
 import { getCalculatorsByCategory } from "@/lib/calculators/registry";
 import { CalculatorCard } from "@/components/calculator-card";
-import type { CalculatorDef, CategoryDef } from "@/lib/calculators/types";
+import type { CategoryDef } from "@/lib/calculators/types";
 
 export const Route = createFileRoute("/kategorie/$slug")({
-  loader: ({ params }): { category: CategoryDef; calcs: CalculatorDef[] } => {
+  loader: ({ params }): { category: CategoryDef; calcSlugs: string[] } => {
     const category = getCategory(params.slug);
     if (!category) throw notFound();
-    const calcs = getCalculatorsByCategory(category.slug);
-    return { category, calcs };
+    const calcSlugs = getCalculatorsByCategory(category.slug).map((calc) => calc.slug);
+    return { category, calcSlugs };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -43,7 +43,10 @@ export const Route = createFileRoute("/kategorie/$slug")({
 });
 
 function CategoryPage() {
-  const { category, calcs } = Route.useLoaderData();
+  const { category, calcSlugs } = Route.useLoaderData();
+  const calcs = getCalculatorsByCategory(category.slug).filter((calc) =>
+    calcSlugs.includes(calc.slug),
+  );
   return (
     <div className="mx-auto max-w-6xl px-6 py-14">
       <nav className="text-sm text-muted-foreground">
@@ -77,7 +80,7 @@ function CategoryPage() {
         </div>
       ) : (
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {calcs.map((calc: CalculatorDef) => (
+          {calcs.map((calc) => (
             <CalculatorCard key={calc.slug} calc={calc} />
           ))}
         </div>

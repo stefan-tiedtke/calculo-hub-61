@@ -8,24 +8,27 @@ import { CalculatorFAQ } from "@/components/calculator/calculator-faq";
 import type { CalculatorDef, CategoryDef } from "@/lib/calculators/types";
 
 export const Route = createFileRoute("/rechner/$slug")({
-  loader: ({ params }): { calc: CalculatorDef; category: CategoryDef | undefined; related: CalculatorDef[] } => {
+  loader: ({ params }): { calcSlug: string; category: CategoryDef | undefined; relatedSlugs: string[] } => {
     const calc = getCalculator(params.slug);
     if (!calc) throw notFound();
     const category = getCategory(calc.category);
-    const related = (
+    const relatedSlugs = (
       calc.relatedSlugs
         ? calc.relatedSlugs
             .map(getCalculator)
             .filter((c): c is CalculatorDef => Boolean(c))
         : getCalculatorsByCategory(calc.category).filter((c) => c.slug !== calc.slug)
-    ).slice(0, 3);
-    return { calc, category, related };
+    ).slice(0, 3).map((relatedCalc) => relatedCalc.slug);
+    return { calcSlug: calc.slug, category, relatedSlugs };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
       return { meta: [{ title: "Rechner nicht gefunden" }, { name: "robots", content: "noindex" }] };
     }
-    const { calc } = loaderData;
+    const calc = getCalculator(loaderData.calcSlug);
+    if (!calc) {
+      return { meta: [{ title: "Rechner nicht gefunden" }, { name: "robots", content: "noindex" }] };
+    }
     const title = `${calc.name} – Rechnerio`;
     const scripts = [
       {
@@ -82,7 +85,12 @@ export const Route = createFileRoute("/rechner/$slug")({
 });
 
 function CalculatorPage() {
-  const { calc, category, related } = Route.useLoaderData();
+  const { calcSlug, category, relatedSlugs } = Route.useLoaderData();
+  const calc = getCalculator(calcSlug);
+  if (!calc) return <CalcNotFound />;
+  const related = relatedSlugs
+    .map(getCalculator)
+    .filter((relatedCalc): relatedCalc is CalculatorDef => Boolean(relatedCalc));
   const CalcComponent = calc.component;
   return (
     <article className="mx-auto max-w-4xl px-6 py-14">
@@ -147,7 +155,7 @@ function CalculatorPage() {
             Ähnliche Rechner
           </h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((r: CalculatorDef) => (
+            {related.map((r) => (
               <CalculatorCard key={r.slug} calc={r} />
             ))}
           </div>
